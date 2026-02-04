@@ -1,0 +1,29 @@
+{
+  "compute_csvs": [
+    "kernels_rank0_kernel_counts.csv",
+    "kernels_rank1_kernel_counts.csv"
+  ],
+  "devices": [
+    "0",
+    "1"
+  ],
+  "inputs": [
+    "kernel_launch_params_rank0_gpu0.jsonl",
+    "kernel_launch_params_rank1_gpu1.jsonl"
+  ],
+  "sig_fields": [
+    "device",
+    "stream",
+    "dtype",
+    "grid",
+    "block",
+    "shared memory"
+  ],
+  "totals": {
+    "device_filtered": 0,
+    "excluded": 2688,
+    "kept": 65232,
+    "seen": 67920
+  },
+  "unique_count": 178
+}

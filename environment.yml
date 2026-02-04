@@ -1,0 +1,28 @@
+# Conda environment for unique_kernels (Vicuna TP profiling + trace analysis).
+# Create: conda env create -f environment.yml
+# Activate: conda activate kernel-prof
+#
+# Important: Use this single environment when running torchrun. If your shell
+# uses a different env (e.g. irene-parallel), torchrun will spawn workers
+# with that env's Python and you'll get "no GPUs found" or wrong packages.
+name: kernel-prof
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  # PyTorch >= 2.2 required by transformers; match host CUDA (e.g. 12.4)
+  - pytorch::pytorch=2.5.1
+  - pytorch::torchvision=0.20.1
+  - pytorch::torchaudio=2.5.1
+  - pytorch::pytorch-cuda=12.4
+  # Pin MKL to avoid iJIT_NotifyEvent symbol error (use after pytorch install if needed)
+  - mkl=2023.1.0
+  - mkl-service
+  - intel-openmp
+  - "numpy<2"
+  - pip
+  - pip:
+    - -r requirements.txt

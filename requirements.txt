@@ -1,0 +1,7 @@
+# unique_kernels pip deps. Install after conda env (PyTorch >= 2.2 from conda).
+# vicuna_tp_profile.py
+transformers>=4.31.0
+sentencepiece>=0.1.99
+accelerate>=0.20.0
+# plot_kernel_gantt.py
+matplotlib>=3.5.0
