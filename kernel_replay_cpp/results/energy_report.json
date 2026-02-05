@@ -1,0 +1,244 @@
+{
+  "full_model": {
+    "num_runs": 100,
+    "total_energy_j": 203.31874679999999,
+    "energy_per_inference_j": 2.033187468,
+    "duration_s": 2.135,
+    "power_samples": 2
+  },
+  "isolated_kernels": {
+    "num_unique_kernels": 144,
+    "num_processed": 74,
+    "num_skipped": 70,
+    "predicted_energy_per_inference_j": 1.6498018062053008
+  },
+  "comparison": {
+    "full_model_energy_j": 2.033187468,
+    "predicted_energy_j": 1.6498018062053008,
+    "error_j": 0.38338566179469913,
+    "error_percent": 18.856385248716236,
+    "ratio_predicted_to_actual": 0.8114361475128377
+  },
+  "per_kernel_energies": [
+    {
+      "name": "maxwell_sgemm_fp16_128x32_tn",
+      "tier": 2,
+      "invocation_count": 48,
+      "benchmark_runs": 100000,
+      "benchmark_duration_s": 4.953,
+      "benchmark_total_energy_j": 504.59737920000003,
+      "energy_per_execution_j": 0.005045973792000001,
+      "energy_per_inference_j": 0.24220674201600004,
+      "power_samples": 5
+    },
+    {
+      "name": "void splitKreduce_kernel<32, 16, int, float, __half, float, __half, true, true, false>(cublasSplitKParams<float>, float const*, __half const*, __half*, float const*, float const*, __half const*, float const*, __half*, void*, long, float*, int*)",
+      "tier": 2,
+      "invocation_count": 48,
+      "benchmark_runs": 100000,
+      "benchmark_duration_s": 4.873,
+      "benchmark_total_energy_j": 402.4443389,
+      "energy_per_execution_j": 0.004024443389,
+      "energy_per_inference_j": 0.19317328267199999,
+      "power_samples": 4
+    },
+    {
+      "name": "void splitKreduce_kernel<32, 16, int, float, __half, float, __half, true, true, false>(cublasSplitKParams<float>, float const*, __half const*, __half*, float const*, float const*, __half const*, float const*, __half*, void*, long, float*, int*)",
+      "tier": 2,
+      "invocation_count": 24,
+      "benchmark_runs": 100000,
+      "benchmark_duration_s": 4.864,
+      "benchmark_total_energy_j": 508.1492265,
+      "energy_per_execution_j": 0.005081492265,
+      "energy_per_inference_j": 0.12195581436,
+      "power_samples": 5
+    },
+    {
+      "name": "void splitKreduce_kernel<32, 16, int, float, __half, float, __half, true, true, false>(cublasSplitKParams<float>, float const*, __half const*, __half*, float const*, float const*, __half const*, float const*, __half*, void*, long, float*, int*)",
+      "tier": 2,
+      "invocation_count": 24,
+      "benchmark_runs": 100000,
+      "benchmark_duration_s": 4.88,
+      "benchmark_total_energy_j": 506.7331689,
+      "energy_per_execution_j": 0.005067331689,
+      "energy_per_inference_j": 0.12161596053599999,
+      "power_samples": 5
+    },
+    {
+      "name": "maxwell_sgemm_fp16_128x32_tn",
+      "tier": 2,
+      "invocation_count": 24,
+      "benchmark_runs": 100000,
+      "benchmark_duration_s": 4.962,
+      "benchmark_total_energy_j": 504.13058450000005,
+      "energy_per_execution_j": 0.005041305845000001,
+      "energy_per_inference_j": 0.12099134028000003,
+      "power_samples": 5
+    },
+    {
+      "name": "maxwell_sgemm_fp16_128x32_tn",
+      "tier": 2,
+      "invocation_count": 24,
+      "benchmark_runs": 100000,
+      "benchmark_duration_s": 4.947,
+      "benchmark_total_energy_j": 504.017371,
+      "energy_per_execution_j": 0.00504017371,
+      "energy_per_inference_j": 0.12096416904,
+      "power_samples": 5
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "invocation_count": 48,
+      "benchmark_runs": 1000000,
+      "benchmark_duration_s": 5.449,
+      "benchmark_total_energy_j": 607.4420587999999,
+      "energy_per_execution_j": 0.0006074420588,
+      "energy_per_inference_j": 0.029157218822399997,
+      "power_samples": 6
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "invocation_count": 48,
+      "benchmark_runs": 1000000,
+      "benchmark_duration_s": 5.46,
+      "benchmark_total_energy_j": 606.9305871,
+      "energy_per_execution_j": 0.0006069305871,
+      "energy_per_inference_j": 0.0291326681808,
+      "power_samples": 6
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "invocation_count": 48,
+      "benchmark_runs": 1000000,
+      "benchmark_duration_s": 5.835,
+      "benchmark_total_energy_j": 606.6574158000001,
+      "energy_per_execution_j": 0.0006066574158,
+      "energy_per_inference_j": 0.029119555958400004,
+      "power_samples": 6
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "invocation_count": 48,
+      "benchmark_runs": 1000000,
+      "benchmark_duration_s": 5.835,
+      "benchmark_total_energy_j": 605.4987983,
+      "energy_per_execution_j": 0.0006054987983,
+      "energy_per_inference_j": 0.0290639423184,
+      "power_samples": 6
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "invocation_count": 48,
+      "benchmark_runs": 1000000,
+      "benchmark_duration_s": 5.834,
+      "benchmark_total_energy_j": 605.4245492000001,
+      "energy_per_execution_j": 0.0006054245492000001,
+      "energy_per_inference_j": 0.029060378361600005,
+      "power_samples": 6
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "invocation_count": 48,
+      "benchmark_runs": 1000000,
+      "benchmark_duration_s": 5.636,
+      "benchmark_total_energy_j": 604.0724741,
+      "energy_per_execution_j": 0.0006040724741,
+      "energy_per_inference_j": 0.028995478756800003,
+      "power_samples": 6
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "invocation_count": 48,
+      "benchmark_runs": 1000000,
+      "benchmark_duration_s": 5.826,
+      "benchmark_total_energy_j": 505.661752,
+      "energy_per_execution_j": 0.0005056617519999999,
+      "energy_per_inference_j": 0.024271764095999997,
+      "power_samples": 5
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "invocation_count": 48,
+      "benchmark_runs": 1000000,
+      "benchmark_duration_s": 5.431,
+      "benchmark_total_energy_j": 505.40146820000007,
+      "energy_per_execution_j": 0.0005054014682000001,
+      "energy_per_inference_j": 0.024259270473600006,
+      "power_samples": 5
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "invocation_count": 48,
+      "benchmark_runs": 1000000,
+      "benchmark_duration_s": 5.428,
+      "benchmark_total_energy_j": 505.2060379,
+      "energy_per_execution_j": 0.0005052060379,
+      "energy_per_inference_j": 0.0242498898192,
+      "power_samples": 5
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "invocation_count": 48,
+      "benchmark_runs": 1000000,
+      "benchmark_duration_s": 5.433,
+      "benchmark_total_energy_j": 504.9317283,
+      "energy_per_execution_j": 0.0005049317283,
+      "energy_per_inference_j": 0.0242367229584,
+      "power_samples": 5
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "invocation_count": 25,
+      "benchmark_runs": 1000000,
+      "benchmark_duration_s": 5.616,
+      "benchmark_total_energy_j": 608.0444243000001,
+      "energy_per_execution_j": 0.0006080444243,
+      "energy_per_inference_j": 0.015201110607500002,
+      "power_samples": 6
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "invocation_count": 24,
+      "benchmark_runs": 1000000,
+      "benchmark_duration_s": 5.436,
+      "benchmark_total_energy_j": 608.4015205,
+      "energy_per_execution_j": 0.0006084015204999999,
+      "energy_per_inference_j": 0.014601636491999997,
+      "power_samples": 6
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "invocation_count": 24,
+      "benchmark_runs": 1000000,
+      "benchmark_duration_s": 5.817,
+      "benchmark_total_energy_j": 607.2803524000001,
+      "energy_per_execution_j": 0.0006072803524000001,
+      "energy_per_inference_j": 0.014574728457600002,
+      "power_samples": 6
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "invocation_count": 24,
+      "benchmark_runs": 1000000,
+      "benchmark_duration_s": 5.645,
+      "benchmark_total_energy_j": 607.2417274000001,
+      "energy_per_execution_j": 0.0006072417274,
+      "energy_per_inference_j": 0.0145738014576,
+      "power_samples": 6
+    }
+  ]
+}

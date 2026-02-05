@@ -1,0 +1,10 @@
+{
+  "end_timestamp": "2026-02-05 02:40:02.878",
+  "energy_joules": 0.0,
+  "full_model_inference_ms": 12.25979435825348,
+  "full_model_inference_us": 12259.794358253479,
+  "max_time_us": 13562.87956237793,
+  "min_time_us": 12125.856399536133,
+  "num_runs": 1000,
+  "start_timestamp": "2026-02-05 02:39:50.603"
+}

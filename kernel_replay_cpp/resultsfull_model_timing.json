@@ -1,0 +1,10 @@
+{
+  "end_timestamp": "",
+  "energy_joules": 0.0,
+  "full_model_inference_ms": 18.743624897003173,
+  "full_model_inference_us": 18743.624897003174,
+  "max_time_us": 22034.55924987793,
+  "min_time_us": 18320.608139038086,
+  "num_runs": 100,
+  "start_timestamp": ""
+}

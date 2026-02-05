@@ -1,0 +1,3711 @@
+{
+  "summary": {
+    "total_kernels": 144,
+    "tier1_cuda_runtime": {
+      "unique": 68,
+      "invocations": 1303,
+      "percentage": "7.6%"
+    },
+    "tier2_cublas": {
+      "unique": 23,
+      "invocations": 3721,
+      "percentage": "21.7%"
+    },
+    "tier3_libtorch": {
+      "unique": 53,
+      "invocations": 12162,
+      "percentage": "70.8%"
+    }
+  },
+  "kernels": [
+    {
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BUnaryFunctor<long, long, bool, at::native::(anonymous namespace)::CompareEqFunctor<long> >, at::detail::Array<char*, 2> >(int, at::native::BUnaryFunctor<long, long, bool, at::native::(anonymous namespace)::CompareEqFunctor<long> >, at::detail::Array<char*, 2>)",
+      "tier": 3,
+      "count": 26,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BUnaryFunctor<long, long, bool, at::native::(anonymous namespace)::CompareEqFunctor<long> >, at::detail::Array<char*, 2> >(int, at::native::BUnaryFunctor<long, long, bool, at::native::(anonymous namespace)::CompareEqFunctor<long> >, at::detail::Array<char*, 2>)"
+      },
+      "params": {
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "elementwise"
+      }
+    },
+    {
+      "name": "void at::native::unrolled_elementwise_kernel<at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#12}::operator()() const::{lambda(long)#1}, at::detail::Array<char*, 2>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast>(int, at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#12}::operator()() const::{lambda(long)#1}, at::detail::Array<char*, 2>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast)",
+      "tier": 3,
+      "count": 26,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void at::native::unrolled_elementwise_kernel<at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#12}::operator()() const::{lambda(long)#1}, at::detail::Array<char*, 2>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast>(int, at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#12}::operator()() const::{lambda(long)#1}, at::detail::Array<char*, 2>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast)"
+      },
+      "params": {
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "elementwise"
+      }
+    },
+    {
+      "name": "void at::native::reduce_kernel<512, 1, at::native::ReduceOp<long, at::native::func_wrapper_t<long, at::native::sum_functor<long, long, long>::operator()(at::TensorIterator&)::{lambda(long, long)#1}>, unsigned int, long, 4> >(at::native::ReduceOp<long, at::native::func_wrapper_t<long, at::native::sum_functor<long, long, long>::operator()(at::TensorIterator&)::{lambda(long, long)#1}>, unsigned int, long, 4>)",
+      "tier": 3,
+      "count": 1,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          1,
+          1,
+          1
+        ],
+        "shared memory": 16,
+        "name": "void at::native::reduce_kernel<512, 1, at::native::ReduceOp<long, at::native::func_wrapper_t<long, at::native::sum_functor<long, long, long>::operator()(at::TensorIterator&)::{lambda(long, long)#1}>, unsigned int, long, 4> >(at::native::ReduceOp<long, at::native::func_wrapper_t<long, at::native::sum_functor<long, long, long>::operator()(at::TensorIterator&)::{lambda(long, long)#1}>, unsigned int, long, 4>)"
+      },
+      "params": {
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          1,
+          1,
+          1
+        ],
+        "shared_memory": 16,
+        "operation": "reduce"
+      }
+    },
+    {
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BUnaryFunctor<long, long, bool, at::native::(anonymous namespace)::CompareFunctor<long> >, at::detail::Array<char*, 2> >(int, at::native::BUnaryFunctor<long, long, bool, at::native::(anonymous namespace)::CompareFunctor<long> >, at::detail::Array<char*, 2>)",
+      "tier": 3,
+      "count": 1,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BUnaryFunctor<long, long, bool, at::native::(anonymous namespace)::CompareFunctor<long> >, at::detail::Array<char*, 2> >(int, at::native::BUnaryFunctor<long, long, bool, at::native::(anonymous namespace)::CompareFunctor<long> >, at::detail::Array<char*, 2>)"
+      },
+      "params": {
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "elementwise"
+      }
+    },
+    {
+      "name": "Memcpy DtoH (Device -> Pageable)",
+      "tier": 1,
+      "count": 26,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 1
+      },
+      "params": {
+        "bytes": 1,
+        "kind": "DtoH"
+      }
+    },
+    {
+      "name": "Memcpy HtoD (Pageable -> Device)",
+      "tier": 1,
+      "count": 1,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 8
+      },
+      "params": {
+        "bytes": 8,
+        "kind": "HtoD"
+      }
+    },
+    {
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<long>, at::detail::Array<char*, 1> >(int, at::native::FillFunctor<long>, at::detail::Array<char*, 1>)",
+      "tier": 3,
+      "count": 26,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<long>, at::detail::Array<char*, 1> >(int, at::native::FillFunctor<long>, at::detail::Array<char*, 1>)"
+      },
+      "params": {
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "fill"
+      }
+    },
+    {
+      "name": "void at::native::(anonymous namespace)::indexSelectSmallIndex<c10::Half, long, unsigned int, 2, 2, -2>(at::cuda::detail::TensorInfo<c10::Half, unsigned int>, at::cuda::detail::TensorInfo<c10::Half, unsigned int>, at::cuda::detail::TensorInfo<long, unsigned int>, int, int, unsigned int, long)",
+      "tier": 3,
+      "count": 25,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          8,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void at::native::(anonymous namespace)::indexSelectSmallIndex<c10::Half, long, unsigned int, 2, 2, -2>(at::cuda::detail::TensorInfo<c10::Half, unsigned int>, at::cuda::detail::TensorInfo<c10::Half, unsigned int>, at::cuda::detail::TensorInfo<long, unsigned int>, int, int, unsigned int, long)"
+      },
+      "params": {
+        "grid": [
+          8,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "index_select"
+      }
+    },
+    {
+      "name": "void at::native::(anonymous namespace)::vectorized_layer_norm_kernel<c10::Half, float>(int, float, c10::Half const*, c10::Half const*, c10::Half const*, float*, float*, c10::Half*)",
+      "tier": 3,
+      "count": 50,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          5,
+          1,
+          1
+        ],
+        "block": [
+          32,
+          4,
+          1
+        ],
+        "shared memory": 24,
+        "name": "void at::native::(anonymous namespace)::vectorized_layer_norm_kernel<c10::Half, float>(int, float, c10::Half const*, c10::Half const*, c10::Half const*, float*, float*, c10::Half*)"
+      },
+      "params": {
+        "grid": [
+          5,
+          1,
+          1
+        ],
+        "block": [
+          32,
+          4,
+          1
+        ],
+        "shared_memory": 24,
+        "operation": "layer_norm"
+      }
+    },
+    {
+      "name": "Memcpy HtoD (Pageable -> Device)",
+      "tier": 1,
+      "count": 25,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 4
+      },
+      "params": {
+        "bytes": 4,
+        "kind": "HtoD"
+      }
+    },
+    {
+      "name": "void (anonymous namespace)::elementwise_kernel_with_index<int, at::native::arange_cuda_out(c10::Scalar const&, c10::Scalar const&, c10::Scalar const&, at::Tensor&)::{lambda()#1}::operator()() const::{lambda()#10}::operator()() const::{lambda(long)#1}>(int, at::native::arange_cuda_out(c10::Scalar const&, c10::Scalar const&, c10::Scalar const&, at::Tensor&)::{lambda()#1}::operator()() const::{lambda()#10}::operator()() const::{lambda(long)#1}, function_traits<at::native::arange_cuda_out(c10::Scalar const&, c10::Scalar const&, c10::Scalar const&, at::Tensor&)::{lambda()#1}::operator()() const::{lambda()#10}::operator()() const::{lambda(long)#1}>::result_type*)",
+      "tier": 3,
+      "count": 25,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          64,
+          1,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void (anonymous namespace)::elementwise_kernel_with_index<int, at::native::arange_cuda_out(c10::Scalar const&, c10::Scalar const&, c10::Scalar const&, at::Tensor&)::{lambda()#1}::operator()() const::{lambda()#10}::operator()() const::{lambda(long)#1}>(int, at::native::arange_cuda_out(c10::Scalar const&, c10::Scalar const&, c10::Scalar const&, at::Tensor&)::{lambda()#1}::operator()() const::{lambda()#10}::operator()() const::{lambda(long)#1}, function_traits<at::native::arange_cuda_out(c10::Scalar const&, c10::Scalar const&, c10::Scalar const&, at::Tensor&)::{lambda()#1}::operator()() const::{lambda()#10}::operator()() const::{lambda(long)#1}>::result_type*)"
+      },
+      "params": {
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          64,
+          1,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "elementwise"
+      }
+    },
+    {
+      "name": "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl<at::native::(anonymous namespace)::pow_tensor_tensor_kernel(at::TensorIteratorBase&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, float)#1}>(at::TensorIteratorBase&, at::native::(anonymous namespace)::pow_tensor_tensor_kernel(at::TensorIteratorBase&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, float)#1} const&)::{lambda(int)#2}>(int, at::native::gpu_kernel_impl<at::native::(anonymous namespace)::pow_tensor_tensor_kernel(at::TensorIteratorBase&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, float)#1}>(at::TensorIteratorBase&, at::native::(anonymous namespace)::pow_tensor_tensor_kernel(at::TensorIteratorBase&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, float)#1} const&)::{lambda(int)#2})",
+      "tier": 3,
+      "count": 25,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl<at::native::(anonymous namespace)::pow_tensor_tensor_kernel(at::TensorIteratorBase&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, float)#1}>(at::TensorIteratorBase&, at::native::(anonymous namespace)::pow_tensor_tensor_kernel(at::TensorIteratorBase&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, float)#1} const&)::{lambda(int)#2}>(int, at::native::gpu_kernel_impl<at::native::(anonymous namespace)::pow_tensor_tensor_kernel(at::TensorIteratorBase&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, float)#1}>(at::TensorIteratorBase&, at::native::(anonymous namespace)::pow_tensor_tensor_kernel(at::TensorIteratorBase&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, float)#1} const&)::{lambda(int)#2})"
+      },
+      "params": {
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "elementwise"
+      }
+    },
+    {
+      "name": "void at_cuda_detail::cub::DeviceScanInitKernel<at_cuda_detail::cub::ScanTileState<long, true> >(at_cuda_detail::cub::ScanTileState<long, true>, int)",
+      "tier": 3,
+      "count": 25,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void at_cuda_detail::cub::DeviceScanInitKernel<at_cuda_detail::cub::ScanTileState<long, true> >(at_cuda_detail::cub::ScanTileState<long, true>, int)"
+      },
+      "params": {
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "scan"
+      }
+    },
+    {
+      "name": "void at_cuda_detail::cub::DeviceScanKernel<at_cuda_detail::cub::DeviceScanPolicy<long>::Policy600, long*, long*, at_cuda_detail::cub::ScanTileState<long, true>, std::plus<long>, at_cuda_detail::cub::NullType, int>(long*, long*, at_cuda_detail::cub::ScanTileState<long, true>, int, std::plus<long>, at_cuda_detail::cub::NullType, int)",
+      "tier": 3,
+      "count": 25,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 7184,
+        "name": "void at_cuda_detail::cub::DeviceScanKernel<at_cuda_detail::cub::DeviceScanPolicy<long>::Policy600, long*, long*, at_cuda_detail::cub::ScanTileState<long, true>, std::plus<long>, at_cuda_detail::cub::NullType, int>(long*, long*, at_cuda_detail::cub::ScanTileState<long, true>, int, std::plus<long>, at_cuda_detail::cub::NullType, int)"
+      },
+      "params": {
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 7184,
+        "operation": "scan"
+      }
+    },
+    {
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctorOnSelf_add<long>, at::detail::Array<char*, 2> >(int, at::native::CUDAFunctorOnSelf_add<long>, at::detail::Array<char*, 2>)",
+      "tier": 3,
+      "count": 26,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctorOnSelf_add<long>, at::detail::Array<char*, 2> >(int, at::native::CUDAFunctorOnSelf_add<long>, at::detail::Array<char*, 2>)"
+      },
+      "params": {
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "elementwise"
+      }
+    },
+    {
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<long, long, long, at::native::MulFunctor<long> >, at::detail::Array<char*, 3> >(int, at::native::BinaryFunctor<long, long, long, at::native::MulFunctor<long> >, at::detail::Array<char*, 3>)",
+      "tier": 3,
+      "count": 75,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<long, long, long, at::native::MulFunctor<long> >, at::detail::Array<char*, 3> >(int, at::native::BinaryFunctor<long, long, long, at::native::MulFunctor<long> >, at::detail::Array<char*, 3>)"
+      },
+      "params": {
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "mul"
+      }
+    },
+    {
+      "name": "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl<at::native::BinaryFunctor<float, float, float, at::native::MulFunctor<float> > >(at::TensorIteratorBase&, at::native::BinaryFunctor<float, float, float, at::native::MulFunctor<float> > const&)::{lambda(int)#2}>(int, at::native::gpu_kernel_impl<at::native::BinaryFunctor<float, float, float, at::native::MulFunctor<float> > >(at::TensorIteratorBase&, at::native::BinaryFunctor<float, float, float, at::native::MulFunctor<float> > const&)::{lambda(int)#2})",
+      "tier": 3,
+      "count": 25,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl<at::native::BinaryFunctor<float, float, float, at::native::MulFunctor<float> > >(at::TensorIteratorBase&, at::native::BinaryFunctor<float, float, float, at::native::MulFunctor<float> > const&)::{lambda(int)#2}>(int, at::native::gpu_kernel_impl<at::native::BinaryFunctor<float, float, float, at::native::MulFunctor<float> > >(at::TensorIteratorBase&, at::native::BinaryFunctor<float, float, float, at::native::MulFunctor<float> > const&)::{lambda(int)#2})"
+      },
+      "params": {
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "mul"
+      }
+    },
+    {
+      "name": "void at::native::unrolled_elementwise_kernel<at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1}, at::detail::Array<char*, 2>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast>(int, at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1}, at::detail::Array<char*, 2>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast)",
+      "tier": 3,
+      "count": 650,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void at::native::unrolled_elementwise_kernel<at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1}, at::detail::Array<char*, 2>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast>(int, at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1}, at::detail::Array<char*, 2>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast)"
+      },
+      "params": {
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "elementwise"
+      }
+    },
+    {
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<float>, at::detail::Array<char*, 1> >(int, at::native::FillFunctor<float>, at::detail::Array<char*, 1>)",
+      "tier": 3,
+      "count": 1,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<float>, at::detail::Array<char*, 1> >(int, at::native::FillFunctor<float>, at::detail::Array<char*, 1>)"
+      },
+      "params": {
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "fill"
+      }
+    },
+    {
+      "name": "void (anonymous namespace)::elementwise_kernel_with_index<int, at::native::arange_cuda_out(c10::Scalar const&, c10::Scalar const&, c10::Scalar const&, at::Tensor&)::{lambda()#1}::operator()() const::{lambda()#12}::operator()() const::{lambda(long)#1}>(int, at::native::arange_cuda_out(c10::Scalar const&, c10::Scalar const&, c10::Scalar const&, at::Tensor&)::{lambda()#1}::operator()() const::{lambda()#12}::operator()() const::{lambda(long)#1}, function_traits<at::native::arange_cuda_out(c10::Scalar const&, c10::Scalar const&, c10::Scalar const&, at::Tensor&)::{lambda()#1}::operator()() const::{lambda()#12}::operator()() const::{lambda(long)#1}>::result_type*)",
+      "tier": 3,
+      "count": 1,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          64,
+          1,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void (anonymous namespace)::elementwise_kernel_with_index<int, at::native::arange_cuda_out(c10::Scalar const&, c10::Scalar const&, c10::Scalar const&, at::Tensor&)::{lambda()#1}::operator()() const::{lambda()#12}::operator()() const::{lambda(long)#1}>(int, at::native::arange_cuda_out(c10::Scalar const&, c10::Scalar const&, c10::Scalar const&, at::Tensor&)::{lambda()#1}::operator()() const::{lambda()#12}::operator()() const::{lambda(long)#1}, function_traits<at::native::arange_cuda_out(c10::Scalar const&, c10::Scalar const&, c10::Scalar const&, at::Tensor&)::{lambda()#1}::operator()() const::{lambda()#12}::operator()() const::{lambda(long)#1}>::result_type*)"
+      },
+      "params": {
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          64,
+          1,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "elementwise"
+      }
+    },
+    {
+      "name": "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl<at::native::BinaryFunctor<long, long, bool, at::native::(anonymous namespace)::CompareFunctor<long> > >(at::TensorIteratorBase&, at::native::BinaryFunctor<long, long, bool, at::native::(anonymous namespace)::CompareFunctor<long> > const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl<at::native::BinaryFunctor<long, long, bool, at::native::(anonymous namespace)::CompareFunctor<long> > >(at::TensorIteratorBase&, at::native::BinaryFunctor<long, long, bool, at::native::(anonymous namespace)::CompareFunctor<long> > const&)::{lambda(int)#1})",
+      "tier": 3,
+      "count": 1,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl<at::native::BinaryFunctor<long, long, bool, at::native::(anonymous namespace)::CompareFunctor<long> > >(at::TensorIteratorBase&, at::native::BinaryFunctor<long, long, bool, at::native::(anonymous namespace)::CompareFunctor<long> > const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl<at::native::BinaryFunctor<long, long, bool, at::native::(anonymous namespace)::CompareFunctor<long> > >(at::TensorIteratorBase&, at::native::BinaryFunctor<long, long, bool, at::native::(anonymous namespace)::CompareFunctor<long> > const&)::{lambda(int)#1})"
+      },
+      "params": {
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "elementwise"
+      }
+    },
+    {
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, bool)#1}, at::detail::Array<char*, 3> >(int, at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, bool)#1}, at::detail::Array<char*, 3>)",
+      "tier": 3,
+      "count": 1,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, bool)#1}, at::detail::Array<char*, 3> >(int, at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, bool)#1}, at::detail::Array<char*, 3>)"
+      },
+      "params": {
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "elementwise"
+      }
+    },
+    {
+      "name": "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl<at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1}>(at::TensorIteratorBase&, at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1} const&)::{lambda(int)#2}>(int, at::native::gpu_kernel_impl<at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1}>(at::TensorIteratorBase&, at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1} const&)::{lambda(int)#2})",
+      "tier": 3,
+      "count": 1,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl<at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1}>(at::TensorIteratorBase&, at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1} const&)::{lambda(int)#2}>(int, at::native::gpu_kernel_impl<at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1}>(at::TensorIteratorBase&, at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1} const&)::{lambda(int)#2})"
+      },
+      "params": {
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "elementwise"
+      }
+    },
+    {
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctorOnOther_add<c10::Half>, at::detail::Array<char*, 2> >(int, at::native::CUDAFunctorOnOther_add<c10::Half>, at::detail::Array<char*, 2>)",
+      "tier": 3,
+      "count": 25,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctorOnOther_add<c10::Half>, at::detail::Array<char*, 2> >(int, at::native::CUDAFunctorOnOther_add<c10::Half>, at::detail::Array<char*, 2>)"
+      },
+      "params": {
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "elementwise"
+      }
+    },
+    {
+      "name": "void at::native::unrolled_elementwise_kernel<at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#22}::operator()() const::{lambda(bool)#1}, at::detail::Array<char*, 2>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast>(int, at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#22}::operator()() const::{lambda(bool)#1}, at::detail::Array<char*, 2>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast)",
+      "tier": 3,
+      "count": 50,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void at::native::unrolled_elementwise_kernel<at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#22}::operator()() const::{lambda(bool)#1}, at::detail::Array<char*, 2>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast>(int, at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#22}::operator()() const::{lambda(bool)#1}, at::detail::Array<char*, 2>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast)"
+      },
+      "params": {
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "elementwise"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 2,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 50
+      },
+      "params": {
+        "bytes": 50,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#22}::operator()() const::{lambda(c10::Half, bool)#1}, at::detail::Array<char*, 3> >(int, at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#22}::operator()() const::{lambda(c10::Half, bool)#1}, at::detail::Array<char*, 3>)",
+      "tier": 3,
+      "count": 25,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#22}::operator()() const::{lambda(c10::Half, bool)#1}, at::detail::Array<char*, 3> >(int, at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#22}::operator()() const::{lambda(c10::Half, bool)#1}, at::detail::Array<char*, 3>)"
+      },
+      "params": {
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "elementwise"
+      }
+    },
+    {
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctor_add<c10::Half>, at::detail::Array<char*, 3> >(int, at::native::CUDAFunctor_add<c10::Half>, at::detail::Array<char*, 3>)",
+      "tier": 3,
+      "count": 1,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctor_add<c10::Half>, at::detail::Array<char*, 3> >(int, at::native::CUDAFunctor_add<c10::Half>, at::detail::Array<char*, 3>)"
+      },
+      "params": {
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "add"
+      }
+    },
+    {
+      "name": "maxwell_sgemm_fp16_128x32_tn",
+      "tier": 2,
+      "count": 24,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          24,
+          1,
+          5
+        ],
+        "block": [
+          256,
+          1,
+          1
+        ],
+        "shared memory": 16384,
+        "name": "maxwell_sgemm_fp16_128x32_tn"
+      },
+      "params": {
+        "grid": [
+          24,
+          1,
+          5
+        ],
+        "block": [
+          256,
+          1,
+          1
+        ],
+        "shared_memory": 16384,
+        "dtype": "fp16",
+        "tile_m": 128,
+        "tile_n": 32,
+        "M": 5,
+        "K": 1024,
+        "N": 3072
+      }
+    },
+    {
+      "name": "void splitKreduce_kernel<32, 16, int, float, __half, float, __half, true, true, false>(cublasSplitKParams<float>, float const*, __half const*, __half*, float const*, float const*, __half const*, float const*, __half*, void*, long, float*, int*)",
+      "tier": 2,
+      "count": 24,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          96,
+          1,
+          1
+        ],
+        "block": [
+          32,
+          16,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void splitKreduce_kernel<32, 16, int, float, __half, float, __half, true, true, false>(cublasSplitKParams<float>, float const*, __half const*, __half*, float const*, float const*, __half const*, float const*, __half*, void*, long, float*, int*)"
+      },
+      "params": {
+        "grid": [
+          96,
+          1,
+          1
+        ],
+        "block": [
+          32,
+          16,
+          1
+        ],
+        "shared_memory": 0,
+        "dtype": "fp16",
+        "M": 5,
+        "K": 1024,
+        "N": 3072
+      }
+    },
+    {
+      "name": "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl<at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1}>(at::TensorIteratorBase&, at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1} const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl<at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1}>(at::TensorIteratorBase&, at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1} const&)::{lambda(int)#1})",
+      "tier": 3,
+      "count": 24,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl<at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1}>(at::TensorIteratorBase&, at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1} const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl<at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1}>(at::TensorIteratorBase&, at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1} const&)::{lambda(int)#1})"
+      },
+      "params": {
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "elementwise"
+      }
+    },
+    {
+      "name": "void gemmSN_TN_kernel<float, 128, 16, 2, 4, 6, 7, false, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half> >(cublasGemmSmallNParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>)",
+      "tier": 2,
+      "count": 24,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          1,
+          1,
+          16
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 10752,
+        "name": "void gemmSN_TN_kernel<float, 128, 16, 2, 4, 6, 7, false, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half> >(cublasGemmSmallNParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>)"
+      },
+      "params": {
+        "grid": [
+          1,
+          1,
+          16
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 10752,
+        "dtype": "fp16",
+        "M": 5,
+        "K": 1024,
+        "N": 1
+      }
+    },
+    {
+      "name": "void at::native::unrolled_elementwise_kernel<at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast>(int, at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast)",
+      "tier": 3,
+      "count": 600,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void at::native::unrolled_elementwise_kernel<at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast>(int, at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast)"
+      },
+      "params": {
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "elementwise"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 48,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 1600
+      },
+      "params": {
+        "bytes": 1600,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl<at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, bool)#1}>(at::TensorIteratorBase&, at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, bool)#1} const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl<at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, bool)#1}>(at::TensorIteratorBase&, at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, bool)#1} const&)::{lambda(int)#1})",
+      "tier": 3,
+      "count": 336,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          2,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl<at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, bool)#1}>(at::TensorIteratorBase&, at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, bool)#1} const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl<at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, bool)#1}>(at::TensorIteratorBase&, at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, bool)#1} const&)::{lambda(int)#1})"
+      },
+      "params": {
+        "grid": [
+          2,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "elementwise"
+      }
+    },
+    {
+      "name": "void (anonymous namespace)::softmax_warp_forward<float, float, float, 3, false, false>(float*, float const*, int, int, int, bool const*, int, bool)",
+      "tier": 3,
+      "count": 24,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          3,
+          1,
+          1
+        ],
+        "block": [
+          8,
+          16,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void (anonymous namespace)::softmax_warp_forward<float, float, float, 3, false, false>(float*, float const*, int, int, int, bool const*, int, bool)"
+      },
+      "params": {
+        "grid": [
+          3,
+          1,
+          1
+        ],
+        "block": [
+          8,
+          16,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "softmax"
+      }
+    },
+    {
+      "name": "void gemmSN_NN_kernel<float, 128, 2, 4, 8, 5, 4, false, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half> >(cublasGemmSmallNParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>)",
+      "tier": 2,
+      "count": 24,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          1,
+          1,
+          16
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 12800,
+        "name": "void gemmSN_NN_kernel<float, 128, 2, 4, 8, 5, 4, false, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half> >(cublasGemmSmallNParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>)"
+      },
+      "params": {
+        "grid": [
+          1,
+          1,
+          16
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 12800,
+        "dtype": "fp16",
+        "M": 5,
+        "K": 1024,
+        "N": 1
+      }
+    },
+    {
+      "name": "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl<at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1}>(at::TensorIteratorBase&, at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1} const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl<at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1}>(at::TensorIteratorBase&, at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1} const&)::{lambda(int)#1})",
+      "tier": 3,
+      "count": 24,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          10,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl<at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1}>(at::TensorIteratorBase&, at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1} const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl<at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1}>(at::TensorIteratorBase&, at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1} const&)::{lambda(int)#1})"
+      },
+      "params": {
+        "grid": [
+          10,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "elementwise"
+      }
+    },
+    {
+      "name": "maxwell_sgemm_fp16_128x32_tn",
+      "tier": 2,
+      "count": 48,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          8,
+          1,
+          14
+        ],
+        "block": [
+          256,
+          1,
+          1
+        ],
+        "shared memory": 16384,
+        "name": "maxwell_sgemm_fp16_128x32_tn"
+      },
+      "params": {
+        "grid": [
+          8,
+          1,
+          14
+        ],
+        "block": [
+          256,
+          1,
+          1
+        ],
+        "shared_memory": 16384,
+        "dtype": "fp16",
+        "tile_m": 128,
+        "tile_n": 32,
+        "M": 5,
+        "K": 1024,
+        "N": 3072
+      }
+    },
+    {
+      "name": "void splitKreduce_kernel<32, 16, int, float, __half, float, __half, true, true, false>(cublasSplitKParams<float>, float const*, __half const*, __half*, float const*, float const*, __half const*, float const*, __half*, void*, long, float*, int*)",
+      "tier": 2,
+      "count": 48,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          32,
+          1,
+          1
+        ],
+        "block": [
+          32,
+          16,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void splitKreduce_kernel<32, 16, int, float, __half, float, __half, true, true, false>(cublasSplitKParams<float>, float const*, __half const*, __half*, float const*, float const*, __half const*, float const*, __half*, void*, long, float*, int*)"
+      },
+      "params": {
+        "grid": [
+          32,
+          1,
+          1
+        ],
+        "block": [
+          32,
+          16,
+          1
+        ],
+        "shared_memory": 0,
+        "dtype": "fp16",
+        "M": 5,
+        "K": 1024,
+        "N": 3072
+      }
+    },
+    {
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctor_add<c10::Half>, at::detail::Array<char*, 3> >(int, at::native::CUDAFunctor_add<c10::Half>, at::detail::Array<char*, 3>)",
+      "tier": 3,
+      "count": 48,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          10,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctor_add<c10::Half>, at::detail::Array<char*, 3> >(int, at::native::CUDAFunctor_add<c10::Half>, at::detail::Array<char*, 3>)"
+      },
+      "params": {
+        "grid": [
+          10,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "add"
+      }
+    },
+    {
+      "name": "maxwell_sgemm_fp16_128x32_tn",
+      "tier": 2,
+      "count": 24,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          32,
+          1,
+          4
+        ],
+        "block": [
+          256,
+          1,
+          1
+        ],
+        "shared memory": 16384,
+        "name": "maxwell_sgemm_fp16_128x32_tn"
+      },
+      "params": {
+        "grid": [
+          32,
+          1,
+          4
+        ],
+        "block": [
+          256,
+          1,
+          1
+        ],
+        "shared_memory": 16384,
+        "dtype": "fp16",
+        "tile_m": 128,
+        "tile_n": 32,
+        "M": 5,
+        "K": 1024,
+        "N": 3072
+      }
+    },
+    {
+      "name": "void splitKreduce_kernel<32, 16, int, float, __half, float, __half, true, true, false>(cublasSplitKParams<float>, float const*, __half const*, __half*, float const*, float const*, __half const*, float const*, __half*, void*, long, float*, int*)",
+      "tier": 2,
+      "count": 24,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          128,
+          1,
+          1
+        ],
+        "block": [
+          32,
+          16,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void splitKreduce_kernel<32, 16, int, float, __half, float, __half, true, true, false>(cublasSplitKParams<float>, float const*, __half const*, __half*, float const*, float const*, __half const*, float const*, __half*, void*, long, float*, int*)"
+      },
+      "params": {
+        "grid": [
+          128,
+          1,
+          1
+        ],
+        "block": [
+          32,
+          16,
+          1
+        ],
+        "shared_memory": 0,
+        "dtype": "fp16",
+        "M": 5,
+        "K": 1024,
+        "N": 3072
+      }
+    },
+    {
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BUnaryFunctor<c10::Half, c10::Half, c10::Half, at::native::MulFunctor<float> >, at::detail::Array<char*, 2> >(int, at::native::BUnaryFunctor<c10::Half, c10::Half, c10::Half, at::native::MulFunctor<float> >, at::detail::Array<char*, 2>)",
+      "tier": 3,
+      "count": 72,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          40,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BUnaryFunctor<c10::Half, c10::Half, c10::Half, at::native::MulFunctor<float> >, at::detail::Array<char*, 2> >(int, at::native::BUnaryFunctor<c10::Half, c10::Half, c10::Half, at::native::MulFunctor<float> >, at::detail::Array<char*, 2>)"
+      },
+      "params": {
+        "grid": [
+          40,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "mul"
+      }
+    },
+    {
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<c10::Half, c10::Half, c10::Half, at::native::MulFunctor<float> >, at::detail::Array<char*, 3> >(int, at::native::BinaryFunctor<c10::Half, c10::Half, c10::Half, at::native::MulFunctor<float> >, at::detail::Array<char*, 3>)",
+      "tier": 3,
+      "count": 72,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          40,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<c10::Half, c10::Half, c10::Half, at::native::MulFunctor<float> >, at::detail::Array<char*, 3> >(int, at::native::BinaryFunctor<c10::Half, c10::Half, c10::Half, at::native::MulFunctor<float> >, at::detail::Array<char*, 3>)"
+      },
+      "params": {
+        "grid": [
+          40,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "mul"
+      }
+    },
+    {
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctorOnSelf_add<c10::Half>, at::detail::Array<char*, 2> >(int, at::native::CUDAFunctorOnSelf_add<c10::Half>, at::detail::Array<char*, 2>)",
+      "tier": 3,
+      "count": 48,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          40,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctorOnSelf_add<c10::Half>, at::detail::Array<char*, 2> >(int, at::native::CUDAFunctorOnSelf_add<c10::Half>, at::detail::Array<char*, 2>)"
+      },
+      "params": {
+        "grid": [
+          40,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "elementwise"
+      }
+    },
+    {
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::tanh_kernel_cuda(at::TensorIteratorBase&)::{lambda()#1}::operator()() const::{lambda()#10}::operator()() const::{lambda(c10::Half)#1}, at::detail::Array<char*, 2> >(int, at::native::tanh_kernel_cuda(at::TensorIteratorBase&)::{lambda()#1}::operator()() const::{lambda()#10}::operator()() const::{lambda(c10::Half)#1}, at::detail::Array<char*, 2>)",
+      "tier": 3,
+      "count": 24,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          40,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void at::native::vectorized_elementwise_kernel<4, at::native::tanh_kernel_cuda(at::TensorIteratorBase&)::{lambda()#1}::operator()() const::{lambda()#10}::operator()() const::{lambda(c10::Half)#1}, at::detail::Array<char*, 2> >(int, at::native::tanh_kernel_cuda(at::TensorIteratorBase&)::{lambda()#1}::operator()() const::{lambda()#10}::operator()() const::{lambda(c10::Half)#1}, at::detail::Array<char*, 2>)"
+      },
+      "params": {
+        "grid": [
+          40,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "elementwise"
+      }
+    },
+    {
+      "name": "maxwell_fp16_sgemm_fp16_64x64_tn",
+      "tier": 2,
+      "count": 1,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          3920,
+          1,
+          1
+        ],
+        "block": [
+          64,
+          1,
+          1
+        ],
+        "shared memory": 8704,
+        "name": "maxwell_fp16_sgemm_fp16_64x64_tn"
+      },
+      "params": {
+        "grid": [
+          3920,
+          1,
+          1
+        ],
+        "block": [
+          64,
+          1,
+          1
+        ],
+        "shared_memory": 8704,
+        "dtype": "fp16",
+        "tile_m": 64,
+        "tile_n": 64,
+        "M": 5,
+        "K": 1024,
+        "N": 3072
+      }
+    },
+    {
+      "name": "Memset (Device)",
+      "tier": 1,
+      "count": 25,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 4
+      },
+      "params": {
+        "bytes": 4,
+        "kind": "memset"
+      }
+    },
+    {
+      "name": "void at::native::reduce_kernel<512, 1, at::native::ReduceOp<c10::Half, at::native::ArgMaxOps<float>, unsigned int, long, 4> >(at::native::ReduceOp<c10::Half, at::native::ArgMaxOps<float>, unsigned int, long, 4>)",
+      "tier": 3,
+      "count": 25,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          1,
+          31,
+          1
+        ],
+        "block": [
+          512,
+          1,
+          1
+        ],
+        "shared memory": 8208,
+        "name": "void at::native::reduce_kernel<512, 1, at::native::ReduceOp<c10::Half, at::native::ArgMaxOps<float>, unsigned int, long, 4> >(at::native::ReduceOp<c10::Half, at::native::ArgMaxOps<float>, unsigned int, long, 4>)"
+      },
+      "params": {
+        "grid": [
+          1,
+          31,
+          1
+        ],
+        "block": [
+          512,
+          1,
+          1
+        ],
+        "shared_memory": 8208,
+        "operation": "reduce"
+      }
+    },
+    {
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctorOnOther_add<long>, at::detail::Array<char*, 2> >(int, at::native::CUDAFunctorOnOther_add<long>, at::detail::Array<char*, 2>)",
+      "tier": 3,
+      "count": 25,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctorOnOther_add<long>, at::detail::Array<char*, 2> >(int, at::native::CUDAFunctorOnOther_add<long>, at::detail::Array<char*, 2>)"
+      },
+      "params": {
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "elementwise"
+      }
+    },
+    {
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BUnaryFunctor<long, long, long, at::native::MulFunctor<long> >, at::detail::Array<char*, 2> >(int, at::native::BUnaryFunctor<long, long, long, at::native::MulFunctor<long> >, at::detail::Array<char*, 2>)",
+      "tier": 3,
+      "count": 25,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BUnaryFunctor<long, long, long, at::native::MulFunctor<long> >, at::detail::Array<char*, 2> >(int, at::native::BUnaryFunctor<long, long, long, at::native::MulFunctor<long> >, at::detail::Array<char*, 2>)"
+      },
+      "params": {
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "mul"
+      }
+    },
+    {
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctor_add<long>, at::detail::Array<char*, 3> >(int, at::native::CUDAFunctor_add<long>, at::detail::Array<char*, 3>)",
+      "tier": 3,
+      "count": 25,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctor_add<long>, at::detail::Array<char*, 3> >(int, at::native::CUDAFunctor_add<long>, at::detail::Array<char*, 3>)"
+      },
+      "params": {
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "add"
+      }
+    },
+    {
+      "name": "void at::native::(anonymous namespace)::CatArrayBatchedCopy<long, unsigned int, 2, 128, 1>(long*, at::native::(anonymous namespace)::CatArrInputTensorMetadata<long, unsigned int, 128, 1>, at::native::(anonymous namespace)::TensorSizeStride<unsigned int, 4u>, int, unsigned int)",
+      "tier": 3,
+      "count": 50,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          56,
+          2,
+          1
+        ],
+        "block": [
+          512,
+          1,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void at::native::(anonymous namespace)::CatArrayBatchedCopy<long, unsigned int, 2, 128, 1>(long*, at::native::(anonymous namespace)::CatArrInputTensorMetadata<long, unsigned int, 128, 1>, at::native::(anonymous namespace)::TensorSizeStride<unsigned int, 4u>, int, unsigned int)"
+      },
+      "params": {
+        "grid": [
+          56,
+          2,
+          1
+        ],
+        "block": [
+          512,
+          1,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "unknown"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 25,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 8
+      },
+      "params": {
+        "bytes": 8,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<long, long, bool, at::native::(anonymous namespace)::CompareEqFunctor<long> >, at::detail::Array<char*, 3> >(int, at::native::BinaryFunctor<long, long, bool, at::native::(anonymous namespace)::CompareEqFunctor<long> >, at::detail::Array<char*, 3>)",
+      "tier": 3,
+      "count": 25,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<long, long, bool, at::native::(anonymous namespace)::CompareEqFunctor<long> >, at::detail::Array<char*, 3> >(int, at::native::BinaryFunctor<long, long, bool, at::native::(anonymous namespace)::CompareEqFunctor<long> >, at::detail::Array<char*, 3>)"
+      },
+      "params": {
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "elementwise"
+      }
+    },
+    {
+      "name": "reduction_prod_kernel",
+      "tier": 3,
+      "count": 25,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          1,
+          1,
+          1
+        ],
+        "shared memory": 16,
+        "name": "reduction_prod_kernel"
+      },
+      "params": {
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          1,
+          1,
+          1
+        ],
+        "shared_memory": 16,
+        "operation": "unknown"
+      }
+    },
+    {
+      "name": "void at::native::reduce_kernel<512, 1, at::native::ReduceOp<long, at::native::func_wrapper_t<long, at::native::MaxNanFunctor<long> >, unsigned int, long, 4> >(at::native::ReduceOp<long, at::native::func_wrapper_t<long, at::native::MaxNanFunctor<long> >, unsigned int, long, 4>)",
+      "tier": 3,
+      "count": 25,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          1,
+          1,
+          1
+        ],
+        "shared memory": 16,
+        "name": "void at::native::reduce_kernel<512, 1, at::native::ReduceOp<long, at::native::func_wrapper_t<long, at::native::MaxNanFunctor<long> >, unsigned int, long, 4> >(at::native::ReduceOp<long, at::native::func_wrapper_t<long, at::native::MaxNanFunctor<long> >, unsigned int, long, 4>)"
+      },
+      "params": {
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          1,
+          1,
+          1
+        ],
+        "shared_memory": 16,
+        "operation": "reduce"
+      }
+    },
+    {
+      "name": "void at::native::(anonymous namespace)::vectorized_layer_norm_kernel<c10::Half, float>(int, float, c10::Half const*, c10::Half const*, c10::Half const*, float*, float*, c10::Half*)",
+      "tier": 3,
+      "count": 1200,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          32,
+          4,
+          1
+        ],
+        "shared memory": 24,
+        "name": "void at::native::(anonymous namespace)::vectorized_layer_norm_kernel<c10::Half, float>(int, float, c10::Half const*, c10::Half const*, c10::Half const*, float*, float*, c10::Half*)"
+      },
+      "params": {
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          32,
+          4,
+          1
+        ],
+        "shared_memory": 24,
+        "operation": "layer_norm"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 1,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 12
+      },
+      "params": {
+        "bytes": 12,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "void gemv2T_kernel_val<int, int, __half, __half, __half, float, 128, 16, 2, 4, false, true, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>, float, float)",
+      "tier": 2,
+      "count": 576,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          384,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 1536,
+        "name": "void gemv2T_kernel_val<int, int, __half, __half, __half, float, 128, 16, 2, 4, false, true, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>, float, float)"
+      },
+      "params": {
+        "grid": [
+          384,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 1536,
+        "dtype": "fp16",
+        "M": 5,
+        "K": 1024,
+        "N": 1
+      }
+    },
+    {
+      "name": "void at::native::(anonymous namespace)::CatArrayBatchedCopy<c10::Half, unsigned int, 3, 64, 64>(c10::Half*, at::native::(anonymous namespace)::CatArrInputTensorMetadata<c10::Half, unsigned int, 64, 64>, at::native::(anonymous namespace)::TensorSizeStride<unsigned int, 4u>, int, unsigned int)",
+      "tier": 3,
+      "count": 1152,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          56,
+          2,
+          1
+        ],
+        "block": [
+          512,
+          1,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void at::native::(anonymous namespace)::CatArrayBatchedCopy<c10::Half, unsigned int, 3, 64, 64>(c10::Half*, at::native::(anonymous namespace)::CatArrInputTensorMetadata<c10::Half, unsigned int, 64, 64>, at::native::(anonymous namespace)::TensorSizeStride<unsigned int, 4u>, int, unsigned int)"
+      },
+      "params": {
+        "grid": [
+          56,
+          2,
+          1
+        ],
+        "block": [
+          512,
+          1,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "unknown"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 24,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 192
+      },
+      "params": {
+        "bytes": 192,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "void gemv2N_kernel<int, int, __half, __half, __half, float, 128, 32, 4, 4, 1, false, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>)",
+      "tier": 2,
+      "count": 72,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          2,
+          1,
+          16
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 2560,
+        "name": "void gemv2N_kernel<int, int, __half, __half, __half, float, 128, 32, 4, 4, 1, false, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>)"
+      },
+      "params": {
+        "grid": [
+          2,
+          1,
+          16
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 2560,
+        "dtype": "fp16",
+        "M": 5,
+        "K": 1024,
+        "N": 1
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 48,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 384
+      },
+      "params": {
+        "bytes": 384,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl<at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, bool)#1}>(at::TensorIteratorBase&, at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, bool)#1} const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl<at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, bool)#1}>(at::TensorIteratorBase&, at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, bool)#1} const&)::{lambda(int)#1})",
+      "tier": 3,
+      "count": 264,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl<at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, bool)#1}>(at::TensorIteratorBase&, at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, bool)#1} const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl<at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, bool)#1}>(at::TensorIteratorBase&, at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, bool)#1} const&)::{lambda(int)#1})"
+      },
+      "params": {
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "elementwise"
+      }
+    },
+    {
+      "name": "void (anonymous namespace)::softmax_warp_forward<float, float, float, 3, false, false>(float*, float const*, int, int, int, bool const*, int, bool)",
+      "tier": 3,
+      "count": 72,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          8,
+          16,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void (anonymous namespace)::softmax_warp_forward<float, float, float, 3, false, false>(float*, float const*, int, int, int, bool const*, int, bool)"
+      },
+      "params": {
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          8,
+          16,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "softmax"
+      }
+    },
+    {
+      "name": "void gemv2N_kernel<int, int, __half, __half, __half, float, 128, 2, 4, 4, 1, false, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>)",
+      "tier": 2,
+      "count": 72,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          1,
+          1,
+          16
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 2560,
+        "name": "void gemv2N_kernel<int, int, __half, __half, __half, float, 128, 2, 4, 4, 1, false, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>)"
+      },
+      "params": {
+        "grid": [
+          1,
+          1,
+          16
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 2560,
+        "dtype": "fp16",
+        "M": 5,
+        "K": 1024,
+        "N": 1
+      }
+    },
+    {
+      "name": "void gemv2T_kernel_val<int, int, __half, __half, __half, float, 128, 16, 2, 4, false, true, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>, float, float)",
+      "tier": 2,
+      "count": 1152,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          128,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 1536,
+        "name": "void gemv2T_kernel_val<int, int, __half, __half, __half, float, 128, 16, 2, 4, false, true, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>, float, float)"
+      },
+      "params": {
+        "grid": [
+          128,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 1536,
+        "dtype": "fp16",
+        "M": 5,
+        "K": 1024,
+        "N": 1
+      }
+    },
+    {
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctor_add<c10::Half>, at::detail::Array<char*, 3> >(int, at::native::CUDAFunctor_add<c10::Half>, at::detail::Array<char*, 3>)",
+      "tier": 3,
+      "count": 1152,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          2,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctor_add<c10::Half>, at::detail::Array<char*, 3> >(int, at::native::CUDAFunctor_add<c10::Half>, at::detail::Array<char*, 3>)"
+      },
+      "params": {
+        "grid": [
+          2,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "add"
+      }
+    },
+    {
+      "name": "void gemv2T_kernel_val<int, int, __half, __half, __half, float, 128, 16, 2, 4, false, true, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>, float, float)",
+      "tier": 2,
+      "count": 576,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          512,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 1536,
+        "name": "void gemv2T_kernel_val<int, int, __half, __half, __half, float, 128, 16, 2, 4, false, true, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>, float, float)"
+      },
+      "params": {
+        "grid": [
+          512,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 1536,
+        "dtype": "fp16",
+        "M": 5,
+        "K": 1024,
+        "N": 1
+      }
+    },
+    {
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BUnaryFunctor<c10::Half, c10::Half, c10::Half, at::native::MulFunctor<float> >, at::detail::Array<char*, 2> >(int, at::native::BUnaryFunctor<c10::Half, c10::Half, c10::Half, at::native::MulFunctor<float> >, at::detail::Array<char*, 2>)",
+      "tier": 3,
+      "count": 1728,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          8,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BUnaryFunctor<c10::Half, c10::Half, c10::Half, at::native::MulFunctor<float> >, at::detail::Array<char*, 2> >(int, at::native::BUnaryFunctor<c10::Half, c10::Half, c10::Half, at::native::MulFunctor<float> >, at::detail::Array<char*, 2>)"
+      },
+      "params": {
+        "grid": [
+          8,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "mul"
+      }
+    },
+    {
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<c10::Half, c10::Half, c10::Half, at::native::MulFunctor<float> >, at::detail::Array<char*, 3> >(int, at::native::BinaryFunctor<c10::Half, c10::Half, c10::Half, at::native::MulFunctor<float> >, at::detail::Array<char*, 3>)",
+      "tier": 3,
+      "count": 1728,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          8,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<c10::Half, c10::Half, c10::Half, at::native::MulFunctor<float> >, at::detail::Array<char*, 3> >(int, at::native::BinaryFunctor<c10::Half, c10::Half, c10::Half, at::native::MulFunctor<float> >, at::detail::Array<char*, 3>)"
+      },
+      "params": {
+        "grid": [
+          8,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "mul"
+      }
+    },
+    {
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctorOnSelf_add<c10::Half>, at::detail::Array<char*, 2> >(int, at::native::CUDAFunctorOnSelf_add<c10::Half>, at::detail::Array<char*, 2>)",
+      "tier": 3,
+      "count": 1152,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          8,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctorOnSelf_add<c10::Half>, at::detail::Array<char*, 2> >(int, at::native::CUDAFunctorOnSelf_add<c10::Half>, at::detail::Array<char*, 2>)"
+      },
+      "params": {
+        "grid": [
+          8,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "elementwise"
+      }
+    },
+    {
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::tanh_kernel_cuda(at::TensorIteratorBase&)::{lambda()#1}::operator()() const::{lambda()#10}::operator()() const::{lambda(c10::Half)#1}, at::detail::Array<char*, 2> >(int, at::native::tanh_kernel_cuda(at::TensorIteratorBase&)::{lambda()#1}::operator()() const::{lambda()#10}::operator()() const::{lambda(c10::Half)#1}, at::detail::Array<char*, 2>)",
+      "tier": 3,
+      "count": 576,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          8,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void at::native::vectorized_elementwise_kernel<4, at::native::tanh_kernel_cuda(at::TensorIteratorBase&)::{lambda()#1}::operator()() const::{lambda()#10}::operator()() const::{lambda(c10::Half)#1}, at::detail::Array<char*, 2> >(int, at::native::tanh_kernel_cuda(at::TensorIteratorBase&)::{lambda()#1}::operator()() const::{lambda()#10}::operator()() const::{lambda(c10::Half)#1}, at::detail::Array<char*, 2>)"
+      },
+      "params": {
+        "grid": [
+          8,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "elementwise"
+      }
+    },
+    {
+      "name": "void gemv2T_kernel_val<int, int, __half, __half, __half, float, 128, 16, 2, 4, false, false, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>, float, float)",
+      "tier": 2,
+      "count": 24,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          31360,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 1536,
+        "name": "void gemv2T_kernel_val<int, int, __half, __half, __half, float, 128, 16, 2, 4, false, false, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>, float, float)"
+      },
+      "params": {
+        "grid": [
+          31360,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 1536,
+        "dtype": "fp16",
+        "M": 5,
+        "K": 1024,
+        "N": 1
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 1,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 14
+      },
+      "params": {
+        "bytes": 14,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 24,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 224
+      },
+      "params": {
+        "bytes": 224,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 48,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 448
+      },
+      "params": {
+        "bytes": 448,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 1,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 16
+      },
+      "params": {
+        "bytes": 16,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 24,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 256
+      },
+      "params": {
+        "bytes": 256,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 48,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 512
+      },
+      "params": {
+        "bytes": 512,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 1,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 18
+      },
+      "params": {
+        "bytes": 18,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 24,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 288
+      },
+      "params": {
+        "bytes": 288,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "void gemv2N_kernel<int, int, __half, __half, __half, float, 128, 32, 4, 4, 1, false, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>)",
+      "tier": 2,
+      "count": 96,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          3,
+          1,
+          16
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 2560,
+        "name": "void gemv2N_kernel<int, int, __half, __half, __half, float, 128, 32, 4, 4, 1, false, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>)"
+      },
+      "params": {
+        "grid": [
+          3,
+          1,
+          16
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 2560,
+        "dtype": "fp16",
+        "M": 5,
+        "K": 1024,
+        "N": 1
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 48,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 576
+      },
+      "params": {
+        "bytes": 576,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "void (anonymous namespace)::softmax_warp_forward<float, float, float, 4, false, false>(float*, float const*, int, int, int, bool const*, int, bool)",
+      "tier": 3,
+      "count": 192,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          16,
+          8,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void (anonymous namespace)::softmax_warp_forward<float, float, float, 4, false, false>(float*, float const*, int, int, int, bool const*, int, bool)"
+      },
+      "params": {
+        "grid": [
+          1,
+          1,
+          1
+        ],
+        "block": [
+          16,
+          8,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "softmax"
+      }
+    },
+    {
+      "name": "void gemv2N_kernel<int, int, __half, __half, __half, float, 128, 4, 4, 4, 1, false, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>)",
+      "tier": 2,
+      "count": 192,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          2,
+          1,
+          16
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 2560,
+        "name": "void gemv2N_kernel<int, int, __half, __half, __half, float, 128, 4, 4, 4, 1, false, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>)"
+      },
+      "params": {
+        "grid": [
+          2,
+          1,
+          16
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 2560,
+        "dtype": "fp16",
+        "M": 5,
+        "K": 1024,
+        "N": 1
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 1,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 20
+      },
+      "params": {
+        "bytes": 20,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 24,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 320
+      },
+      "params": {
+        "bytes": 320,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 48,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 640
+      },
+      "params": {
+        "bytes": 640,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 1,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 22
+      },
+      "params": {
+        "bytes": 22,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 24,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 352
+      },
+      "params": {
+        "bytes": 352,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 48,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 704
+      },
+      "params": {
+        "bytes": 704,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 1,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 24
+      },
+      "params": {
+        "bytes": 24,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 48,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 768
+      },
+      "params": {
+        "bytes": 768,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 1,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 26
+      },
+      "params": {
+        "bytes": 26,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 24,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 416
+      },
+      "params": {
+        "bytes": 416,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "void gemv2N_kernel<int, int, __half, __half, __half, float, 128, 32, 4, 4, 1, false, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>)",
+      "tier": 2,
+      "count": 96,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          4,
+          1,
+          16
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 2560,
+        "name": "void gemv2N_kernel<int, int, __half, __half, __half, float, 128, 32, 4, 4, 1, false, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>)"
+      },
+      "params": {
+        "grid": [
+          4,
+          1,
+          16
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 2560,
+        "dtype": "fp16",
+        "M": 5,
+        "K": 1024,
+        "N": 1
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 48,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 832
+      },
+      "params": {
+        "bytes": 832,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 1,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 28
+      },
+      "params": {
+        "bytes": 28,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 48,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 896
+      },
+      "params": {
+        "bytes": 896,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 1,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 30
+      },
+      "params": {
+        "bytes": 30,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 24,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 480
+      },
+      "params": {
+        "bytes": 480,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 24,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 960
+      },
+      "params": {
+        "bytes": 960,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 1,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 32
+      },
+      "params": {
+        "bytes": 32,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 24,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 1024
+      },
+      "params": {
+        "bytes": 1024,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 1,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 34
+      },
+      "params": {
+        "bytes": 34,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 24,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 544
+      },
+      "params": {
+        "bytes": 544,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "void gemv2N_kernel<int, int, __half, __half, __half, float, 128, 32, 4, 4, 1, false, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>)",
+      "tier": 2,
+      "count": 96,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          5,
+          1,
+          16
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 2560,
+        "name": "void gemv2N_kernel<int, int, __half, __half, __half, float, 128, 32, 4, 4, 1, false, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>)"
+      },
+      "params": {
+        "grid": [
+          5,
+          1,
+          16
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 2560,
+        "dtype": "fp16",
+        "M": 5,
+        "K": 1024,
+        "N": 1
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 24,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 1088
+      },
+      "params": {
+        "bytes": 1088,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "void (anonymous namespace)::softmax_warp_forward<float, float, float, 5, false, false>(float*, float const*, int, int, int, bool const*, int, bool)",
+      "tier": 3,
+      "count": 312,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          2,
+          1,
+          1
+        ],
+        "block": [
+          32,
+          4,
+          1
+        ],
+        "shared memory": 0,
+        "name": "void (anonymous namespace)::softmax_warp_forward<float, float, float, 5, false, false>(float*, float const*, int, int, int, bool const*, int, bool)"
+      },
+      "params": {
+        "grid": [
+          2,
+          1,
+          1
+        ],
+        "block": [
+          32,
+          4,
+          1
+        ],
+        "shared_memory": 0,
+        "operation": "softmax"
+      }
+    },
+    {
+      "name": "void gemv2N_kernel<int, int, __half, __half, __half, float, 128, 32, 4, 4, 1, false, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>)",
+      "tier": 2,
+      "count": 312,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          16,
+          1,
+          16
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 2560,
+        "name": "void gemv2N_kernel<int, int, __half, __half, __half, float, 128, 32, 4, 4, 1, false, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>)"
+      },
+      "params": {
+        "grid": [
+          16,
+          1,
+          16
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 2560,
+        "dtype": "fp16",
+        "M": 5,
+        "K": 1024,
+        "N": 1
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 1,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 36
+      },
+      "params": {
+        "bytes": 36,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 24,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 1152
+      },
+      "params": {
+        "bytes": 1152,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 1,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 38
+      },
+      "params": {
+        "bytes": 38,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 24,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 608
+      },
+      "params": {
+        "bytes": 608,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 24,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 1216
+      },
+      "params": {
+        "bytes": 1216,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 1,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 40
+      },
+      "params": {
+        "bytes": 40,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 24,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 1280
+      },
+      "params": {
+        "bytes": 1280,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 1,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 42
+      },
+      "params": {
+        "bytes": 42,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 24,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 672
+      },
+      "params": {
+        "bytes": 672,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "void gemv2N_kernel<int, int, __half, __half, __half, float, 128, 32, 4, 4, 1, false, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>)",
+      "tier": 2,
+      "count": 96,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          6,
+          1,
+          16
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 2560,
+        "name": "void gemv2N_kernel<int, int, __half, __half, __half, float, 128, 32, 4, 4, 1, false, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>)"
+      },
+      "params": {
+        "grid": [
+          6,
+          1,
+          16
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 2560,
+        "dtype": "fp16",
+        "M": 5,
+        "K": 1024,
+        "N": 1
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 24,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 1344
+      },
+      "params": {
+        "bytes": 1344,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 1,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 44
+      },
+      "params": {
+        "bytes": 44,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 24,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 1408
+      },
+      "params": {
+        "bytes": 1408,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 1,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 46
+      },
+      "params": {
+        "bytes": 46,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 24,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 736
+      },
+      "params": {
+        "bytes": 736,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 24,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 1472
+      },
+      "params": {
+        "bytes": 1472,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 1,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 48
+      },
+      "params": {
+        "bytes": 48,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 24,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 1536
+      },
+      "params": {
+        "bytes": 1536,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 24,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 800
+      },
+      "params": {
+        "bytes": 800,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "void gemv2N_kernel<int, int, __half, __half, __half, float, 128, 32, 4, 4, 1, false, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>)",
+      "tier": 2,
+      "count": 96,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          7,
+          1,
+          16
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 2560,
+        "name": "void gemv2N_kernel<int, int, __half, __half, __half, float, 128, 32, 4, 4, 1, false, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>)"
+      },
+      "params": {
+        "grid": [
+          7,
+          1,
+          16
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 2560,
+        "dtype": "fp16",
+        "M": 5,
+        "K": 1024,
+        "N": 1
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 1,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 52
+      },
+      "params": {
+        "bytes": 52,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 24,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 1664
+      },
+      "params": {
+        "bytes": 1664,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 1,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 54
+      },
+      "params": {
+        "bytes": 54,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 24,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 864
+      },
+      "params": {
+        "bytes": 864,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 24,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 1728
+      },
+      "params": {
+        "bytes": 1728,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 1,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 56
+      },
+      "params": {
+        "bytes": 56,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 24,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 1792
+      },
+      "params": {
+        "bytes": 1792,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 1,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 58
+      },
+      "params": {
+        "bytes": 58,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 24,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 928
+      },
+      "params": {
+        "bytes": 928,
+        "kind": "DtoD"
+      }
+    },
+    {
+      "name": "void gemv2N_kernel<int, int, __half, __half, __half, float, 128, 32, 4, 4, 1, false, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>)",
+      "tier": 2,
+      "count": 24,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "grid": [
+          8,
+          1,
+          16
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared memory": 2560,
+        "name": "void gemv2N_kernel<int, int, __half, __half, __half, float, 128, 32, 4, 4, 1, false, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>)"
+      },
+      "params": {
+        "grid": [
+          8,
+          1,
+          16
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "shared_memory": 2560,
+        "dtype": "fp16",
+        "M": 5,
+        "K": 1024,
+        "N": 1
+      }
+    },
+    {
+      "name": "Memcpy DtoD (Device -> Device)",
+      "tier": 1,
+      "count": 24,
+      "signature": {
+        "device": 0,
+        "stream": 7,
+        "bytes": 1856
+      },
+      "params": {
+        "bytes": 1856,
+        "kind": "DtoD"
+      }
+    }
+  ]
+}

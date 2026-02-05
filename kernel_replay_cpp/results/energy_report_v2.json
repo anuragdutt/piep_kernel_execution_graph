@@ -1,0 +1,195 @@
+{
+  "full_model": {
+    "num_runs": 100,
+    "total_energy_j": 203.31874679999999,
+    "energy_per_inference_j": 2.033187468,
+    "duration_s": 2.135,
+    "power_samples": 2
+  },
+  "isolated_kernels": {
+    "num_unique_kernels": 144,
+    "num_measured": 74,
+    "num_estimated": 70,
+    "measured_energy_j": 1.6498018062053008,
+    "estimated_energy_j": 17.164934606053393,
+    "predicted_energy_per_inference_j": 18.814736412258693,
+    "avg_power_during_benchmark_w": 100.96777251184834
+  },
+  "comparison": {
+    "full_model_energy_j": 2.033187468,
+    "predicted_energy_j": 18.814736412258693,
+    "error_j": 16.78154894425869,
+    "error_percent": 825.381289644005,
+    "ratio_predicted_to_actual": 9.253812896440051
+  },
+  "per_kernel_energies": [
+    {
+      "name": "void at::native::(anonymous namespace)::vectorized_layer_norm_kernel<c10::Half, float>(int, float, c10::Half const*, c10::Half const*, c10::Half const*, float*, float*, c10::Half*)",
+      "tier": 3,
+      "invocation_count": 1200,
+      "single_time_us": 17.40800030529499,
+      "energy_per_inference_j": 2.1091764176534533,
+      "method": "estimated_insufficient_samples"
+    },
+    {
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BUnaryFunctor<c10::Half, c10::Half, c10::Half, at::native::MulFunctor<float> >, at::detail::Array<char*, 2> >(int, at::native::BUnaryFunctor<c10::Half, c10::Half, c10::Half, at::native::MulFunctor<float> >, at::detail::Array<char*, 2>)",
+      "tier": 3,
+      "invocation_count": 1728,
+      "single_time_us": 10.239999741315842,
+      "energy_per_inference_j": 1.78659641848763,
+      "method": "estimated_insufficient_samples"
+    },
+    {
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<c10::Half, c10::Half, c10::Half, at::native::MulFunctor<float> >, at::detail::Array<char*, 3> >(int, at::native::BinaryFunctor<c10::Half, c10::Half, c10::Half, at::native::MulFunctor<float> >, at::detail::Array<char*, 3>)",
+      "tier": 3,
+      "invocation_count": 1728,
+      "single_time_us": 9.8879998549819,
+      "energy_per_inference_j": 1.725182184882243,
+      "method": "estimated_insufficient_samples"
+    },
+    {
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctor_add<c10::Half>, at::detail::Array<char*, 3> >(int, at::native::CUDAFunctor_add<c10::Half>, at::detail::Array<char*, 3>)",
+      "tier": 3,
+      "invocation_count": 1152,
+      "single_time_us": 10.239999741315842,
+      "energy_per_inference_j": 1.1910642789917534,
+      "method": "estimated_insufficient_samples"
+    },
+    {
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctorOnSelf_add<c10::Half>, at::detail::Array<char*, 2> >(int, at::native::CUDAFunctorOnSelf_add<c10::Half>, at::detail::Array<char*, 2>)",
+      "tier": 3,
+      "invocation_count": 1152,
+      "single_time_us": 9.312000125646591,
+      "energy_per_inference_j": 1.0831241206847095,
+      "method": "estimated_insufficient_samples"
+    },
+    {
+      "name": "void gemv2T_kernel_val<int, int, __half, __half, __half, float, 128, 16, 2, 4, false, true, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>, float, float)",
+      "tier": 2,
+      "invocation_count": 1152,
+      "single_time_us": 9.220280151367188,
+      "energy_per_inference_j": 1.0724557234392031,
+      "method": "estimated_insufficient_samples"
+    },
+    {
+      "name": "void at::native::(anonymous namespace)::CatArrayBatchedCopy<c10::Half, unsigned int, 3, 64, 64>(c10::Half*, at::native::(anonymous namespace)::CatArrInputTensorMetadata<c10::Half, unsigned int, 64, 64>, at::native::(anonymous namespace)::TensorSizeStride<unsigned int, 4u>, int, unsigned int)",
+      "tier": 3,
+      "invocation_count": 1152,
+      "single_time_us": 9.216000325977802,
+      "energy_per_inference_j": 1.0719579160885786,
+      "method": "estimated_insufficient_samples"
+    },
+    {
+      "name": "void at::native::unrolled_elementwise_kernel<at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1}, at::detail::Array<char*, 2>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast>(int, at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1}, at::detail::Array<char*, 2>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast)",
+      "tier": 3,
+      "invocation_count": 650,
+      "single_time_us": 10.879999957978725,
+      "energy_per_inference_j": 0.714044084445975,
+      "method": "estimated_insufficient_samples"
+    },
+    {
+      "name": "void (anonymous namespace)::softmax_warp_forward<float, float, float, 5, false, false>(float*, float const*, int, int, int, bool const*, int, bool)",
+      "tier": 3,
+      "invocation_count": 312,
+      "single_time_us": 22.52800017595291,
+      "energy_per_inference_j": 0.7096758230366977,
+      "method": "estimated_insufficient_samples"
+    },
+    {
+      "name": "void at::native::unrolled_elementwise_kernel<at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast>(int, at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast)",
+      "tier": 3,
+      "invocation_count": 600,
+      "single_time_us": 10.239999741315842,
+      "energy_per_inference_j": 0.6203459786415382,
+      "method": "estimated_insufficient_samples"
+    },
+    {
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::tanh_kernel_cuda(at::TensorIteratorBase&)::{lambda()#1}::operator()() const::{lambda()#10}::operator()() const::{lambda(c10::Half)#1}, at::detail::Array<char*, 2> >(int, at::native::tanh_kernel_cuda(at::TensorIteratorBase&)::{lambda()#1}::operator()() const::{lambda()#10}::operator()() const::{lambda(c10::Half)#1}, at::detail::Array<char*, 2>)",
+      "tier": 3,
+      "invocation_count": 576,
+      "single_time_us": 10.208000428974628,
+      "energy_per_inference_j": 0.5936711415054108,
+      "method": "estimated_insufficient_samples"
+    },
+    {
+      "name": "void gemv2T_kernel_val<int, int, __half, __half, __half, float, 128, 16, 2, 4, false, true, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>, float, float)",
+      "tier": 2,
+      "invocation_count": 576,
+      "single_time_us": 9.39251708984375,
+      "energy_per_inference_j": 0.5462447206124111,
+      "method": "estimated_insufficient_samples"
+    },
+    {
+      "name": "void gemv2T_kernel_val<int, int, __half, __half, __half, float, 128, 16, 2, 4, false, true, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>, float, float)",
+      "tier": 2,
+      "invocation_count": 576,
+      "single_time_us": 9.171226196289062,
+      "energy_per_inference_j": 0.5333750094191722,
+      "method": "estimated_insufficient_samples"
+    },
+    {
+      "name": "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl<at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, bool)#1}>(at::TensorIteratorBase&, at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, bool)#1} const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl<at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, bool)#1}>(at::TensorIteratorBase&, at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, bool)#1} const&)::{lambda(int)#1})",
+      "tier": 3,
+      "invocation_count": 336,
+      "single_time_us": 10.912000201642513,
+      "energy_per_inference_j": 0.370191478946918,
+      "method": "estimated_insufficient_samples"
+    },
+    {
+      "name": "void (anonymous namespace)::softmax_warp_forward<float, float, float, 4, false, false>(float*, float const*, int, int, int, bool const*, int, bool)",
+      "tier": 3,
+      "invocation_count": 192,
+      "single_time_us": 15.48799965530634,
+      "energy_per_inference_j": 0.3002474545652268,
+      "method": "estimated_insufficient_samples"
+    },
+    {
+      "name": "void gemv2N_kernel<int, int, __half, __half, __half, float, 128, 32, 4, 4, 1, false, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>)",
+      "tier": 2,
+      "invocation_count": 312,
+      "single_time_us": 9.424711303710938,
+      "energy_per_inference_j": 0.29689673735371463,
+      "method": "estimated_insufficient_samples"
+    },
+    {
+      "name": "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl<at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, bool)#1}>(at::TensorIteratorBase&, at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, bool)#1} const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl<at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, bool)#1}>(at::TensorIteratorBase&, at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, bool)#1} const&)::{lambda(int)#1})",
+      "tier": 3,
+      "invocation_count": 264,
+      "single_time_us": 9.952000342309475,
+      "energy_per_inference_j": 0.2652754649424369,
+      "method": "estimated_insufficient_samples"
+    },
+    {
+      "name": "maxwell_sgemm_fp16_128x32_tn",
+      "tier": 2,
+      "invocation_count": 48,
+      "benchmark_runs": 100000,
+      "benchmark_duration_s": 4.953,
+      "benchmark_total_energy_j": 504.59737920000003,
+      "energy_per_execution_j": 0.005045973792000001,
+      "energy_per_inference_j": 0.24220674201600004,
+      "power_samples": 5,
+      "method": "measured"
+    },
+    {
+      "name": "void splitKreduce_kernel<32, 16, int, float, __half, float, __half, true, true, false>(cublasSplitKParams<float>, float const*, __half const*, __half*, float const*, float const*, __half const*, float const*, __half*, void*, long, float*, int*)",
+      "tier": 2,
+      "invocation_count": 48,
+      "benchmark_runs": 100000,
+      "benchmark_duration_s": 4.873,
+      "benchmark_total_energy_j": 402.4443389,
+      "energy_per_execution_j": 0.004024443389,
+      "energy_per_inference_j": 0.19317328267199999,
+      "power_samples": 4,
+      "method": "measured"
+    },
+    {
+      "name": "void gemv2N_kernel<int, int, __half, __half, __half, float, 128, 4, 4, 4, 1, false, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>)",
+      "tier": 2,
+      "invocation_count": 192,
+      "single_time_us": 9.2398974609375,
+      "energy_per_inference_j": 0.1791229180547986,
+      "method": "estimated_insufficient_samples"
+    }
+  ]
+}

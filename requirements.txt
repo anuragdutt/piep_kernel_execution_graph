@@ -1,7 +1,22 @@
-# unique_kernels pip deps. Install after conda env (PyTorch >= 2.2 from conda).
-# vicuna_tp_profile.py
+# Pip-only setup. PyTorch (CUDA) must be installed first so pip doesn't pull CPU wheels from PyPI.
+# Match index to your driver: nvidia-smi shows max supported CUDA (use that or lower).
+#   CUDA 12.2 driver -> cu121:  pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+#   CUDA 12.4+       -> cu124:  pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+# Then: pip install -r requirements.txt
+
+# App / profiling (Vicuna tokenizer needs protobuf for SentencePiece)
+# For PyTorch 1.12 (Pascal GPUs): pip install 'transformers>=4.30,<4.36' first so transformers doesn't disable PyTorch.
 transformers>=4.31.0
 sentencepiece>=0.1.99
 accelerate>=0.20.0
-# plot_kernel_gantt.py
+protobuf
+tiktoken
+# Plotting (plot_kernel_gantt.py)
 matplotlib>=3.5.0
+
+# Version pin to avoid issues with PyTorch 2.x
+numpy<2
+
+# Optional: for single-GPU 8-bit loading (fits 11GB). ONLY on PyTorch 2.3+ (e.g. A6000).
+# On Pascal + PyTorch 1.12 do NOT install bitsandbytes - it will upgrade PyTorch and break 1080 Ti.
+# pip install bitsandbytes

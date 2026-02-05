@@ -1,0 +1,24 @@
+{
+  "start_timestamp": "2026-02-05 00:33:03.870",
+  "end_timestamp": "2026-02-05 00:33:06.006",
+  "duration_seconds": 2.136,
+  "num_power_samples": 2,
+  "num_runs": 100,
+  "power_watts": {
+    "average": 101.5,
+    "peak": 101.5,
+    "min": 101.5
+  },
+  "energy_joules": {
+    "total": 204.552138,
+    "per_run": 2.0455213800000003
+  },
+  "energy_wh": {
+    "total": 0.056820038333333336,
+    "per_run": 0.0005682003833333334
+  },
+  "power_meters": {
+    "pm1_avg_watts": 101.5,
+    "pm2_avg_watts": 0.0
+  }
+}

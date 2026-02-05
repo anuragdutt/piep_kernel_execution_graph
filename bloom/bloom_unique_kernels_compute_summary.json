@@ -1,0 +1,19 @@
+{
+  "device": "0",
+  "sig_fields": [
+    "device",
+    "stream",
+    "dtype",
+    "grid",
+    "block",
+    "shared memory"
+  ],
+  "totals": {
+    "device_filtered": 21528,
+    "excluded": 0,
+    "kept": 17186,
+    "seen": 38714
+  },
+  "trace": "trace.json",
+  "unique_count": 144
+}
