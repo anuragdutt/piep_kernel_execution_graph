@@ -1,157 +1,110 @@
 # Kernel execution profiling and replay
 
-Project layout:
-- **vicuna/** – Vicuna-7B TP profiling scripts and data (trace, unique kernels, etc.)
-- **bloom/** – BLOOM-560M profiling scripts and data (trace, shapes, unique kernels, gantt)
-- **kernel_replay_cpp/** – C++ kernel replay benchmark and GPU power/energy measurement
+Profile LLM inference (BLOOM, Vicuna), extract CUDA kernel traces, and replay them in C++ with **GPU power/energy measurement** via nvidia-smi.
 
-## Environment (use one env only)
+## Project layout
 
-Scripts require **one** Python environment (e.g. a venv) so that `torchrun` and the worker processes use the same Python and PyTorch. If you run with another env active, workers will use that env and you can get "no GPUs found" or wrong packages.
+| Directory | Contents |
+|-----------|----------|
+| **bloom/** | BLOOM-560M profiling (PyTorch profiler), trace extraction, unique kernels JSONL, gantt plots |
+| **vicuna/** | Vicuna-7B tensor-parallel profiling (2-GPU) |
+| **kernel_replay_cpp/** | C++ benchmark: load BLOOM TorchScript, run full model + isolated kernel replay, correlate with GPU power log → per-kernel and full-model energy (J) |
 
-### Setup with pip (no conda)
+## Environment
 
-1. **Create and activate a venv:**
-   ```bash
-   python3 -m venv .venv
-   source .venv/bin/activate   # Linux/macOS
-   ```
+Use a single Python environment (venv) so that all scripts and workers see the same PyTorch/CUDA.
 
-2. **Install PyTorch with CUDA** (match index to your driver; `nvidia-smi` shows your CUDA version):
-   - **CUDA 12.2** → use `cu121`:
-     ```bash
-     pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
-     ```
-   - **CUDA 12.4+** → use `cu124`:
-     ```bash
-     pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
-     ```
+```bash
+python3 -m venv .venv
+source .venv/bin/activate   # Linux/macOS
 
-3. **Install the rest:**
-   ```bash
-   pip install -r requirements.txt
-   ```
+# PyTorch with CUDA (match your driver; nvidia-smi shows CUDA version)
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121   # or cu124
 
-### Required packages (summary)
+pip install -r requirements.txt
+```
 
-| Script | Packages |
-|--------|----------|
-| **vicuna_tp_profile.py** | PyTorch ≥2.1 (CUDA 12.x + NCCL), transformers, sentencepiece, accelerate. Requires 2 GPUs with TP. |
-| **bloom_profile.py** | PyTorch ≥2.0 (CUDA), transformers. Runs single GPU (fits 11GB) or 2-GPU TP. |
-| **plot_kernel_gantt.py** | PyTorch traces (input); matplotlib |
-| **extract_unique_kernels.py** | stdlib only (reads trace JSON/CSV) |
+Requirements: `transformers`, `sentencepiece`, `accelerate`, `protobuf`, `matplotlib`, `numpy<2`.
 
-## Running the profiler
+## BLOOM workflow: profile → replay → energy
 
-1. **Activate the same env in the shell you use for torchrun:**
-   ```bash
-   source .venv/bin/activate
-   ```
-2. **Confirm Python and GPUs:**
-   ```bash
-   which python torchrun   # should be .../piep_kernel_execution_graph/.venv/bin/...
-   nvidia-smi              # should list GPUs
-   ```
+### 1. Profile BLOOM and extract kernels
 
-### Option A: BLOOM-560M (fits 11GB single GPU, e.g. GTX 1080 Ti)
-
-From repo root, activate venv then run from `bloom/`:
 ```bash
 source .venv/bin/activate
-cd bloom && ./run_bloom_profile.sh
+cd bloom
+./run_bloom_profile.sh
 ```
-Or run the Python commands inside `bloom/` with `--trace trace.json --shape-log bloom_shapes.jsonl` (outputs stay in `bloom/`).
 
-### Option B: Vicuna-7B (requires 2× A6000 with TP, ~14GB per GPU)
+Produces PyTorch trace and shape logs. Then extract unique compute kernels:
 
-From repo root:
+```bash
+# From bloom/ or repo root
+python bloom/extract_unique_kernels.py ...   # see bloom scripts; outputs bloom_unique_kernels_compute.jsonl
+```
+
+### 2. Export BLOOM to TorchScript (for C++)
+
 ```bash
 source .venv/bin/activate
-cd vicuna && ./run_vicuna_2gpu.sh
-```
-Or:
-```bash
-CUDA_VISIBLE_DEVICES=0,1 torchrun --nproc_per_node=2 \
-  vicuna/vicuna_tp_profile.py \
-  --model lmsys/vicuna-7b-v1.5 \
-  --prompt "Explain tensor parallelism in one paragraph." \
-  --max-new-tokens 64 \
-  --trace trace.json \
-  --record-shapes \
-  --shape-log linear_shapes.jsonl
+python kernel_replay_cpp/scripts/export_model.py --output bloom_560m_traced.pt
 ```
 
-If you see **"ProcessGroupNCCL is only supported with GPUs, no GPUs found"** or **"MPS client failed to connect"** (CUDA error 805):
+Uses HuggingFace `bigscience/bloom-560m`, traces with `torch.jit.trace`, saves a `.pt` file (~1.1 GB). The C++ benchmark loads this via libtorch.
 
-1. **Same shell, correct env:** Use your venv in the shell that runs torchrun (`source .venv/bin/activate`), then run the command again.
-2. **Must be on a GPU node:** The machine you run on must have GPUs. In the same shell, run:
-   ```bash
-   nvidia-smi
-   ```
-   If that shows no devices or fails, you are on a **login/head node** with no GPUs. Run the script **on a compute node that has GPUs**:
-   - **SLURM:** Get a session on a GPU node, then run the torchrun command there:
-     ```bash
-     srun --gres=gpu:2 --pty bash
-     # now you're on a GPU node
-     source .venv/bin/activate
-     CUDA_VISIBLE_DEVICES=0,1 torchrun --nproc_per_node=2 ...
-     ```
-   - Or submit a batch job with `#SBATCH --gres=gpu:2` and run the same command in the job script.
-3. **Env vars:** Set `CUDA_VISIBLE_DEVICES=0,1` (or your GPU indices) in the same shell as torchrun so worker processes inherit it.
-
-### Pascal (GTX 1080 Ti) with PyTorch 1.12
-
-If you use PyTorch 1.12+cu116 for Pascal, **transformers** from PyPI may require PyTorch ≥2.2 and disable the PyTorch backend. Install an older transformers that works with 1.12:
+### 3. Classify kernels into tiers
 
 ```bash
-pip install 'transformers>=4.30,<4.36'
+python kernel_replay_cpp/scripts/classify_kernels.py \
+  --input bloom/bloom_unique_kernels_compute.jsonl \
+  --output kernel_replay_cpp/data/kernel_signatures.json
 ```
 
-Then install the rest of `requirements.txt` (sentencepiece, accelerate, etc.). The script will run in single-GPU mode (no tensor parallel) and still produce kernel traces.
+Classifies each kernel as Tier 1 (CUDA memcpy/memset), Tier 2 (cuBLAS GEMM), or Tier 3 (libtorch ops).
 
-**VRAM (single-GPU / 1080 Ti):** Vicuna-7B in fp16 needs ~14GB. A 1080 Ti has 11GB. **Do not** `pip install bitsandbytes` when using PyTorch 1.12 (Pascal): current bitsandbytes requires PyTorch ≥2.3 and will upgrade your install, breaking 1080 Ti support. On Pascal without bitsandbytes the script falls back to fp16 and will OOM on 11GB—use a smaller model, or run on a machine with TP (e.g. 2× A6000). On PyTorch 2.3+ (e.g. A6000), `pip install bitsandbytes` enables 8-bit in single-GPU mode. Use `--no-load-in-8bit` to force fp16 when you have enough VRAM.
+### 4. Build C++ benchmark
 
-**If bitsandbytes already upgraded PyTorch:** Restore Pascal-compatible PyTorch with:
+See **kernel_replay_cpp/BUILD_GUIDE.md** and **kernel_replay_cpp/README.md**. Summary:
+
 ```bash
-pip uninstall -y bitsandbytes torch torchvision torchaudio
-pip install torch==1.12.1+cu116 torchvision==0.13.1+cu116 torchaudio==0.12.1 --index-url https://download.pytorch.org/whl/cu116
+cd kernel_replay_cpp
+mkdir build && cd build
+cmake .. -DCMAKE_PREFIX_PATH=/path/to/libtorch
+make -j
 ```
-Then do not install bitsandbytes again in this env.
 
-### GPU compatibility (PyTorch wheels)
+### 5. Run benchmark with GPU power and get energy report
 
-Current PyTorch pip wheels support only **compute capability 7.0 and above** (Volta, Turing, Ampere, Ada, etc.). They do **not** support Pascal (e.g. **GTX 1080 Ti**, sm_61).
+From `kernel_replay_cpp/scripts/` (or pass paths accordingly):
 
-If you see *"NVIDIA GeForce GTX 1080 Ti with CUDA capability sm_61 is not compatible with the current PyTorch installation"*:
+```bash
+./run_with_gpu_power.sh --model ../bloom_560m_traced.pt --runs 1000
+```
 
-- **Option A (recommended):** Run on a machine with GPUs that have compute capability ≥ 7.0 (e.g. RTX 20xx, 30xx, 40xx, A100, V100, etc.).
-- **Option B:** Build PyTorch from source with `TORCH_CUDA_ARCH_LIST="6.1"` so Pascal is included (see [PyTorch docs](https://pytorch.org/get-started/locally/)).
+This script:
 
-Install **protobuf** if the tokenizer warns: `pip install protobuf` (it is already in `requirements.txt`).
+1. Starts a background **GPU power logger** (nvidia-smi, CSV log).
+2. Runs **kernel_benchmark compare**: full BLOOM inference then isolated replay of each unique kernel (with timestamps).
+3. Stops the logger.
+4. Runs **calculate_per_kernel_energy.py**: integrates power over each kernel’s time window → per-kernel energy (measured); **predicted energy = measured kernels only** (no estimated).
+5. Writes **results/gpu_energy_report.json** and prints an energy comparison summary (full model vs predicted from measured kernels).
 
----
+Optional: `--gpu 0`, `--interval 0.04` (polling interval in seconds; ~25 Hz typical for nvidia-smi).
 
-## Kernel Replay Analysis
+Full-model energy is also computed from the power log and shown in the C++ “Full Model Results” block when `POWER_LOG_PATH` is set (the script exports it).
 
-After generating traces, see the analysis documents for kernel replay strategies:
+## Vicuna (2-GPU tensor parallel)
 
-### BLOOM-560M Analysis
+```bash
+source .venv/bin/activate
+cd vicuna
+./run_vicuna_2gpu.sh
+```
 
-- **`BLOOM_KERNEL_ANALYSIS.md`** - Breakdown of 144 unique kernels found in BLOOM-560M trace
-- **`BLOOM_DIRECT_REPLAY_ANALYSIS.md`** - How to replay kernels in C++/CUDA (with/without PyTorch)
-- **`LIBTORCH_REPLAY_GUIDE.md`** - Step-by-step guide to replay BLOOM kernels using libtorch C++ API
-- **`minimal_replay_example.cpp`** - Minimal working C++ example
+Requires 2 GPUs and NCCL. See `vicuna/` for options.
 
-### Quick Summary
+## References
 
-**With libtorch C++ API (RECOMMENDED):**
-- ✅ 100% kernel coverage (all 144 unique kernels replay exactly)
-- ✅ ~2-4 hours of work (mostly API translation)
-- ✅ Same performance as Python PyTorch
-- See `LIBTORCH_REPLAY_GUIDE.md` for full walkthrough
-
-**Without PyTorch (pure CUDA/cuBLAS):**
-- ⚠️ ~29% can use standard APIs (cudaMemcpy, cublasGemmEx)
-- ⚠️ ~67% need custom CUDA kernels (elementwise, LayerNorm, etc.)
-- ⚠️ ~2-4 weeks of work
-- See `BLOOM_DIRECT_REPLAY_ANALYSIS.md` for details
+- **kernel_replay_cpp/README.md** – C++ project structure, tiers, usage.
+- **kernel_replay_cpp/BUILD_GUIDE.md** – libtorch, CMake, dependencies.
+- **kernel_replay_cpp/QUICKSTART.md** – Short runbook.
