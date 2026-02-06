@@ -51,7 +51,8 @@ def get_gpu_power():
 def main():
     parser = argparse.ArgumentParser(description='GPU Power Logger')
     parser.add_argument('-o', '--output', required=True, help='Output CSV file')
-    parser.add_argument('-i', '--interval', type=float, default=0.05, help='Sampling interval in seconds (default: 0.05 = 20 Hz; use 0.02 for 50 Hz)')
+    parser.add_argument('-i', '--interval', type=float, default=0.04,
+                        help='Sampling interval in seconds (default: 0.04 = 25 Hz).')
     parser.add_argument('-g', '--gpu', type=int, default=None, help='Specific GPU index to monitor (default: all)')
     args = parser.parse_args()
     

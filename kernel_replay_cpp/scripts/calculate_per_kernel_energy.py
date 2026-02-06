@@ -171,7 +171,6 @@ def main():
             energy_for_inference = energy_per_exec * invocation_count
             total_estimated_energy += energy_for_inference
             estimated_count += 1
-            
             estimated_energies.append({
                 "name": kernel['name'],
                 "tier": kernel['tier'],
@@ -197,7 +196,6 @@ def main():
             energy_for_inference = energy_per_exec * invocation_count
             total_estimated_energy += energy_for_inference
             estimated_count += 1
-            
             estimated_energies.append({
                 "name": kernel['name'],
                 "tier": kernel['tier'],
@@ -228,15 +226,12 @@ def main():
             "method": "measured"
         })
     
-    # Combine measured and estimated
-    total_combined_energy = total_predicted_energy + total_estimated_energy
+    # Predicted energy = measured kernels only (no estimated)
+    print(f"   Measured: {measured_count} kernels ({total_predicted_energy:.4f} J) -> used for prediction")
+    print(f"   Estimated: {estimated_count} kernels ({total_estimated_energy:.4f} J) -> excluded from prediction")
     
-    print(f"   Measured: {measured_count} kernels ({total_predicted_energy:.4f} J)")
-    print(f"   Estimated: {estimated_count} kernels ({total_estimated_energy:.4f} J)")
-    print(f"   Total predicted energy per inference: {total_combined_energy:.4f} J")
-    
-    # Calculate error using combined energy
-    error_j = abs(total_combined_energy - full_energy_per_inference)
+    # Error vs full model, using measured-only prediction
+    error_j = abs(total_predicted_energy - full_energy_per_inference)
     error_pct = (error_j / full_energy_per_inference) * 100.0
     
     # Generate report
@@ -253,17 +248,16 @@ def main():
             "num_unique_kernels": len(kernels),
             "num_measured": measured_count,
             "num_estimated": estimated_count,
-            "measured_energy_j": total_predicted_energy,
-            "estimated_energy_j": total_estimated_energy,
-            "predicted_energy_per_inference_j": total_combined_energy,
+            "predicted_energy_per_inference_j": total_predicted_energy,
+            "estimated_energy_excluded_j": total_estimated_energy,
             "avg_power_during_benchmark_w": avg_power_w
         },
         "comparison": {
             "full_model_energy_j": full_energy_per_inference,
-            "predicted_energy_j": total_combined_energy,
+            "predicted_energy_j": total_predicted_energy,
             "error_j": error_j,
             "error_percent": error_pct,
-            "ratio_predicted_to_actual": total_combined_energy / full_energy_per_inference
+            "ratio_predicted_to_actual": total_predicted_energy / full_energy_per_inference
         },
         "per_kernel_energies": sorted(all_kernel_energies, 
                                        key=lambda x: x['energy_per_inference_j'], 
@@ -279,9 +273,9 @@ def main():
     print("ENERGY COMPARISON SUMMARY")
     print("="*70)
     print(f"Full Model Energy (per inference):     {full_energy_per_inference:.4f} J")
-    print(f"Predicted Energy (measured kernels):   {total_predicted_energy:.4f} J ({measured_count} kernels)")
-    print(f"Predicted Energy (estimated kernels):  {total_estimated_energy:.4f} J ({estimated_count} kernels)")
-    print(f"Total Predicted Energy:                {total_combined_energy:.4f} J")
+    print(f"Predicted Energy (measured only):       {total_predicted_energy:.4f} J ({measured_count} kernels)")
+    if estimated_count > 0:
+        print(f"  (excluded: {estimated_count} estimated kernels, {total_estimated_energy:.4f} J)")
     print(f"Error:                                  {error_j:.4f} J ({error_pct:.1f}%)")
     print(f"Ratio (Predicted/Actual):               {report['comparison']['ratio_predicted_to_actual']:.3f}x")
     print(f"\nReport saved to: {args.output}")

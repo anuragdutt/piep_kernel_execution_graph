@@ -163,27 +163,43 @@ def extract_libtorch_params(kernel: Dict[str, Any]) -> Dict[str, Any]:
         'operation': 'unknown'
     }
     
-    # Identify the operation type from kernel name
-    if 'layer_norm' in name.lower():
+    # Identify the operation type from kernel name (order: more specific first)
+    n = name.lower()
+    if 'layer_norm' in n:
         params['operation'] = 'layer_norm'
-    elif 'softmax' in name.lower():
+    elif 'softmax' in n:
         params['operation'] = 'softmax'
-    elif 'cudafunctor_add' in name.lower() or 'addfunctor' in name.lower():
-        params['operation'] = 'add'
-    elif 'mulfunctor' in name.lower():
-        params['operation'] = 'mul'
-    elif 'fillfunctor' in name.lower():
-        params['operation'] = 'fill'
-    elif 'indexselect' in name.lower():
+    elif 'indexselect' in n or 'index_select' in n:
         params['operation'] = 'index_select'
-    elif 'gelu' in name.lower():
+    elif 'gelu' in n:
         params['operation'] = 'gelu'
-    elif 'reduce_kernel' in name.lower():
+    elif 'reduce_kernel' in n or 'reduction_prod_kernel' in n or 'argmax' in n or 'maxnan' in n:
         params['operation'] = 'reduce'
-    elif 'scan' in name.lower():
+    elif 'devicescan' in n or 'scan' in n:
         params['operation'] = 'scan'
-    elif 'elementwise' in name.lower():
+    elif 'cudafunctor_add' in n or 'cudafunctoronself_add' in n or 'cudafunctoronother_add' in n or ('add' in n and 'cudafunctor' in n):
+        params['operation'] = 'add'
+    elif 'mulfunctor' in n or ('binaryfunctor' in n and 'mul' in n) or ('bunaryfunctor' in n and 'mul' in n):
+        params['operation'] = 'mul'
+    elif 'fillfunctor' in n:
+        params['operation'] = 'fill'
+    elif 'direct_copy' in n or 'direct_copy_kernel' in n:
+        params['operation'] = 'elementwise'  # copy ~ elementwise
+    elif 'masked_fill' in n:
+        params['operation'] = 'elementwise'  # masked_fill ~ fill + mask
+    elif 'compare' in n or 'compareeq' in n or 'comparefunctor' in n or 'bunaryfunctor' in n:
+        params['operation'] = 'elementwise'  # compare kernels
+    elif 'tanh' in n:
+        params['operation'] = 'elementwise'  # tanh
+    elif 'arange' in n:
+        params['operation'] = 'elementwise'  # arange
+    elif 'pow_tensor' in n:
+        params['operation'] = 'elementwise'  # pow
+    elif 'catarray' in n or 'catarr' in n:
+        params['operation'] = 'elementwise'  # concat/cat copy
+    elif 'elementwise' in n:
         params['operation'] = 'elementwise'
+    # else remains 'unknown'
     
     return params
 

@@ -102,7 +102,6 @@ export PYTORCH_JIT_DISABLE_WARNING_PRINTS=1
 ./kernel_benchmark compare \
     --output-dir "$RESULTS_DIR/" \
     --kernels ../data/kernel_signatures.json \
-    --no-fusion \
     "$@"
 
 BENCH_EXIT_CODE=$?

@@ -5,6 +5,7 @@
 # Usage:
 #   ./run_with_gpu_power.sh --model ../bloom_560m_traced.pt --runs 100
 #   ./run_with_gpu_power.sh --gpu 0 --model ../bloom_560m_traced.pt --runs 100   # single GPU only
+#   ./run_with_gpu_power.sh --interval 0.02 --model ...   # 50 Hz polling (more kernels measured)
 #
 # Optional: CUDA_VISIBLE_DEVICES=0 ./run_with_gpu_power.sh --gpu 0 --model ... --runs 100
 
@@ -15,13 +16,18 @@ RESULTS_DIR="$SCRIPT_DIR/../results"
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
 GPU_POWER_LOG="$RESULTS_DIR/gpu_power_$TIMESTAMP.csv"
 
-# Parse optional --gpu N (default 0: only log GPU 0 so energy = that GPU only)
+# Polling interval in seconds. nvidia-smi typically tops out at ~25 Hz in practice (subprocess overhead).
+# 0.04 = 25 Hz (realistic), 0.02 = 50 Hz (logger asks for it; actual rate may still be ~25 Hz)
+POLL_INTERVAL="0.04"
+
+# Parse optional --gpu N and --interval (polling interval in seconds)
 GPU_ID="0"
 BENCH_ARGS=()
 while [[ $# -gt 0 ]]; do
     case "$1" in
-        --gpu) GPU_ID="$2"; shift 2 ;;
-        *)     BENCH_ARGS+=("$1"); shift ;;
+        --gpu)      GPU_ID="$2"; shift 2 ;;
+        --interval) POLL_INTERVAL="$2"; shift 2 ;;
+        *)          BENCH_ARGS+=("$1"); shift ;;
     esac
 done
 
@@ -37,13 +43,13 @@ echo "GPU power log: $GPU_POWER_LOG"
 
 mkdir -p "$RESULTS_DIR"
 
-# Step 1: Start GPU power logger (nvidia-smi, 20 Hz), GPU $GPU_ID only
+# Step 1: Start GPU power logger (nvidia-smi), GPU $GPU_ID only
 echo ""
 echo -e "${GREEN}Step 1: Starting GPU Power Logger (nvidia-smi, GPU $GPU_ID only)${NC}"
-# 0.05s = 20 Hz; -g so we only log the GPU the benchmark uses (default GPU 0)
-python3 "$SCRIPT_DIR/gpu_power_logger.py" -o "$GPU_POWER_LOG" -i 0.05 -g "$GPU_ID" &
+echo "  Polling interval: ${POLL_INTERVAL}s - higher rate = more power samples = more kernels measured (not estimated)"
+python3 "$SCRIPT_DIR/gpu_power_logger.py" -o "$GPU_POWER_LOG" -i "$POLL_INTERVAL" -g "$GPU_ID" &
 LOGGER_PID=$!
-echo "  Logger PID: $LOGGER_PID (logging GPU $GPU_ID only)"
+echo "  Logger PID: $LOGGER_PID"
 sleep 2
 
 # Step 2: Run benchmark
@@ -54,10 +60,10 @@ echo "  Args: ${BENCH_ARGS[*]}"
 set +e
 cd "$SCRIPT_DIR/../build"
 
+export POWER_LOG_PATH="$GPU_POWER_LOG"
 ./kernel_benchmark compare \
     --output-dir "$RESULTS_DIR/" \
     --kernels ../data/kernel_signatures.json \
-    --no-fusion \
     "${BENCH_ARGS[@]}"
 
 BENCH_EXIT=$?

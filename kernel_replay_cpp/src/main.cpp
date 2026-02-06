@@ -21,7 +21,7 @@ namespace full_model {
         std::string end_timestamp;
     };
     BenchmarkResult benchmark_model(const std::string& model_path, 
-                                   int seq_len, int warmup_runs, int timed_runs, bool disable_fusion);
+                                   int seq_len, int warmup_runs, int timed_runs);
     bool save_results(const BenchmarkResult& result, const std::string& output_path);
 }
 
@@ -68,10 +68,9 @@ void print_usage(const char* prog_name) {
     std::cout << "  --warmup <n>          Number of warmup runs (default: 10)" << std::endl;
     std::cout << "  --runs <n>            Number of timed runs (default: 100)" << std::endl;
     std::cout << "  --output-dir <path>   Output directory for results (default: results/)" << std::endl;
-    std::cout << "  --no-fusion           Disable JIT kernel fusion (for fair comparison)" << std::endl;
     std::cout << "\nExample:" << std::endl;
     std::cout << "  " << prog_name << " compare --model bloom_560m_traced.pt --kernels data/kernel_signatures.json" << std::endl;
-    std::cout << "  " << prog_name << " compare --model bloom_560m_traced.pt --runs 1000 --no-fusion" << std::endl;
+    std::cout << "  " << prog_name << " compare --model bloom_560m_traced.pt --runs 1000" << std::endl;
 }
 
 int main(int argc, char** argv) {
@@ -83,7 +82,6 @@ int main(int argc, char** argv) {
     int seq_len = 5;
     int warmup_runs = 10;
     int timed_runs = 100;
-    bool disable_fusion = false;
     
     // Parse command line arguments
     for (int i = 1; i < argc; i++) {
@@ -110,9 +108,6 @@ int main(int argc, char** argv) {
         }
         else if (arg == "--output-dir" && i + 1 < argc) {
             output_dir = argv[++i];
-        }
-        else if (arg == "--no-fusion") {
-            disable_fusion = true;
         }
         else if (arg == "full" || arg == "isolated" || arg == "compare") {
             mode = arg;
@@ -153,7 +148,7 @@ int main(int argc, char** argv) {
             return 1;
         }
         
-        full_result = full_model::benchmark_model(model_path, seq_len, warmup_runs, timed_runs, disable_fusion);
+        full_result = full_model::benchmark_model(model_path, seq_len, warmup_runs, timed_runs);
         if (full_result.avg_time_us < 0) {
             std::cerr << "Error: Full model benchmark failed" << std::endl;
             success = false;
@@ -192,7 +187,5 @@ int main(int argc, char** argv) {
     std::cout.flush();
     std::cerr.flush();
     
-    // Exit immediately without running destructors or cleanup (avoids segfault in
-    // libtorch/CUDA teardown or cleanup_cublas). All results are already saved.
     _exit(success ? 0 : 1);
 }

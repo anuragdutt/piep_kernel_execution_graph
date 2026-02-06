@@ -82,7 +82,7 @@ AggregatedResults run_isolated_kernels(const kernel::KernelRegistry& registry, i
     // Record start timestamp for energy correlation
     results.start_timestamp = get_iso_timestamp();
     std::cout << "Start timestamp: " << results.start_timestamp << std::endl;
-    std::cout << "\nNote: Higher run counts so fast kernels run 50ms+ and get power samples (measured not estimated)." << std::endl;
+    std::cout << "\nNote: Run counts chosen so each kernel runs 100ms+ for 2–3+ nvidia-smi samples (~25 Hz)." << std::endl;
     
     for (const auto& sig : kernels) {
         double avg_single_time_us = -1.0;
@@ -90,15 +90,15 @@ AggregatedResults run_isolated_kernels(const kernel::KernelRegistry& registry, i
         int actual_runs = 0;
         
         try {
-            // Target: each kernel runs long enough that at least one 20 Hz poll falls in its window (~50ms).
-            // Higher runs = longer runtime = fewer "estimated" (avg_power × duration) and more measured.
+            // Target: each kernel runs long enough for several nvidia-smi samples (~25 Hz => 1 sample/40ms).
+            // Aim for ~100ms+ per kernel so we get 2–3+ power samples and energy is measured not estimated.
             int adaptive_runs;
             if (sig.tier == kernel::Tier::CUBLAS) {
-                adaptive_runs = 20000;   // ~1s
+                adaptive_runs = 50000;   // ~1–2.5s for typical GEMM/GEMV => 25–60+ samples at 25 Hz
             } else if (sig.tier == kernel::Tier::CUDA_RUNTIME) {
-                adaptive_runs = 600000;  // ~2–3s so even fast memcpy get 40+ samples
+                adaptive_runs = 600000;  // ~2–3s for memcpy => 50+ samples at 25 Hz
             } else {
-                adaptive_runs = 2000000; // 2M: fast libtorch kernels run 100ms+ so we get 2+ samples
+                adaptive_runs = 5000000; // 5M: even 0.02us kernels => 100ms window => 2–3 samples at 25 Hz
             }
             
             // Record start timestamp for THIS kernel

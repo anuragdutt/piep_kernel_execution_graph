@@ -477,7 +477,7 @@
           1
         ],
         "shared_memory": 0,
-        "operation": "elementwise"
+        "operation": "add"
       }
     },
     {
@@ -792,7 +792,7 @@
           1
         ],
         "shared_memory": 0,
-        "operation": "elementwise"
+        "operation": "add"
       }
     },
     {
@@ -1550,7 +1550,7 @@
           1
         ],
         "shared_memory": 0,
-        "operation": "elementwise"
+        "operation": "add"
       }
     },
     {
@@ -1709,7 +1709,7 @@
           1
         ],
         "shared_memory": 0,
-        "operation": "elementwise"
+        "operation": "add"
       }
     },
     {
@@ -1814,7 +1814,7 @@
           1
         ],
         "shared_memory": 0,
-        "operation": "unknown"
+        "operation": "elementwise"
       }
     },
     {
@@ -1898,7 +1898,7 @@
           1
         ],
         "shared_memory": 16,
-        "operation": "unknown"
+        "operation": "reduce"
       }
     },
     {
@@ -2055,7 +2055,7 @@
           1
         ],
         "shared_memory": 0,
-        "operation": "unknown"
+        "operation": "elementwise"
       }
     },
     {
@@ -2445,7 +2445,7 @@
           1
         ],
         "shared_memory": 0,
-        "operation": "elementwise"
+        "operation": "add"
       }
     },
     {

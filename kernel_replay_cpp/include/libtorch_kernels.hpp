@@ -19,7 +19,7 @@ namespace tier3 {
  * @param norm_dim Dimension to normalize over
  * @return Time in microseconds
  */
-double benchmark_layer_norm(const std::vector<int64_t>& shape, int64_t norm_dim);
+double benchmark_layer_norm(const std::vector<int64_t>& shape, int64_t norm_dim, int num_iters = 100000);
 
 /**
  * Benchmark softmax operation
@@ -28,7 +28,7 @@ double benchmark_layer_norm(const std::vector<int64_t>& shape, int64_t norm_dim)
  * @param dim Dimension to apply softmax
  * @return Time in microseconds
  */
-double benchmark_softmax(const std::vector<int64_t>& shape, int dim);
+double benchmark_softmax(const std::vector<int64_t>& shape, int dim, int num_iters = 100000);
 
 /**
  * Benchmark elementwise add operation
@@ -36,7 +36,7 @@ double benchmark_softmax(const std::vector<int64_t>& shape, int dim);
  * @param shape Tensor shape
  * @return Time in microseconds
  */
-double benchmark_add(const std::vector<int64_t>& shape);
+double benchmark_add(const std::vector<int64_t>& shape, int num_iters = 100000);
 
 /**
  * Benchmark elementwise mul operation
@@ -44,7 +44,7 @@ double benchmark_add(const std::vector<int64_t>& shape);
  * @param shape Tensor shape
  * @return Time in microseconds
  */
-double benchmark_mul(const std::vector<int64_t>& shape);
+double benchmark_mul(const std::vector<int64_t>& shape, int num_iters = 100000);
 
 /**
  * Benchmark fill operation
@@ -53,7 +53,7 @@ double benchmark_mul(const std::vector<int64_t>& shape);
  * @param value Value to fill
  * @return Time in microseconds
  */
-double benchmark_fill(const std::vector<int64_t>& shape, float value = 0.0);
+double benchmark_fill(const std::vector<int64_t>& shape, float value = 0.0, int num_iters = 100000);
 
 /**
  * Benchmark index_select operation
@@ -63,7 +63,7 @@ double benchmark_fill(const std::vector<int64_t>& shape, float value = 0.0);
  * @param index_size Number of indices
  * @return Time in microseconds
  */
-double benchmark_index_select(const std::vector<int64_t>& shape, int dim, int index_size);
+double benchmark_index_select(const std::vector<int64_t>& shape, int dim, int index_size, int num_iters = 100000);
 
 /**
  * Benchmark gelu activation
@@ -80,7 +80,7 @@ double benchmark_gelu(const std::vector<int64_t>& shape);
  * @param dim Dimension to reduce
  * @return Time in microseconds
  */
-double benchmark_reduce(const std::vector<int64_t>& shape, int dim);
+double benchmark_reduce(const std::vector<int64_t>& shape, int dim, int num_iters = 100000);
 
 /**
  * Benchmark generic elementwise operation
@@ -88,7 +88,8 @@ double benchmark_reduce(const std::vector<int64_t>& shape, int dim);
  * @param shape Tensor shape
  * @return Time in microseconds
  */
-double benchmark_elementwise(const std::vector<int64_t>& shape);
+double benchmark_scan(const std::vector<int64_t>& shape, int num_iters = 100000);
+double benchmark_elementwise(const std::vector<int64_t>& shape, int num_iters = 100000);
 
 /**
  * Dispatch and benchmark a Tier 3 kernel based on its signature
