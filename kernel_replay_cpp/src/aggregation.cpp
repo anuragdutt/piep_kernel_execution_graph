@@ -55,7 +55,6 @@ struct AggregatedResults {
 
 AggregatedResults run_isolated_kernels(const kernel::KernelRegistry& registry, int num_runs) {
     std::cout << "\n=== Running Isolated Kernel Benchmarks ===" << std::endl;
-    std::cout << "Running each kernel " << num_runs << " times for accurate energy measurement" << std::endl;
     std::cout << "Note: Each kernel runs long enough to get good power samples (~10s minimum)" << std::endl;
     
     // For energy measurements, we need LONG runs per kernel (at least 10 seconds)
@@ -90,15 +89,16 @@ AggregatedResults run_isolated_kernels(const kernel::KernelRegistry& registry, i
         int actual_runs = 0;
         
         try {
-            // Target: each kernel runs long enough for several nvidia-smi samples (~25 Hz => 1 sample/40ms).
-            // Aim for ~100ms+ per kernel so we get 2–3+ power samples and energy is measured not estimated.
+            // Target: each kernel runs long enough for system power meter (WattsUp at ~1 Hz => 1 sample/sec).
+            // Aim for 10+ seconds per kernel so we get 10+ power samples for accurate energy measurement.
+            // This is MUCH longer than GPU power (nvidia-smi ~25 Hz) because system power sampling is slower.
             int adaptive_runs;
             if (sig.tier == kernel::Tier::CUBLAS) {
-                adaptive_runs = 50000;   // ~1–2.5s for typical GEMM/GEMV => 25–60+ samples at 25 Hz
+                adaptive_runs = 100000;   
             } else if (sig.tier == kernel::Tier::CUDA_RUNTIME) {
-                adaptive_runs = 600000;  // ~2–3s for memcpy => 50+ samples at 25 Hz
+                adaptive_runs = 1000000; 
             } else {
-                adaptive_runs = 5000000; // 5M: even 0.02us kernels => 100ms window => 2–3 samples at 25 Hz
+                adaptive_runs = 5000000; 
             }
             
             // Record start timestamp for THIS kernel

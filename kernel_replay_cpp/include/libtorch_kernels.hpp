@@ -106,11 +106,16 @@ double run_tier3_kernel(const kernel::KernelSignature& sig, int num_runs = 1);
  * Infer tensor shape from grid/block dimensions (approximate)
  * 
  * Many kernels don't have explicit shape info, so we estimate
- * based on grid dimensions
+ * based on grid dimensions and operation type
+ * 
+ * @param grid Kernel grid dimensions
+ * @param block Kernel block dimensions  
+ * @param operation Operation type (for operation-specific constraints)
  */
 std::vector<int64_t> infer_shape_from_grid(
     const std::vector<int>& grid,
-    const std::vector<int>& block
+    const std::vector<int>& block,
+    const std::string& operation
 );
 
 } // namespace tier3

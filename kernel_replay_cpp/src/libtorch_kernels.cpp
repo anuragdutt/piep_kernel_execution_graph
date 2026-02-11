@@ -6,16 +6,56 @@ namespace tier3 {
 
 std::vector<int64_t> infer_shape_from_grid(
     const std::vector<int>& grid,
-    const std::vector<int>& block
+    const std::vector<int>& block,
+    const std::string& operation
 ) {
-    // Approximate shape inference from grid dimensions
-    // This is a rough heuristic - actual shapes should come from bloom_shapes.jsonl
+    // Infer approximate tensor shape from grid/block dimensions
+    // Different operations have different shape requirements
+    
     int64_t total_threads = (int64_t)grid[0] * grid[1] * grid[2] * 
                            block[0] * block[1] * block[2];
     
-    // Default to 2D shape for most operations
-    // BLOOM-560M uses [batch, seq_len, hidden_size] = [1, 5, 1024]
-    return {1, 5, 1024};  // Default BLOOM shape
+    // BLOOM-560M common tensor sizes:
+    // - [1, 5, 1024]:  input embeddings (batch=1, seq=5, hidden=1024)
+    // - [1, 5, 4096]:  FFN intermediate (batch=1, seq=5, ffn=4096)
+    // - [1, 5, 3072]:  QKV projection (batch=1, seq=5, 3*hidden)
+    
+    int batch = 1;
+    int seq_len = 5;
+    int64_t feature_dim = 1024;  // Default to hidden size
+    
+    // For layer_norm, softmax, etc.: must use proper feature dimensions
+    if (operation == "layer_norm") {
+        // Layer norm always normalizes over hidden_dim=1024
+        return {batch, seq_len, 1024};
+    } else if (operation == "softmax") {
+        // Softmax over attention scores: [batch, num_heads, seq, seq] or similar
+        // For BLOOM-560M with 16 heads: simplified to [1, 5, 1024]
+        return {batch, seq_len, 1024};
+    } else {
+        // For elementwise operations, infer from grid size
+        if (total_threads <= 5120) {
+            // Small kernels: ~1×5×1024 or smaller, but keep multiples of common sizes
+            if (total_threads <= 512) {
+                feature_dim = 128;
+            } else if (total_threads <= 2560) {
+                feature_dim = 512;
+            } else {
+                feature_dim = 1024;
+            }
+        } else if (total_threads <= 15360) {
+            // Medium kernels: ~1×5×3072
+            feature_dim = 3072;
+        } else if (total_threads <= 20480) {
+            // Large kernels: ~1×5×4096
+            feature_dim = 4096;
+        } else {
+            // Very large kernels: estimate but cap at reasonable size
+            feature_dim = std::min((int64_t)8192, total_threads / (batch * seq_len));
+        }
+    }
+    
+    return {batch, seq_len, feature_dim};
 }
 
 double benchmark_layer_norm(const std::vector<int64_t>& shape, int64_t norm_dim, int num_iters) {
@@ -131,12 +171,12 @@ double run_tier3_kernel(const kernel::KernelSignature& sig, int num_runs) {
     const std::string& name = sig.name;
     std::string operation = sig.get_operation();
     
-    // Run many iterations so power logger (nvidia-smi ~25 Hz) gets 2+ samples per kernel.
-    // Cap at 100k to avoid excessive runtime; 100k * ~10us = ~1s per kernel.
-    int iters = std::min(std::max(num_runs, 1000), 100000);
+    // Use the num_runs passed from aggregation (calibrated for system power meter at ~1 Hz)
+    // No cap - we need long durations for accurate power measurement
+    int iters = num_runs;
     
-    // Infer shape from grid/block
-    std::vector<int64_t> shape = infer_shape_from_grid(sig.grid, sig.block);
+    // Infer shape from grid/block, considering operation type
+    std::vector<int64_t> shape = infer_shape_from_grid(sig.grid, sig.block, operation);
     
     // Dispatch based on operation type
     if (operation == "layer_norm") {

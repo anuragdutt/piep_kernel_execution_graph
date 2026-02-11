@@ -1,1455 +1,1455 @@
 {
-  "end_timestamp": "2026-02-06 18:34:49.740",
+  "end_timestamp": "2026-02-10 18:54:59.846",
   "kernels": [
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:32:35.672",
+      "end_timestamp": "2026-02-10 18:32:47.639",
       "invocation_count": 26,
       "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BUnaryFunctor<long, long, bool, at::native::(anonymous namespace)::CompareEqFunctor<long> >, at::detail::Array<char*, 2> >(int, at::native::BUnaryFunctor<long, long, bool, at::native::(anonymous namespace)::CompareEqFunctor<long> >, at::detail::Array<char*, 2>)",
-      "single_time_us": 4.006810607910157,
-      "start_timestamp": "2026-02-06 18:32:35.270",
+      "single_time_us": 3.9196515625,
+      "start_timestamp": "2026-02-10 18:32:28.039",
       "tier": 3,
-      "total_time_us": 104.17707580566407
+      "total_time_us": 101.910940625
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:32:36.071",
+      "end_timestamp": "2026-02-10 18:33:07.327",
       "invocation_count": 26,
       "name": "void at::native::unrolled_elementwise_kernel<at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#12}::operator()() const::{lambda(long)#1}, at::detail::Array<char*, 2>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast>(int, at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#12}::operator()() const::{lambda(long)#1}, at::detail::Array<char*, 2>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast)",
-      "single_time_us": 3.9890841674804687,
-      "start_timestamp": "2026-02-06 18:32:35.672",
+      "single_time_us": 3.93754921875,
+      "start_timestamp": "2026-02-10 18:32:47.639",
       "tier": 3,
-      "total_time_us": 103.71618835449219
+      "total_time_us": 102.3762796875
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:32:36.636",
+      "end_timestamp": "2026-02-10 18:33:32.471",
       "invocation_count": 1,
       "name": "void at::native::reduce_kernel<512, 1, at::native::ReduceOp<long, at::native::func_wrapper_t<long, at::native::sum_functor<long, long, long>::operator()(at::TensorIterator&)::{lambda(long, long)#1}>, unsigned int, long, 4> >(at::native::ReduceOp<long, at::native::func_wrapper_t<long, at::native::sum_functor<long, long, long>::operator()(at::TensorIterator&)::{lambda(long, long)#1}>, unsigned int, long, 4>)",
-      "single_time_us": 5.6262445068359375,
-      "start_timestamp": "2026-02-06 18:32:36.071",
+      "single_time_us": 5.027993359375,
+      "start_timestamp": "2026-02-10 18:33:07.327",
       "tier": 3,
-      "total_time_us": 5.6262445068359375
+      "total_time_us": 5.027993359375
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:32:37.042",
+      "end_timestamp": "2026-02-10 18:33:52.042",
       "invocation_count": 1,
       "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BUnaryFunctor<long, long, bool, at::native::(anonymous namespace)::CompareFunctor<long> >, at::detail::Array<char*, 2> >(int, at::native::BUnaryFunctor<long, long, bool, at::native::(anonymous namespace)::CompareFunctor<long> >, at::detail::Array<char*, 2>)",
-      "single_time_us": 4.057454833984375,
-      "start_timestamp": "2026-02-06 18:32:36.636",
+      "single_time_us": 3.91393359375,
+      "start_timestamp": "2026-02-10 18:33:32.471",
       "tier": 3,
-      "total_time_us": 4.057454833984375
+      "total_time_us": 3.91393359375
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:32:40.006",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:33:56.843",
       "invocation_count": 26,
       "name": "Memcpy DtoH (Device -> Pageable)",
-      "single_time_us": 4.940053304036458,
-      "start_timestamp": "2026-02-06 18:32:37.042",
+      "single_time_us": 4.80068017578125,
+      "start_timestamp": "2026-02-10 18:33:52.042",
       "tier": 1,
-      "total_time_us": 128.4413859049479
+      "total_time_us": 124.8176845703125
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:32:42.258",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:34:00.764",
       "invocation_count": 1,
       "name": "Memcpy HtoD (Pageable -> Device)",
-      "single_time_us": 3.7518509928385417,
-      "start_timestamp": "2026-02-06 18:32:40.006",
+      "single_time_us": 3.920984375,
+      "start_timestamp": "2026-02-10 18:33:56.843",
       "tier": 1,
-      "total_time_us": 3.7518509928385417
+      "total_time_us": 3.920984375
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:32:42.514",
+      "end_timestamp": "2026-02-10 18:34:12.662",
       "invocation_count": 26,
       "name": "void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<long>, at::detail::Array<char*, 1> >(int, at::native::FillFunctor<long>, at::detail::Array<char*, 1>)",
-      "single_time_us": 2.566246337890625,
-      "start_timestamp": "2026-02-06 18:32:42.258",
+      "single_time_us": 2.3793798828125,
+      "start_timestamp": "2026-02-10 18:34:00.764",
       "tier": 3,
-      "total_time_us": 66.72240478515624
+      "total_time_us": 61.863876953125
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:32:43.058",
+      "end_timestamp": "2026-02-10 18:34:37.341",
       "invocation_count": 25,
       "name": "void at::native::(anonymous namespace)::indexSelectSmallIndex<c10::Half, long, unsigned int, 2, 2, -2>(at::cuda::detail::TensorInfo<c10::Half, unsigned int>, at::cuda::detail::TensorInfo<c10::Half, unsigned int>, at::cuda::detail::TensorInfo<long, unsigned int>, int, int, unsigned int, long)",
-      "single_time_us": 5.438493041992188,
-      "start_timestamp": "2026-02-06 18:32:42.514",
+      "single_time_us": 4.935711328125,
+      "start_timestamp": "2026-02-10 18:34:12.662",
       "tier": 3,
-      "total_time_us": 135.9623260498047
+      "total_time_us": 123.39278320312499
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:32:43.770",
+      "end_timestamp": "2026-02-10 18:35:09.604",
       "invocation_count": 50,
       "name": "void at::native::(anonymous namespace)::vectorized_layer_norm_kernel<c10::Half, float>(int, float, c10::Half const*, c10::Half const*, c10::Half const*, float*, float*, c10::Half*)",
-      "single_time_us": 7.110737915039063,
-      "start_timestamp": "2026-02-06 18:32:43.058",
+      "single_time_us": 6.45214921875,
+      "start_timestamp": "2026-02-10 18:34:37.341",
       "tier": 3,
-      "total_time_us": 355.5368957519531
+      "total_time_us": 322.6074609375
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:32:46.035",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:35:13.337",
       "invocation_count": 25,
       "name": "Memcpy HtoD (Pageable -> Device)",
-      "single_time_us": 3.7756245930989585,
-      "start_timestamp": "2026-02-06 18:32:43.770",
+      "single_time_us": 3.733356201171875,
+      "start_timestamp": "2026-02-10 18:35:09.604",
       "tier": 1,
-      "total_time_us": 94.39061482747397
+      "total_time_us": 93.33390502929687
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:32:46.437",
+      "end_timestamp": "2026-02-10 18:35:32.824",
       "invocation_count": 25,
       "name": "void (anonymous namespace)::elementwise_kernel_with_index<int, at::native::arange_cuda_out(c10::Scalar const&, c10::Scalar const&, c10::Scalar const&, at::Tensor&)::{lambda()#1}::operator()() const::{lambda()#10}::operator()() const::{lambda(long)#1}>(int, at::native::arange_cuda_out(c10::Scalar const&, c10::Scalar const&, c10::Scalar const&, at::Tensor&)::{lambda()#1}::operator()() const::{lambda()#10}::operator()() const::{lambda(long)#1}, function_traits<at::native::arange_cuda_out(c10::Scalar const&, c10::Scalar const&, c10::Scalar const&, at::Tensor&)::{lambda()#1}::operator()() const::{lambda()#10}::operator()() const::{lambda(long)#1}>::result_type*)",
-      "single_time_us": 4.019580993652344,
-      "start_timestamp": "2026-02-06 18:32:46.035",
+      "single_time_us": 3.8970578125,
+      "start_timestamp": "2026-02-10 18:35:13.337",
       "tier": 3,
-      "total_time_us": 100.4895248413086
+      "total_time_us": 97.4264453125
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:32:46.842",
+      "end_timestamp": "2026-02-10 18:35:52.328",
       "invocation_count": 25,
       "name": "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl<at::native::(anonymous namespace)::pow_tensor_tensor_kernel(at::TensorIteratorBase&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, float)#1}>(at::TensorIteratorBase&, at::native::(anonymous namespace)::pow_tensor_tensor_kernel(at::TensorIteratorBase&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, float)#1} const&)::{lambda(int)#2}>(int, at::native::gpu_kernel_impl<at::native::(anonymous namespace)::pow_tensor_tensor_kernel(at::TensorIteratorBase&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, float)#1}>(at::TensorIteratorBase&, at::native::(anonymous namespace)::pow_tensor_tensor_kernel(at::TensorIteratorBase&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, float)#1} const&)::{lambda(int)#2})",
-      "single_time_us": 4.043983459472656,
-      "start_timestamp": "2026-02-06 18:32:46.437",
+      "single_time_us": 3.90061640625,
+      "start_timestamp": "2026-02-10 18:35:32.824",
       "tier": 3,
-      "total_time_us": 101.0995864868164
+      "total_time_us": 97.51541015625
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:32:47.402",
+      "end_timestamp": "2026-02-10 18:36:09.779",
       "invocation_count": 25,
       "name": "void at_cuda_detail::cub::DeviceScanInitKernel<at_cuda_detail::cub::ScanTileState<long, true> >(at_cuda_detail::cub::ScanTileState<long, true>, int)",
-      "single_time_us": 5.600645141601563,
-      "start_timestamp": "2026-02-06 18:32:46.842",
+      "single_time_us": 3.490043359375,
+      "start_timestamp": "2026-02-10 18:35:52.328",
       "tier": 3,
-      "total_time_us": 140.01612854003906
+      "total_time_us": 87.251083984375
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:32:47.962",
+      "end_timestamp": "2026-02-10 18:36:27.154",
       "invocation_count": 25,
       "name": "void at_cuda_detail::cub::DeviceScanKernel<at_cuda_detail::cub::DeviceScanPolicy<long>::Policy600, long*, long*, at_cuda_detail::cub::ScanTileState<long, true>, std::plus<long>, at_cuda_detail::cub::NullType, int>(long*, long*, at_cuda_detail::cub::ScanTileState<long, true>, int, std::plus<long>, at_cuda_detail::cub::NullType, int)",
-      "single_time_us": 5.5994775390625,
-      "start_timestamp": "2026-02-06 18:32:47.402",
+      "single_time_us": 3.474983203125,
+      "start_timestamp": "2026-02-10 18:36:09.779",
       "tier": 3,
-      "total_time_us": 139.9869384765625
+      "total_time_us": 86.87458007812499
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:32:48.367",
+      "end_timestamp": "2026-02-10 18:36:46.657",
       "invocation_count": 26,
       "name": "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctorOnSelf_add<long>, at::detail::Array<char*, 2> >(int, at::native::CUDAFunctorOnSelf_add<long>, at::detail::Array<char*, 2>)",
-      "single_time_us": 4.049715270996094,
-      "start_timestamp": "2026-02-06 18:32:47.962",
+      "single_time_us": 3.900340625,
+      "start_timestamp": "2026-02-10 18:36:27.154",
       "tier": 3,
-      "total_time_us": 105.29259704589845
+      "total_time_us": 101.40885625
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:32:48.776",
+      "end_timestamp": "2026-02-10 18:37:06.173",
       "invocation_count": 75,
       "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<long, long, long, at::native::MulFunctor<long> >, at::detail::Array<char*, 3> >(int, at::native::BinaryFunctor<long, long, long, at::native::MulFunctor<long> >, at::detail::Array<char*, 3>)",
-      "single_time_us": 4.083301391601562,
-      "start_timestamp": "2026-02-06 18:32:48.367",
+      "single_time_us": 3.902940625,
+      "start_timestamp": "2026-02-10 18:36:46.657",
       "tier": 3,
-      "total_time_us": 306.2476043701172
+      "total_time_us": 292.72054687499997
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:32:49.185",
+      "end_timestamp": "2026-02-10 18:37:25.720",
       "invocation_count": 25,
       "name": "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl<at::native::BinaryFunctor<float, float, float, at::native::MulFunctor<float> > >(at::TensorIteratorBase&, at::native::BinaryFunctor<float, float, float, at::native::MulFunctor<float> > const&)::{lambda(int)#2}>(int, at::native::gpu_kernel_impl<at::native::BinaryFunctor<float, float, float, at::native::MulFunctor<float> > >(at::TensorIteratorBase&, at::native::BinaryFunctor<float, float, float, at::native::MulFunctor<float> > const&)::{lambda(int)#2})",
-      "single_time_us": 4.086890563964844,
-      "start_timestamp": "2026-02-06 18:32:48.776",
+      "single_time_us": 3.90932265625,
+      "start_timestamp": "2026-02-10 18:37:06.173",
       "tier": 3,
-      "total_time_us": 102.17226409912111
+      "total_time_us": 97.73306640625
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:32:49.589",
+      "end_timestamp": "2026-02-10 18:37:45.227",
       "invocation_count": 650,
       "name": "void at::native::unrolled_elementwise_kernel<at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1}, at::detail::Array<char*, 2>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast>(int, at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1}, at::detail::Array<char*, 2>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast)",
-      "single_time_us": 4.037666015625,
-      "start_timestamp": "2026-02-06 18:32:49.185",
+      "single_time_us": 3.901246484375,
+      "start_timestamp": "2026-02-10 18:37:25.720",
       "tier": 3,
-      "total_time_us": 2624.48291015625
+      "total_time_us": 2535.81021484375
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:32:49.847",
+      "end_timestamp": "2026-02-10 18:37:57.029",
       "invocation_count": 1,
       "name": "void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<float>, at::detail::Array<char*, 1> >(int, at::native::FillFunctor<float>, at::detail::Array<char*, 1>)",
-      "single_time_us": 2.58100830078125,
-      "start_timestamp": "2026-02-06 18:32:49.589",
+      "single_time_us": 2.3601689453125,
+      "start_timestamp": "2026-02-10 18:37:45.227",
       "tier": 3,
-      "total_time_us": 2.58100830078125
+      "total_time_us": 2.3601689453125
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:32:50.247",
+      "end_timestamp": "2026-02-10 18:38:16.477",
       "invocation_count": 1,
       "name": "void (anonymous namespace)::elementwise_kernel_with_index<int, at::native::arange_cuda_out(c10::Scalar const&, c10::Scalar const&, c10::Scalar const&, at::Tensor&)::{lambda()#1}::operator()() const::{lambda()#12}::operator()() const::{lambda(long)#1}>(int, at::native::arange_cuda_out(c10::Scalar const&, c10::Scalar const&, c10::Scalar const&, at::Tensor&)::{lambda()#1}::operator()() const::{lambda()#12}::operator()() const::{lambda(long)#1}, function_traits<at::native::arange_cuda_out(c10::Scalar const&, c10::Scalar const&, c10::Scalar const&, at::Tensor&)::{lambda()#1}::operator()() const::{lambda()#12}::operator()() const::{lambda(long)#1}>::result_type*)",
-      "single_time_us": 4.005519409179687,
-      "start_timestamp": "2026-02-06 18:32:49.847",
+      "single_time_us": 3.889443359375,
+      "start_timestamp": "2026-02-10 18:37:57.029",
       "tier": 3,
-      "total_time_us": 4.005519409179687
+      "total_time_us": 3.889443359375
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:32:50.650",
+      "end_timestamp": "2026-02-10 18:38:35.910",
       "invocation_count": 1,
       "name": "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl<at::native::BinaryFunctor<long, long, bool, at::native::(anonymous namespace)::CompareFunctor<long> > >(at::TensorIteratorBase&, at::native::BinaryFunctor<long, long, bool, at::native::(anonymous namespace)::CompareFunctor<long> > const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl<at::native::BinaryFunctor<long, long, bool, at::native::(anonymous namespace)::CompareFunctor<long> > >(at::TensorIteratorBase&, at::native::BinaryFunctor<long, long, bool, at::native::(anonymous namespace)::CompareFunctor<long> > const&)::{lambda(int)#1})",
-      "single_time_us": 4.028811950683593,
-      "start_timestamp": "2026-02-06 18:32:50.247",
+      "single_time_us": 3.8863828125,
+      "start_timestamp": "2026-02-10 18:38:16.477",
       "tier": 3,
-      "total_time_us": 4.028811950683593
+      "total_time_us": 3.8863828125
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:32:51.053",
+      "end_timestamp": "2026-02-10 18:38:55.362",
       "invocation_count": 1,
       "name": "void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, bool)#1}, at::detail::Array<char*, 3> >(int, at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, bool)#1}, at::detail::Array<char*, 3>)",
-      "single_time_us": 4.023531494140625,
-      "start_timestamp": "2026-02-06 18:32:50.650",
+      "single_time_us": 3.890401171875,
+      "start_timestamp": "2026-02-10 18:38:35.910",
       "tier": 3,
-      "total_time_us": 4.023531494140625
+      "total_time_us": 3.890401171875
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:32:51.454",
+      "end_timestamp": "2026-02-10 18:39:14.823",
       "invocation_count": 1,
       "name": "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl<at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1}>(at::TensorIteratorBase&, at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1} const&)::{lambda(int)#2}>(int, at::native::gpu_kernel_impl<at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1}>(at::TensorIteratorBase&, at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1} const&)::{lambda(int)#2})",
-      "single_time_us": 4.013878173828125,
-      "start_timestamp": "2026-02-06 18:32:51.053",
+      "single_time_us": 3.89195859375,
+      "start_timestamp": "2026-02-10 18:38:55.363",
       "tier": 3,
-      "total_time_us": 4.013878173828125
+      "total_time_us": 3.89195859375
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:32:51.856",
+      "end_timestamp": "2026-02-10 18:39:34.285",
       "invocation_count": 25,
       "name": "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctorOnOther_add<c10::Half>, at::detail::Array<char*, 2> >(int, at::native::CUDAFunctorOnOther_add<c10::Half>, at::detail::Array<char*, 2>)",
-      "single_time_us": 4.01807373046875,
-      "start_timestamp": "2026-02-06 18:32:51.454",
+      "single_time_us": 3.892191796875,
+      "start_timestamp": "2026-02-10 18:39:14.823",
       "tier": 3,
-      "total_time_us": 100.45184326171875
+      "total_time_us": 97.304794921875
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:32:52.258",
+      "end_timestamp": "2026-02-10 18:39:53.768",
       "invocation_count": 50,
       "name": "void at::native::unrolled_elementwise_kernel<at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#22}::operator()() const::{lambda(bool)#1}, at::detail::Array<char*, 2>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast>(int, at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#22}::operator()() const::{lambda(bool)#1}, at::detail::Array<char*, 2>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast)",
-      "single_time_us": 4.021370239257813,
-      "start_timestamp": "2026-02-06 18:32:51.856",
+      "single_time_us": 3.896476953125,
+      "start_timestamp": "2026-02-10 18:39:34.285",
       "tier": 3,
-      "total_time_us": 201.06851196289063
+      "total_time_us": 194.82384765625
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:32:53.549",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:39:55.764",
       "invocation_count": 2,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.150851847330729,
-      "start_timestamp": "2026-02-06 18:32:52.258",
+      "single_time_us": 1.9958056640625,
+      "start_timestamp": "2026-02-10 18:39:53.768",
       "tier": 1,
-      "total_time_us": 4.301703694661458
+      "total_time_us": 3.991611328125
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:32:53.956",
+      "end_timestamp": "2026-02-10 18:40:15.238",
       "invocation_count": 25,
       "name": "void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#22}::operator()() const::{lambda(c10::Half, bool)#1}, at::detail::Array<char*, 3> >(int, at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#22}::operator()() const::{lambda(c10::Half, bool)#1}, at::detail::Array<char*, 3>)",
-      "single_time_us": 4.063917846679687,
-      "start_timestamp": "2026-02-06 18:32:53.549",
+      "single_time_us": 3.8946390625,
+      "start_timestamp": "2026-02-10 18:39:55.764",
       "tier": 3,
-      "total_time_us": 101.59794616699219
+      "total_time_us": 97.3659765625
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:32:54.359",
+      "end_timestamp": "2026-02-10 18:40:34.822",
       "invocation_count": 1,
       "name": "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctor_add<c10::Half>, at::detail::Array<char*, 3> >(int, at::native::CUDAFunctor_add<c10::Half>, at::detail::Array<char*, 3>)",
-      "single_time_us": 4.031518249511719,
-      "start_timestamp": "2026-02-06 18:32:53.956",
+      "single_time_us": 3.916458203125,
+      "start_timestamp": "2026-02-10 18:40:15.238",
       "tier": 3,
-      "total_time_us": 4.031518249511719
+      "total_time_us": 3.916458203125
     },
     {
-      "benchmark_runs": 50000,
-      "end_timestamp": "2026-02-06 18:32:56.584",
+      "benchmark_runs": 100000,
+      "end_timestamp": "2026-02-10 18:40:39.065",
       "invocation_count": 24,
       "name": "maxwell_sgemm_fp16_128x32_tn",
-      "single_time_us": 44.4520458984375,
-      "start_timestamp": "2026-02-06 18:32:54.359",
+      "single_time_us": 42.4230810546875,
+      "start_timestamp": "2026-02-10 18:40:34.822",
       "tier": 2,
-      "total_time_us": 1066.8491015625
+      "total_time_us": 1018.1539453125
     },
     {
-      "benchmark_runs": 50000,
-      "end_timestamp": "2026-02-06 18:32:58.804",
+      "benchmark_runs": 100000,
+      "end_timestamp": "2026-02-10 18:40:43.533",
       "invocation_count": 24,
       "name": "void splitKreduce_kernel<32, 16, int, float, __half, float, __half, true, true, false>(cublasSplitKParams<float>, float const*, __half const*, __half*, float const*, float const*, __half const*, float const*, __half*, void*, long, float*, int*)",
-      "single_time_us": 44.3878125,
-      "start_timestamp": "2026-02-06 18:32:56.584",
+      "single_time_us": 44.670869140625,
+      "start_timestamp": "2026-02-10 18:40:39.065",
       "tier": 2,
-      "total_time_us": 1065.3075000000001
+      "total_time_us": 1072.100859375
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:32:59.208",
+      "end_timestamp": "2026-02-10 18:41:03.009",
       "invocation_count": 24,
       "name": "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl<at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1}>(at::TensorIteratorBase&, at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1} const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl<at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1}>(at::TensorIteratorBase&, at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1} const&)::{lambda(int)#1})",
-      "single_time_us": 4.032796020507813,
-      "start_timestamp": "2026-02-06 18:32:58.804",
+      "single_time_us": 3.8950453125,
+      "start_timestamp": "2026-02-10 18:40:43.533",
       "tier": 3,
-      "total_time_us": 96.7871044921875
+      "total_time_us": 93.4810875
     },
     {
-      "benchmark_runs": 50000,
-      "end_timestamp": "2026-02-06 18:32:59.408",
+      "benchmark_runs": 100000,
+      "end_timestamp": "2026-02-10 18:41:03.438",
       "invocation_count": 24,
       "name": "void gemmSN_TN_kernel<float, 128, 16, 2, 4, 6, 7, false, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half> >(cublasGemmSmallNParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>)",
-      "single_time_us": 3.9984536743164063,
-      "start_timestamp": "2026-02-06 18:32:59.208",
+      "single_time_us": 4.287180480957031,
+      "start_timestamp": "2026-02-10 18:41:03.009",
       "tier": 2,
-      "total_time_us": 95.96288818359375
+      "total_time_us": 102.89233154296875
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:32:59.810",
+      "end_timestamp": "2026-02-10 18:41:22.895",
       "invocation_count": 600,
       "name": "void at::native::unrolled_elementwise_kernel<at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast>(int, at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#8}::operator()() const::{lambda(float)#1}, at::detail::Array<char*, 2>, TrivialOffsetCalculator<1, unsigned int>, TrivialOffsetCalculator<1, unsigned int>, at::native::memory::LoadWithCast<1>, at::native::memory::StoreWithCast)",
-      "single_time_us": 4.01739501953125,
-      "start_timestamp": "2026-02-06 18:32:59.408",
+      "single_time_us": 3.89116640625,
+      "start_timestamp": "2026-02-10 18:41:03.438",
       "tier": 3,
-      "total_time_us": 2410.43701171875
+      "total_time_us": 2334.69984375
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:33:01.118",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:41:24.903",
       "invocation_count": 48,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.1789951578776043,
-      "start_timestamp": "2026-02-06 18:32:59.810",
+      "single_time_us": 2.0075396728515624,
+      "start_timestamp": "2026-02-10 18:41:22.895",
       "tier": 1,
-      "total_time_us": 104.591767578125
+      "total_time_us": 96.361904296875
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:33:01.520",
+      "end_timestamp": "2026-02-10 18:41:44.385",
       "invocation_count": 336,
       "name": "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl<at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, bool)#1}>(at::TensorIteratorBase&, at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, bool)#1} const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl<at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, bool)#1}>(at::TensorIteratorBase&, at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, bool)#1} const&)::{lambda(int)#1})",
-      "single_time_us": 4.02259033203125,
-      "start_timestamp": "2026-02-06 18:33:01.118",
+      "single_time_us": 3.896185546875,
+      "start_timestamp": "2026-02-10 18:41:24.903",
       "tier": 3,
-      "total_time_us": 1351.5903515625
+      "total_time_us": 1309.11834375
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:33:02.264",
+      "end_timestamp": "2026-02-10 18:42:22.143",
       "invocation_count": 24,
       "name": "void (anonymous namespace)::softmax_warp_forward<float, float, float, 3, false, false>(float*, float const*, int, int, int, bool const*, int, bool)",
-      "single_time_us": 7.438997192382812,
-      "start_timestamp": "2026-02-06 18:33:01.520",
+      "single_time_us": 7.55135546875,
+      "start_timestamp": "2026-02-10 18:41:44.385",
       "tier": 3,
-      "total_time_us": 178.53593261718748
+      "total_time_us": 181.23253125
     },
     {
-      "benchmark_runs": 50000,
-      "end_timestamp": "2026-02-06 18:33:02.464",
+      "benchmark_runs": 100000,
+      "end_timestamp": "2026-02-10 18:42:22.551",
       "invocation_count": 24,
       "name": "void gemmSN_NN_kernel<float, 128, 2, 4, 8, 5, 4, false, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half> >(cublasGemmSmallNParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>)",
-      "single_time_us": 4.00195068359375,
-      "start_timestamp": "2026-02-06 18:33:02.264",
+      "single_time_us": 4.075909729003906,
+      "start_timestamp": "2026-02-10 18:42:22.143",
       "tier": 2,
-      "total_time_us": 96.04681640625
+      "total_time_us": 97.82183349609375
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:33:02.865",
+      "end_timestamp": "2026-02-10 18:42:42.053",
       "invocation_count": 24,
       "name": "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl<at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1}>(at::TensorIteratorBase&, at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1} const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl<at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1}>(at::TensorIteratorBase&, at::native::(anonymous namespace)::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::operator()() const::{lambda()#20}::operator()() const::{lambda(c10::Half)#1} const&)::{lambda(int)#1})",
-      "single_time_us": 4.009679870605469,
-      "start_timestamp": "2026-02-06 18:33:02.464",
+      "single_time_us": 3.90023671875,
+      "start_timestamp": "2026-02-10 18:42:22.551",
       "tier": 3,
-      "total_time_us": 96.23231689453125
+      "total_time_us": 93.60568125
     },
     {
-      "benchmark_runs": 50000,
-      "end_timestamp": "2026-02-06 18:33:05.089",
+      "benchmark_runs": 100000,
+      "end_timestamp": "2026-02-10 18:42:46.297",
       "invocation_count": 48,
       "name": "maxwell_sgemm_fp16_128x32_tn",
-      "single_time_us": 44.462880859375,
-      "start_timestamp": "2026-02-06 18:33:02.865",
+      "single_time_us": 42.4292041015625,
+      "start_timestamp": "2026-02-10 18:42:42.053",
       "tier": 2,
-      "total_time_us": 2134.21828125
+      "total_time_us": 2036.6017968749998
     },
     {
-      "benchmark_runs": 50000,
-      "end_timestamp": "2026-02-06 18:33:07.312",
+      "benchmark_runs": 100000,
+      "end_timestamp": "2026-02-10 18:42:50.765",
       "invocation_count": 48,
       "name": "void splitKreduce_kernel<32, 16, int, float, __half, float, __half, true, true, false>(cublasSplitKParams<float>, float const*, __half const*, __half*, float const*, float const*, __half const*, float const*, __half*, void*, long, float*, int*)",
-      "single_time_us": 44.4370703125,
-      "start_timestamp": "2026-02-06 18:33:05.089",
+      "single_time_us": 44.675009765625,
+      "start_timestamp": "2026-02-10 18:42:46.297",
       "tier": 2,
-      "total_time_us": 2132.979375
+      "total_time_us": 2144.40046875
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:33:07.716",
+      "end_timestamp": "2026-02-10 18:43:10.320",
       "invocation_count": 48,
       "name": "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctor_add<c10::Half>, at::detail::Array<char*, 3> >(int, at::native::CUDAFunctor_add<c10::Half>, at::detail::Array<char*, 3>)",
-      "single_time_us": 4.041209716796875,
-      "start_timestamp": "2026-02-06 18:33:07.312",
+      "single_time_us": 3.9106828125,
+      "start_timestamp": "2026-02-10 18:42:50.765",
       "tier": 3,
-      "total_time_us": 193.97806640624998
+      "total_time_us": 187.71277500000002
     },
     {
-      "benchmark_runs": 50000,
-      "end_timestamp": "2026-02-06 18:33:09.946",
+      "benchmark_runs": 100000,
+      "end_timestamp": "2026-02-10 18:43:14.564",
       "invocation_count": 24,
       "name": "maxwell_sgemm_fp16_128x32_tn",
-      "single_time_us": 44.5496728515625,
-      "start_timestamp": "2026-02-06 18:33:07.716",
+      "single_time_us": 42.4300634765625,
+      "start_timestamp": "2026-02-10 18:43:10.320",
       "tier": 2,
-      "total_time_us": 1069.1921484375
+      "total_time_us": 1018.3215234375
     },
     {
-      "benchmark_runs": 50000,
-      "end_timestamp": "2026-02-06 18:33:12.171",
+      "benchmark_runs": 100000,
+      "end_timestamp": "2026-02-10 18:43:19.036",
       "invocation_count": 24,
       "name": "void splitKreduce_kernel<32, 16, int, float, __half, float, __half, true, true, false>(cublasSplitKParams<float>, float const*, __half const*, __half*, float const*, float const*, __half const*, float const*, __half*, void*, long, float*, int*)",
-      "single_time_us": 44.485712890625,
-      "start_timestamp": "2026-02-06 18:33:09.946",
+      "single_time_us": 44.713857421875,
+      "start_timestamp": "2026-02-10 18:43:14.564",
       "tier": 2,
-      "total_time_us": 1067.6571093750001
+      "total_time_us": 1073.132578125
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:33:12.582",
+      "end_timestamp": "2026-02-10 18:43:38.588",
       "invocation_count": 72,
       "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BUnaryFunctor<c10::Half, c10::Half, c10::Half, at::native::MulFunctor<float> >, at::detail::Array<char*, 2> >(int, at::native::BUnaryFunctor<c10::Half, c10::Half, c10::Half, at::native::MulFunctor<float> >, at::detail::Array<char*, 2>)",
-      "single_time_us": 4.106703796386719,
-      "start_timestamp": "2026-02-06 18:33:12.171",
+      "single_time_us": 3.91027421875,
+      "start_timestamp": "2026-02-10 18:43:19.036",
       "tier": 3,
-      "total_time_us": 295.68267333984375
+      "total_time_us": 281.53974375
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:33:12.992",
+      "end_timestamp": "2026-02-10 18:43:58.084",
       "invocation_count": 72,
       "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<c10::Half, c10::Half, c10::Half, at::native::MulFunctor<float> >, at::detail::Array<char*, 3> >(int, at::native::BinaryFunctor<c10::Half, c10::Half, c10::Half, at::native::MulFunctor<float> >, at::detail::Array<char*, 3>)",
-      "single_time_us": 4.095408020019531,
-      "start_timestamp": "2026-02-06 18:33:12.582",
+      "single_time_us": 3.898945703125,
+      "start_timestamp": "2026-02-10 18:43:38.588",
       "tier": 3,
-      "total_time_us": 294.86937744140624
+      "total_time_us": 280.724090625
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:33:13.397",
+      "end_timestamp": "2026-02-10 18:44:17.552",
       "invocation_count": 48,
       "name": "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctorOnSelf_add<c10::Half>, at::detail::Array<char*, 2> >(int, at::native::CUDAFunctorOnSelf_add<c10::Half>, at::detail::Array<char*, 2>)",
-      "single_time_us": 4.047828674316406,
-      "start_timestamp": "2026-02-06 18:33:12.992",
+      "single_time_us": 3.893380078125,
+      "start_timestamp": "2026-02-10 18:43:58.084",
       "tier": 3,
-      "total_time_us": 194.2957763671875
+      "total_time_us": 186.88224375
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:33:13.802",
+      "end_timestamp": "2026-02-10 18:44:37.015",
       "invocation_count": 24,
       "name": "void at::native::vectorized_elementwise_kernel<4, at::native::tanh_kernel_cuda(at::TensorIteratorBase&)::{lambda()#1}::operator()() const::{lambda()#10}::operator()() const::{lambda(c10::Half)#1}, at::detail::Array<char*, 2> >(int, at::native::tanh_kernel_cuda(at::TensorIteratorBase&)::{lambda()#1}::operator()() const::{lambda()#10}::operator()() const::{lambda(c10::Half)#1}, at::detail::Array<char*, 2>)",
-      "single_time_us": 4.052617492675782,
-      "start_timestamp": "2026-02-06 18:33:13.397",
+      "single_time_us": 3.892353125,
+      "start_timestamp": "2026-02-10 18:44:17.552",
       "tier": 3,
-      "total_time_us": 97.26281982421875
+      "total_time_us": 93.416475
     },
     {
-      "benchmark_runs": 50000,
-      "end_timestamp": "2026-02-06 18:33:16.031",
+      "benchmark_runs": 100000,
+      "end_timestamp": "2026-02-10 18:44:41.258",
       "invocation_count": 1,
       "name": "maxwell_fp16_sgemm_fp16_64x64_tn",
-      "single_time_us": 44.5633349609375,
-      "start_timestamp": "2026-02-06 18:33:13.802",
+      "single_time_us": 42.42740234375,
+      "start_timestamp": "2026-02-10 18:44:37.015",
       "tier": 2,
-      "total_time_us": 44.5633349609375
+      "total_time_us": 42.42740234375
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:33:16.694",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:44:42.270",
       "invocation_count": 25,
       "name": "Memset (Device)",
-      "single_time_us": 1.1048361206054687,
-      "start_timestamp": "2026-02-06 18:33:16.031",
+      "single_time_us": 1.011402587890625,
+      "start_timestamp": "2026-02-10 18:44:41.258",
       "tier": 1,
-      "total_time_us": 27.620903015136715
+      "total_time_us": 25.285064697265625
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:33:17.255",
+      "end_timestamp": "2026-02-10 18:45:40.220",
       "invocation_count": 25,
       "name": "void at::native::reduce_kernel<512, 1, at::native::ReduceOp<c10::Half, at::native::ArgMaxOps<float>, unsigned int, long, 4> >(at::native::ReduceOp<c10::Half, at::native::ArgMaxOps<float>, unsigned int, long, 4>)",
-      "single_time_us": 5.6058056640625,
-      "start_timestamp": "2026-02-06 18:33:16.694",
+      "single_time_us": 11.58955390625,
+      "start_timestamp": "2026-02-10 18:44:42.270",
       "tier": 3,
-      "total_time_us": 140.1451416015625
+      "total_time_us": 289.73884765625
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:33:17.660",
+      "end_timestamp": "2026-02-10 18:45:59.709",
       "invocation_count": 25,
       "name": "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctorOnOther_add<long>, at::detail::Array<char*, 2> >(int, at::native::CUDAFunctorOnOther_add<long>, at::detail::Array<char*, 2>)",
-      "single_time_us": 4.0439300537109375,
-      "start_timestamp": "2026-02-06 18:33:17.255",
+      "single_time_us": 3.89748125,
+      "start_timestamp": "2026-02-10 18:45:40.220",
       "tier": 3,
-      "total_time_us": 101.09825134277344
+      "total_time_us": 97.43703124999999
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:33:18.069",
+      "end_timestamp": "2026-02-10 18:46:19.229",
       "invocation_count": 25,
       "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BUnaryFunctor<long, long, long, at::native::MulFunctor<long> >, at::detail::Array<char*, 2> >(int, at::native::BUnaryFunctor<long, long, long, at::native::MulFunctor<long> >, at::detail::Array<char*, 2>)",
-      "single_time_us": 4.0878079223632815,
-      "start_timestamp": "2026-02-06 18:33:17.660",
+      "single_time_us": 3.903941015625,
+      "start_timestamp": "2026-02-10 18:45:59.709",
       "tier": 3,
-      "total_time_us": 102.19519805908203
+      "total_time_us": 97.598525390625
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:33:18.468",
+      "end_timestamp": "2026-02-10 18:46:38.707",
       "invocation_count": 25,
       "name": "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctor_add<long>, at::detail::Array<char*, 3> >(int, at::native::CUDAFunctor_add<long>, at::detail::Array<char*, 3>)",
-      "single_time_us": 3.9936614990234376,
-      "start_timestamp": "2026-02-06 18:33:18.069",
+      "single_time_us": 3.895310546875,
+      "start_timestamp": "2026-02-10 18:46:19.229",
       "tier": 3,
-      "total_time_us": 99.84153747558594
+      "total_time_us": 97.382763671875
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:33:18.868",
+      "end_timestamp": "2026-02-10 18:46:58.155",
       "invocation_count": 50,
       "name": "void at::native::(anonymous namespace)::CatArrayBatchedCopy<long, unsigned int, 2, 128, 1>(long*, at::native::(anonymous namespace)::CatArrInputTensorMetadata<long, unsigned int, 128, 1>, at::native::(anonymous namespace)::TensorSizeStride<unsigned int, 4u>, int, unsigned int)",
-      "single_time_us": 3.9952178955078126,
-      "start_timestamp": "2026-02-06 18:33:18.468",
+      "single_time_us": 3.889495703125,
+      "start_timestamp": "2026-02-10 18:46:38.707",
       "tier": 3,
-      "total_time_us": 199.76089477539063
+      "total_time_us": 194.47478515625
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:33:20.175",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:47:00.151",
       "invocation_count": 25,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.178991292317708,
-      "start_timestamp": "2026-02-06 18:33:18.868",
+      "single_time_us": 1.996185546875,
+      "start_timestamp": "2026-02-10 18:46:58.155",
       "tier": 1,
-      "total_time_us": 54.474782307942704
+      "total_time_us": 49.904638671875
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:33:20.581",
+      "end_timestamp": "2026-02-10 18:47:19.571",
       "invocation_count": 25,
       "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<long, long, bool, at::native::(anonymous namespace)::CompareEqFunctor<long> >, at::detail::Array<char*, 3> >(int, at::native::BinaryFunctor<long, long, bool, at::native::(anonymous namespace)::CompareEqFunctor<long> >, at::detail::Array<char*, 3>)",
-      "single_time_us": 4.058872680664063,
-      "start_timestamp": "2026-02-06 18:33:20.175",
+      "single_time_us": 3.88363125,
+      "start_timestamp": "2026-02-10 18:47:00.151",
       "tier": 3,
-      "total_time_us": 101.47181701660158
+      "total_time_us": 97.09078125
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:33:21.136",
+      "end_timestamp": "2026-02-10 18:47:44.681",
       "invocation_count": 25,
       "name": "reduction_prod_kernel",
-      "single_time_us": 5.54925048828125,
-      "start_timestamp": "2026-02-06 18:33:20.581",
+      "single_time_us": 5.021952734375,
+      "start_timestamp": "2026-02-10 18:47:19.571",
       "tier": 3,
-      "total_time_us": 138.73126220703125
+      "total_time_us": 125.54881835937499
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:33:21.695",
+      "end_timestamp": "2026-02-10 18:48:09.808",
       "invocation_count": 25,
       "name": "void at::native::reduce_kernel<512, 1, at::native::ReduceOp<long, at::native::func_wrapper_t<long, at::native::MaxNanFunctor<long> >, unsigned int, long, 4> >(at::native::ReduceOp<long, at::native::func_wrapper_t<long, at::native::MaxNanFunctor<long> >, unsigned int, long, 4>)",
-      "single_time_us": 5.586585693359375,
-      "start_timestamp": "2026-02-06 18:33:21.136",
+      "single_time_us": 5.02513515625,
+      "start_timestamp": "2026-02-10 18:47:44.681",
       "tier": 3,
-      "total_time_us": 139.66464233398438
+      "total_time_us": 125.62837890625
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:33:22.414",
+      "end_timestamp": "2026-02-10 18:48:42.315",
       "invocation_count": 1200,
       "name": "void at::native::(anonymous namespace)::vectorized_layer_norm_kernel<c10::Half, float>(int, float, c10::Half const*, c10::Half const*, c10::Half const*, float*, float*, c10::Half*)",
-      "single_time_us": 7.190382690429687,
-      "start_timestamp": "2026-02-06 18:33:21.695",
+      "single_time_us": 6.50110078125,
+      "start_timestamp": "2026-02-10 18:48:09.808",
       "tier": 3,
-      "total_time_us": 8628.459228515625
+      "total_time_us": 7801.3209375
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:33:23.718",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:48:44.329",
       "invocation_count": 1,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.1732572428385417,
-      "start_timestamp": "2026-02-06 18:33:22.414",
+      "single_time_us": 2.0133206787109375,
+      "start_timestamp": "2026-02-10 18:48:42.315",
       "tier": 1,
-      "total_time_us": 2.1732572428385417
+      "total_time_us": 2.0133206787109375
     },
     {
-      "benchmark_runs": 50000,
-      "end_timestamp": "2026-02-06 18:33:23.919",
+      "benchmark_runs": 100000,
+      "end_timestamp": "2026-02-10 18:48:44.758",
       "invocation_count": 576,
       "name": "void gemv2T_kernel_val<int, int, __half, __half, __half, float, 128, 16, 2, 4, false, true, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>, float, float)",
-      "single_time_us": 4.005576171875,
-      "start_timestamp": "2026-02-06 18:33:23.718",
+      "single_time_us": 4.286207885742187,
+      "start_timestamp": "2026-02-10 18:48:44.329",
       "tier": 2,
-      "total_time_us": 2307.211875
+      "total_time_us": 2468.8557421875
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:33:24.323",
+      "end_timestamp": "2026-02-10 18:49:04.216",
       "invocation_count": 1152,
       "name": "void at::native::(anonymous namespace)::CatArrayBatchedCopy<c10::Half, unsigned int, 3, 64, 64>(c10::Half*, at::native::(anonymous namespace)::CatArrInputTensorMetadata<c10::Half, unsigned int, 64, 64>, at::native::(anonymous namespace)::TensorSizeStride<unsigned int, 4u>, int, unsigned int)",
-      "single_time_us": 4.034508056640625,
-      "start_timestamp": "2026-02-06 18:33:23.919",
+      "single_time_us": 3.891503125,
+      "start_timestamp": "2026-02-10 18:48:44.758",
       "tier": 3,
-      "total_time_us": 4647.75328125
+      "total_time_us": 4483.0116
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:33:25.627",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:49:06.201",
       "invocation_count": 24,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.1736309814453123,
-      "start_timestamp": "2026-02-06 18:33:24.323",
+      "single_time_us": 1.9844940185546875,
+      "start_timestamp": "2026-02-10 18:49:04.216",
       "tier": 1,
-      "total_time_us": 52.1671435546875
+      "total_time_us": 47.6278564453125
     },
     {
-      "benchmark_runs": 50000,
-      "end_timestamp": "2026-02-06 18:33:25.827",
+      "benchmark_runs": 100000,
+      "end_timestamp": "2026-02-10 18:49:06.608",
       "invocation_count": 72,
       "name": "void gemv2N_kernel<int, int, __half, __half, __half, float, 128, 32, 4, 4, 1, false, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>)",
-      "single_time_us": 4.00368896484375,
-      "start_timestamp": "2026-02-06 18:33:25.627",
+      "single_time_us": 4.073912353515625,
+      "start_timestamp": "2026-02-10 18:49:06.201",
       "tier": 2,
-      "total_time_us": 288.26560546875
+      "total_time_us": 293.321689453125
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:33:27.131",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:49:08.611",
       "invocation_count": 48,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.173232421875,
-      "start_timestamp": "2026-02-06 18:33:25.827",
+      "single_time_us": 2.0021292724609374,
+      "start_timestamp": "2026-02-10 18:49:06.608",
       "tier": 1,
-      "total_time_us": 104.31515625
+      "total_time_us": 96.102205078125
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:33:27.541",
+      "end_timestamp": "2026-02-10 18:49:28.069",
       "invocation_count": 264,
       "name": "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl<at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, bool)#1}>(at::TensorIteratorBase&, at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, bool)#1} const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl<at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, bool)#1}>(at::TensorIteratorBase&, at::native::(anonymous namespace)::masked_fill_kernel<bool>(at::TensorIterator&, c10::Scalar const&)::{lambda()#1}::operator()() const::{lambda()#8}::operator()() const::{lambda(float, bool)#1} const&)::{lambda(int)#1})",
-      "single_time_us": 4.0936865234375,
-      "start_timestamp": "2026-02-06 18:33:27.131",
+      "single_time_us": 3.89150703125,
+      "start_timestamp": "2026-02-10 18:49:08.611",
       "tier": 3,
-      "total_time_us": 1080.7332421875
+      "total_time_us": 1027.35785625
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:33:28.285",
+      "end_timestamp": "2026-02-10 18:50:05.821",
       "invocation_count": 72,
       "name": "void (anonymous namespace)::softmax_warp_forward<float, float, float, 3, false, false>(float*, float const*, int, int, int, bool const*, int, bool)",
-      "single_time_us": 7.438917846679687,
-      "start_timestamp": "2026-02-06 18:33:27.541",
+      "single_time_us": 7.550065625,
+      "start_timestamp": "2026-02-10 18:49:28.069",
       "tier": 3,
-      "total_time_us": 535.6020849609375
+      "total_time_us": 543.604725
     },
     {
-      "benchmark_runs": 50000,
-      "end_timestamp": "2026-02-06 18:33:28.485",
+      "benchmark_runs": 100000,
+      "end_timestamp": "2026-02-10 18:50:06.229",
       "invocation_count": 72,
       "name": "void gemv2N_kernel<int, int, __half, __half, __half, float, 128, 2, 4, 4, 1, false, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>)",
-      "single_time_us": 4.0041259765625,
-      "start_timestamp": "2026-02-06 18:33:28.285",
+      "single_time_us": 4.073131103515625,
+      "start_timestamp": "2026-02-10 18:50:05.821",
       "tier": 2,
-      "total_time_us": 288.2970703125
+      "total_time_us": 293.26543945312494
     },
     {
-      "benchmark_runs": 50000,
-      "end_timestamp": "2026-02-06 18:33:28.686",
+      "benchmark_runs": 100000,
+      "end_timestamp": "2026-02-10 18:50:06.657",
       "invocation_count": 1152,
       "name": "void gemv2T_kernel_val<int, int, __half, __half, __half, float, 128, 16, 2, 4, false, true, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>, float, float)",
-      "single_time_us": 4.004104919433594,
-      "start_timestamp": "2026-02-06 18:33:28.485",
+      "single_time_us": 4.287967224121093,
+      "start_timestamp": "2026-02-10 18:50:06.229",
       "tier": 2,
-      "total_time_us": 4612.7288671875
+      "total_time_us": 4939.738242187499
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:33:29.090",
+      "end_timestamp": "2026-02-10 18:50:26.182",
       "invocation_count": 1152,
       "name": "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctor_add<c10::Half>, at::detail::Array<char*, 3> >(int, at::native::CUDAFunctor_add<c10::Half>, at::detail::Array<char*, 3>)",
-      "single_time_us": 4.047000732421875,
-      "start_timestamp": "2026-02-06 18:33:28.686",
+      "single_time_us": 3.904778125,
+      "start_timestamp": "2026-02-10 18:50:06.657",
       "tier": 3,
-      "total_time_us": 4662.14484375
+      "total_time_us": 4498.3044
     },
     {
-      "benchmark_runs": 50000,
-      "end_timestamp": "2026-02-06 18:33:29.291",
+      "benchmark_runs": 100000,
+      "end_timestamp": "2026-02-10 18:50:26.611",
       "invocation_count": 576,
       "name": "void gemv2T_kernel_val<int, int, __half, __half, __half, float, 128, 16, 2, 4, false, true, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>, float, float)",
-      "single_time_us": 4.001297302246094,
-      "start_timestamp": "2026-02-06 18:33:29.090",
+      "single_time_us": 4.286259155273438,
+      "start_timestamp": "2026-02-10 18:50:26.182",
       "tier": 2,
-      "total_time_us": 2304.74724609375
+      "total_time_us": 2468.8852734375005
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:33:29.704",
+      "end_timestamp": "2026-02-10 18:50:46.145",
       "invocation_count": 1728,
       "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BUnaryFunctor<c10::Half, c10::Half, c10::Half, at::native::MulFunctor<float> >, at::detail::Array<char*, 2> >(int, at::native::BUnaryFunctor<c10::Half, c10::Half, c10::Half, at::native::MulFunctor<float> >, at::detail::Array<char*, 2>)",
-      "single_time_us": 4.136864318847656,
-      "start_timestamp": "2026-02-06 18:33:29.291",
+      "single_time_us": 3.906609375,
+      "start_timestamp": "2026-02-10 18:50:26.611",
       "tier": 3,
-      "total_time_us": 7148.501542968749
+      "total_time_us": 6750.621
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:33:30.114",
+      "end_timestamp": "2026-02-10 18:51:05.731",
       "invocation_count": 1728,
       "name": "void at::native::vectorized_elementwise_kernel<4, at::native::BinaryFunctor<c10::Half, c10::Half, c10::Half, at::native::MulFunctor<float> >, at::detail::Array<char*, 3> >(int, at::native::BinaryFunctor<c10::Half, c10::Half, c10::Half, at::native::MulFunctor<float> >, at::detail::Array<char*, 3>)",
-      "single_time_us": 4.095590515136719,
-      "start_timestamp": "2026-02-06 18:33:29.704",
+      "single_time_us": 3.916915234375,
+      "start_timestamp": "2026-02-10 18:50:46.145",
       "tier": 3,
-      "total_time_us": 7077.18041015625
+      "total_time_us": 6768.4295250000005
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:33:30.513",
+      "end_timestamp": "2026-02-10 18:51:25.239",
       "invocation_count": 1152,
       "name": "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctorOnSelf_add<c10::Half>, at::detail::Array<char*, 2> >(int, at::native::CUDAFunctorOnSelf_add<c10::Half>, at::detail::Array<char*, 2>)",
-      "single_time_us": 3.992412109375,
-      "start_timestamp": "2026-02-06 18:33:30.114",
+      "single_time_us": 3.901476953125,
+      "start_timestamp": "2026-02-10 18:51:05.731",
       "tier": 3,
-      "total_time_us": 4599.25875
+      "total_time_us": 4494.50145
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:33:30.914",
+      "end_timestamp": "2026-02-10 18:51:44.769",
       "invocation_count": 576,
       "name": "void at::native::vectorized_elementwise_kernel<4, at::native::tanh_kernel_cuda(at::TensorIteratorBase&)::{lambda()#1}::operator()() const::{lambda()#10}::operator()() const::{lambda(c10::Half)#1}, at::detail::Array<char*, 2> >(int, at::native::tanh_kernel_cuda(at::TensorIteratorBase&)::{lambda()#1}::operator()() const::{lambda()#10}::operator()() const::{lambda(c10::Half)#1}, at::detail::Array<char*, 2>)",
-      "single_time_us": 4.008810424804688,
-      "start_timestamp": "2026-02-06 18:33:30.513",
+      "single_time_us": 3.905837109375,
+      "start_timestamp": "2026-02-10 18:51:25.239",
       "tier": 3,
-      "total_time_us": 2309.0748046875
+      "total_time_us": 2249.7621750000003
     },
     {
-      "benchmark_runs": 50000,
-      "end_timestamp": "2026-02-06 18:33:31.115",
+      "benchmark_runs": 100000,
+      "end_timestamp": "2026-02-10 18:51:45.198",
       "invocation_count": 24,
       "name": "void gemv2T_kernel_val<int, int, __half, __half, __half, float, 128, 16, 2, 4, false, false, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>, float, float)",
-      "single_time_us": 4.000636901855469,
-      "start_timestamp": "2026-02-06 18:33:30.914",
+      "single_time_us": 4.284190673828125,
+      "start_timestamp": "2026-02-10 18:51:44.769",
       "tier": 2,
-      "total_time_us": 96.01528564453125
+      "total_time_us": 102.82057617187499
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:33:32.420",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:51:47.203",
       "invocation_count": 1,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.175189208984375,
-      "start_timestamp": "2026-02-06 18:33:31.115",
+      "single_time_us": 2.005732421875,
+      "start_timestamp": "2026-02-10 18:51:45.198",
       "tier": 1,
-      "total_time_us": 2.175189208984375
+      "total_time_us": 2.005732421875
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:33:33.723",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:51:49.203",
       "invocation_count": 24,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.1714961751302084,
-      "start_timestamp": "2026-02-06 18:33:32.420",
+      "single_time_us": 1.9995821533203124,
+      "start_timestamp": "2026-02-10 18:51:47.203",
       "tier": 1,
-      "total_time_us": 52.115908203125
+      "total_time_us": 47.9899716796875
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:33:35.026",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:51:51.190",
       "invocation_count": 48,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.1718990071614583,
-      "start_timestamp": "2026-02-06 18:33:33.723",
+      "single_time_us": 1.9869249267578124,
+      "start_timestamp": "2026-02-10 18:51:49.203",
       "tier": 1,
-      "total_time_us": 104.25115234375
+      "total_time_us": 95.372396484375
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:33:36.332",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:51:53.197",
       "invocation_count": 1,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.176368611653646,
-      "start_timestamp": "2026-02-06 18:33:35.026",
+      "single_time_us": 2.0067493896484376,
+      "start_timestamp": "2026-02-10 18:51:51.190",
       "tier": 1,
-      "total_time_us": 2.176368611653646
+      "total_time_us": 2.0067493896484376
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:33:37.636",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:51:55.201",
       "invocation_count": 24,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.1726151529947915,
-      "start_timestamp": "2026-02-06 18:33:36.332",
+      "single_time_us": 2.00359326171875,
+      "start_timestamp": "2026-02-10 18:51:53.197",
       "tier": 1,
-      "total_time_us": 52.142763671874995
+      "total_time_us": 48.086238281250004
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:33:38.941",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:51:57.190",
       "invocation_count": 48,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.1742964680989583,
-      "start_timestamp": "2026-02-06 18:33:37.636",
+      "single_time_us": 1.9891812744140625,
+      "start_timestamp": "2026-02-10 18:51:55.201",
       "tier": 1,
-      "total_time_us": 104.36623046874999
+      "total_time_us": 95.480701171875
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:33:40.242",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:51:59.196",
       "invocation_count": 1,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.1691239420572916,
-      "start_timestamp": "2026-02-06 18:33:38.941",
+      "single_time_us": 2.0058992919921876,
+      "start_timestamp": "2026-02-10 18:51:57.190",
       "tier": 1,
-      "total_time_us": 2.1691239420572916
+      "total_time_us": 2.0058992919921876
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:33:41.545",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:52:01.183",
       "invocation_count": 24,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.1706632486979167,
-      "start_timestamp": "2026-02-06 18:33:40.242",
+      "single_time_us": 1.98653759765625,
+      "start_timestamp": "2026-02-10 18:51:59.196",
       "tier": 1,
-      "total_time_us": 52.09591796875
+      "total_time_us": 47.67690234375
     },
     {
-      "benchmark_runs": 50000,
-      "end_timestamp": "2026-02-06 18:33:41.745",
+      "benchmark_runs": 100000,
+      "end_timestamp": "2026-02-10 18:52:01.591",
       "invocation_count": 96,
       "name": "void gemv2N_kernel<int, int, __half, __half, __half, float, 128, 32, 4, 4, 1, false, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>)",
-      "single_time_us": 4.004654846191406,
-      "start_timestamp": "2026-02-06 18:33:41.545",
+      "single_time_us": 4.073807983398438,
+      "start_timestamp": "2026-02-10 18:52:01.183",
       "tier": 2,
-      "total_time_us": 384.44686523437497
+      "total_time_us": 391.08556640625
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:33:43.047",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:52:03.592",
       "invocation_count": 48,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.170384724934896,
-      "start_timestamp": "2026-02-06 18:33:41.745",
+      "single_time_us": 2.000919189453125,
+      "start_timestamp": "2026-02-10 18:52:01.591",
       "tier": 1,
-      "total_time_us": 104.178466796875
+      "total_time_us": 96.04412109375
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:33:43.792",
+      "end_timestamp": "2026-02-10 18:52:41.350",
       "invocation_count": 192,
       "name": "void (anonymous namespace)::softmax_warp_forward<float, float, float, 4, false, false>(float*, float const*, int, int, int, bool const*, int, bool)",
-      "single_time_us": 7.441131591796875,
-      "start_timestamp": "2026-02-06 18:33:43.047",
+      "single_time_us": 7.55126796875,
+      "start_timestamp": "2026-02-10 18:52:03.592",
       "tier": 3,
-      "total_time_us": 1428.697265625
+      "total_time_us": 1449.84345
     },
     {
-      "benchmark_runs": 50000,
-      "end_timestamp": "2026-02-06 18:33:43.992",
+      "benchmark_runs": 100000,
+      "end_timestamp": "2026-02-10 18:52:41.757",
       "invocation_count": 192,
       "name": "void gemv2N_kernel<int, int, __half, __half, __half, float, 128, 4, 4, 4, 1, false, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>)",
-      "single_time_us": 4.002754516601563,
-      "start_timestamp": "2026-02-06 18:33:43.792",
+      "single_time_us": 4.073931274414062,
+      "start_timestamp": "2026-02-10 18:52:41.350",
       "tier": 2,
-      "total_time_us": 768.5288671875
+      "total_time_us": 782.1948046875
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:33:45.290",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:52:43.756",
       "invocation_count": 1,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.162592366536458,
-      "start_timestamp": "2026-02-06 18:33:43.992",
+      "single_time_us": 1.9982283935546874,
+      "start_timestamp": "2026-02-10 18:52:41.757",
       "tier": 1,
-      "total_time_us": 2.162592366536458
+      "total_time_us": 1.9982283935546874
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:33:46.590",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:52:45.755",
       "invocation_count": 24,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.1674308268229168,
-      "start_timestamp": "2026-02-06 18:33:45.290",
+      "single_time_us": 1.999210205078125,
+      "start_timestamp": "2026-02-10 18:52:43.756",
       "tier": 1,
-      "total_time_us": 52.01833984375
+      "total_time_us": 47.981044921875004
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:33:47.893",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:52:47.756",
       "invocation_count": 48,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.1706803385416666,
-      "start_timestamp": "2026-02-06 18:33:46.590",
+      "single_time_us": 2.0004853515625,
+      "start_timestamp": "2026-02-10 18:52:45.755",
       "tier": 1,
-      "total_time_us": 104.19265625
+      "total_time_us": 96.023296875
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:33:49.185",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:52:49.751",
       "invocation_count": 1,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.153938191731771,
-      "start_timestamp": "2026-02-06 18:33:47.893",
+      "single_time_us": 1.9948251953125,
+      "start_timestamp": "2026-02-10 18:52:47.756",
       "tier": 1,
-      "total_time_us": 2.153938191731771
+      "total_time_us": 1.9948251953125
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:33:50.482",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:52:51.749",
       "invocation_count": 24,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.1615531412760416,
-      "start_timestamp": "2026-02-06 18:33:49.185",
+      "single_time_us": 1.9975989990234375,
+      "start_timestamp": "2026-02-10 18:52:49.751",
       "tier": 1,
-      "total_time_us": 51.877275390625
+      "total_time_us": 47.9423759765625
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:33:51.779",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:52:53.754",
       "invocation_count": 48,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.1606245930989583,
-      "start_timestamp": "2026-02-06 18:33:50.482",
+      "single_time_us": 2.0050863037109377,
+      "start_timestamp": "2026-02-10 18:52:51.749",
       "tier": 1,
-      "total_time_us": 103.70998046874999
+      "total_time_us": 96.24414257812501
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:33:53.076",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:52:55.741",
       "invocation_count": 1,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.1617783610026042,
-      "start_timestamp": "2026-02-06 18:33:51.779",
+      "single_time_us": 1.9872545166015625,
+      "start_timestamp": "2026-02-10 18:52:53.754",
       "tier": 1,
-      "total_time_us": 2.1617783610026042
+      "total_time_us": 1.9872545166015625
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:33:54.370",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:52:57.740",
       "invocation_count": 48,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.1562150065104166,
-      "start_timestamp": "2026-02-06 18:33:53.076",
+      "single_time_us": 1.998477294921875,
+      "start_timestamp": "2026-02-10 18:52:55.741",
       "tier": 1,
-      "total_time_us": 103.4983203125
+      "total_time_us": 95.92691015625
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:33:55.669",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:52:59.748",
       "invocation_count": 1,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.1648628743489584,
-      "start_timestamp": "2026-02-06 18:33:54.370",
+      "single_time_us": 2.007646240234375,
+      "start_timestamp": "2026-02-10 18:52:57.740",
       "tier": 1,
-      "total_time_us": 2.1648628743489584
+      "total_time_us": 2.007646240234375
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:33:56.966",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:53:01.729",
       "invocation_count": 24,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.1609232584635416,
-      "start_timestamp": "2026-02-06 18:33:55.669",
+      "single_time_us": 1.981181884765625,
+      "start_timestamp": "2026-02-10 18:52:59.748",
       "tier": 1,
-      "total_time_us": 51.862158203125
+      "total_time_us": 47.548365234375
     },
     {
-      "benchmark_runs": 50000,
-      "end_timestamp": "2026-02-06 18:33:57.166",
+      "benchmark_runs": 100000,
+      "end_timestamp": "2026-02-10 18:53:02.137",
       "invocation_count": 96,
       "name": "void gemv2N_kernel<int, int, __half, __half, __half, float, 128, 32, 4, 4, 1, false, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>)",
-      "single_time_us": 4.004495239257812,
-      "start_timestamp": "2026-02-06 18:33:56.966",
+      "single_time_us": 4.0730587768554685,
+      "start_timestamp": "2026-02-10 18:53:01.729",
       "tier": 2,
-      "total_time_us": 384.43154296874997
+      "total_time_us": 391.013642578125
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:33:58.470",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:53:04.136",
       "invocation_count": 48,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.1731563313802083,
-      "start_timestamp": "2026-02-06 18:33:57.166",
+      "single_time_us": 1.99913134765625,
+      "start_timestamp": "2026-02-10 18:53:02.137",
       "tier": 1,
-      "total_time_us": 104.31150390625
+      "total_time_us": 95.9583046875
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:33:59.776",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:53:06.146",
       "invocation_count": 1,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.1760274251302083,
-      "start_timestamp": "2026-02-06 18:33:58.470",
+      "single_time_us": 2.0094053955078124,
+      "start_timestamp": "2026-02-10 18:53:04.136",
       "tier": 1,
-      "total_time_us": 2.1760274251302083
+      "total_time_us": 2.0094053955078124
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:34:01.079",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:53:08.136",
       "invocation_count": 48,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.171494954427083,
-      "start_timestamp": "2026-02-06 18:33:59.776",
+      "single_time_us": 1.990581298828125,
+      "start_timestamp": "2026-02-10 18:53:06.146",
       "tier": 1,
-      "total_time_us": 104.23175781249999
+      "total_time_us": 95.54790234375
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:34:02.383",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:53:10.144",
       "invocation_count": 1,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.1734393310546873,
-      "start_timestamp": "2026-02-06 18:34:01.079",
+      "single_time_us": 2.00707470703125,
+      "start_timestamp": "2026-02-10 18:53:08.136",
       "tier": 1,
-      "total_time_us": 2.1734393310546873
+      "total_time_us": 2.00707470703125
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:34:03.684",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:53:12.143",
       "invocation_count": 24,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.16787109375,
-      "start_timestamp": "2026-02-06 18:34:02.383",
+      "single_time_us": 1.9994888916015625,
+      "start_timestamp": "2026-02-10 18:53:10.144",
       "tier": 1,
-      "total_time_us": 52.028906250000006
+      "total_time_us": 47.9877333984375
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:34:04.989",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:53:14.133",
       "invocation_count": 24,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.174610799153646,
-      "start_timestamp": "2026-02-06 18:34:03.684",
+      "single_time_us": 1.9900927734375,
+      "start_timestamp": "2026-02-10 18:53:12.143",
       "tier": 1,
-      "total_time_us": 52.1906591796875
+      "total_time_us": 47.762226562500004
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:34:06.293",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:53:16.131",
       "invocation_count": 1,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.174078369140625,
-      "start_timestamp": "2026-02-06 18:34:04.989",
+      "single_time_us": 1.9975338134765626,
+      "start_timestamp": "2026-02-10 18:53:14.133",
       "tier": 1,
-      "total_time_us": 2.174078369140625
+      "total_time_us": 1.9975338134765626
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:34:07.592",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:53:18.135",
       "invocation_count": 24,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.1646164957682292,
-      "start_timestamp": "2026-02-06 18:34:06.293",
+      "single_time_us": 2.003990478515625,
+      "start_timestamp": "2026-02-10 18:53:16.131",
       "tier": 1,
-      "total_time_us": 51.950795898437505
+      "total_time_us": 48.09577148437499
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:34:08.894",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:53:20.121",
       "invocation_count": 1,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.1701253255208335,
-      "start_timestamp": "2026-02-06 18:34:07.592",
+      "single_time_us": 1.98563330078125,
+      "start_timestamp": "2026-02-10 18:53:18.135",
       "tier": 1,
-      "total_time_us": 2.1701253255208335
+      "total_time_us": 1.98563330078125
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:34:10.194",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:53:22.119",
       "invocation_count": 24,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.1660689290364585,
-      "start_timestamp": "2026-02-06 18:34:08.894",
+      "single_time_us": 1.9976365966796874,
+      "start_timestamp": "2026-02-10 18:53:20.121",
       "tier": 1,
-      "total_time_us": 51.985654296875005
+      "total_time_us": 47.9432783203125
     },
     {
-      "benchmark_runs": 50000,
-      "end_timestamp": "2026-02-06 18:34:10.394",
+      "benchmark_runs": 100000,
+      "end_timestamp": "2026-02-10 18:53:22.527",
       "invocation_count": 96,
       "name": "void gemv2N_kernel<int, int, __half, __half, __half, float, 128, 32, 4, 4, 1, false, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>)",
-      "single_time_us": 4.0009286499023435,
-      "start_timestamp": "2026-02-06 18:34:10.194",
+      "single_time_us": 4.075038452148437,
+      "start_timestamp": "2026-02-10 18:53:22.119",
       "tier": 2,
-      "total_time_us": 384.089150390625
+      "total_time_us": 391.20369140624996
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:34:11.699",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:53:24.535",
       "invocation_count": 24,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.1749674479166665,
-      "start_timestamp": "2026-02-06 18:34:10.394",
+      "single_time_us": 2.0082694091796873,
+      "start_timestamp": "2026-02-10 18:53:22.527",
       "tier": 1,
-      "total_time_us": 52.19921875
+      "total_time_us": 48.19846582031249
     },
     {
       "benchmark_runs": 5000000,
-      "end_timestamp": "2026-02-06 18:34:12.444",
+      "end_timestamp": "2026-02-10 18:54:02.297",
       "invocation_count": 312,
       "name": "void (anonymous namespace)::softmax_warp_forward<float, float, float, 5, false, false>(float*, float const*, int, int, int, bool const*, int, bool)",
-      "single_time_us": 7.440926513671875,
-      "start_timestamp": "2026-02-06 18:34:11.699",
+      "single_time_us": 7.551990625,
+      "start_timestamp": "2026-02-10 18:53:24.535",
       "tier": 3,
-      "total_time_us": 2321.569072265625
+      "total_time_us": 2356.221075
     },
     {
-      "benchmark_runs": 50000,
-      "end_timestamp": "2026-02-06 18:34:12.644",
+      "benchmark_runs": 100000,
+      "end_timestamp": "2026-02-10 18:54:02.704",
       "invocation_count": 312,
       "name": "void gemv2N_kernel<int, int, __half, __half, __half, float, 128, 32, 4, 4, 1, false, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>)",
-      "single_time_us": 4.0047781372070315,
-      "start_timestamp": "2026-02-06 18:34:12.444",
+      "single_time_us": 4.073724670410156,
+      "start_timestamp": "2026-02-10 18:54:02.297",
       "tier": 2,
-      "total_time_us": 1249.4907788085939
+      "total_time_us": 1271.0020971679687
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:34:13.953",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:54:04.708",
       "invocation_count": 1,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.181199747721354,
-      "start_timestamp": "2026-02-06 18:34:12.644",
+      "single_time_us": 2.0036239013671877,
+      "start_timestamp": "2026-02-10 18:54:02.704",
       "tier": 1,
-      "total_time_us": 2.181199747721354
+      "total_time_us": 2.0036239013671877
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:34:15.253",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:54:06.701",
       "invocation_count": 24,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.1668965657552084,
-      "start_timestamp": "2026-02-06 18:34:13.953",
+      "single_time_us": 1.9925361328125,
+      "start_timestamp": "2026-02-10 18:54:04.708",
       "tier": 1,
-      "total_time_us": 52.005517578125
+      "total_time_us": 47.8208671875
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:34:16.558",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:54:08.708",
       "invocation_count": 1,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.1741233317057294,
-      "start_timestamp": "2026-02-06 18:34:15.253",
+      "single_time_us": 2.00715576171875,
+      "start_timestamp": "2026-02-10 18:54:06.701",
       "tier": 1,
-      "total_time_us": 2.1741233317057294
+      "total_time_us": 2.00715576171875
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:34:17.858",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:54:10.710",
       "invocation_count": 24,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.1660776774088544,
-      "start_timestamp": "2026-02-06 18:34:16.558",
+      "single_time_us": 2.001429443359375,
+      "start_timestamp": "2026-02-10 18:54:08.708",
       "tier": 1,
-      "total_time_us": 51.98586425781251
+      "total_time_us": 48.034306640625
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:34:19.161",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:54:12.699",
       "invocation_count": 24,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.1718072509765625,
-      "start_timestamp": "2026-02-06 18:34:17.858",
+      "single_time_us": 1.989003662109375,
+      "start_timestamp": "2026-02-10 18:54:10.710",
       "tier": 1,
-      "total_time_us": 52.1233740234375
+      "total_time_us": 47.736087890625
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:34:20.465",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:54:14.705",
       "invocation_count": 1,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.1738427734375,
-      "start_timestamp": "2026-02-06 18:34:19.161",
+      "single_time_us": 2.0055859375,
+      "start_timestamp": "2026-02-10 18:54:12.699",
       "tier": 1,
-      "total_time_us": 2.1738427734375
+      "total_time_us": 2.0055859375
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:34:21.764",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:54:16.694",
       "invocation_count": 24,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.165116170247396,
-      "start_timestamp": "2026-02-06 18:34:20.465",
+      "single_time_us": 1.98931591796875,
+      "start_timestamp": "2026-02-10 18:54:14.705",
       "tier": 1,
-      "total_time_us": 51.962788085937504
+      "total_time_us": 47.74358203125
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:34:23.067",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:54:18.692",
       "invocation_count": 1,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.1706219482421876,
-      "start_timestamp": "2026-02-06 18:34:21.764",
+      "single_time_us": 1.997939697265625,
+      "start_timestamp": "2026-02-10 18:54:16.694",
       "tier": 1,
-      "total_time_us": 2.1706219482421876
+      "total_time_us": 1.997939697265625
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:34:24.369",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:54:20.685",
       "invocation_count": 24,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.169800008138021,
-      "start_timestamp": "2026-02-06 18:34:23.067",
+      "single_time_us": 1.99243994140625,
+      "start_timestamp": "2026-02-10 18:54:18.692",
       "tier": 1,
-      "total_time_us": 52.075200195312505
+      "total_time_us": 47.81855859375
     },
     {
-      "benchmark_runs": 50000,
-      "end_timestamp": "2026-02-06 18:34:24.569",
+      "benchmark_runs": 100000,
+      "end_timestamp": "2026-02-10 18:54:21.093",
       "invocation_count": 96,
       "name": "void gemv2N_kernel<int, int, __half, __half, __half, float, 128, 32, 4, 4, 1, false, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>)",
-      "single_time_us": 4.003401489257812,
-      "start_timestamp": "2026-02-06 18:34:24.369",
+      "single_time_us": 4.076502990722656,
+      "start_timestamp": "2026-02-10 18:54:20.685",
       "tier": 2,
-      "total_time_us": 384.32654296875
+      "total_time_us": 391.34428710937505
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:34:25.872",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:54:23.092",
       "invocation_count": 24,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.1712137858072915,
-      "start_timestamp": "2026-02-06 18:34:24.569",
+      "single_time_us": 1.999120361328125,
+      "start_timestamp": "2026-02-10 18:54:21.093",
       "tier": 1,
-      "total_time_us": 52.109130859375
+      "total_time_us": 47.978888671875
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:34:27.177",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:54:25.096",
       "invocation_count": 1,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.1745013427734374,
-      "start_timestamp": "2026-02-06 18:34:25.872",
+      "single_time_us": 2.0041904296875,
+      "start_timestamp": "2026-02-10 18:54:23.092",
       "tier": 1,
-      "total_time_us": 2.1745013427734374
+      "total_time_us": 2.0041904296875
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:34:28.482",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:54:27.074",
       "invocation_count": 24,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.175326944986979,
-      "start_timestamp": "2026-02-06 18:34:27.177",
+      "single_time_us": 1.9771832275390624,
+      "start_timestamp": "2026-02-10 18:54:25.096",
       "tier": 1,
-      "total_time_us": 52.20784667968749
+      "total_time_us": 47.4523974609375
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:34:29.784",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:54:29.075",
       "invocation_count": 1,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.169039103190104,
-      "start_timestamp": "2026-02-06 18:34:28.482",
+      "single_time_us": 2.001480712890625,
+      "start_timestamp": "2026-02-10 18:54:27.074",
       "tier": 1,
-      "total_time_us": 2.169039103190104
+      "total_time_us": 2.001480712890625
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:34:31.087",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:54:31.065",
       "invocation_count": 24,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.172501424153646,
-      "start_timestamp": "2026-02-06 18:34:29.784",
+      "single_time_us": 1.989396484375,
+      "start_timestamp": "2026-02-10 18:54:29.075",
       "tier": 1,
-      "total_time_us": 52.140034179687504
+      "total_time_us": 47.745515625
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:34:32.390",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:54:33.049",
       "invocation_count": 24,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.1702530924479166,
-      "start_timestamp": "2026-02-06 18:34:31.087",
+      "single_time_us": 1.9844228515625,
+      "start_timestamp": "2026-02-10 18:54:31.065",
       "tier": 1,
-      "total_time_us": 52.08607421875
+      "total_time_us": 47.6261484375
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:34:33.694",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:54:35.059",
       "invocation_count": 1,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.1731656901041667,
-      "start_timestamp": "2026-02-06 18:34:32.390",
+      "single_time_us": 2.0095743408203126,
+      "start_timestamp": "2026-02-10 18:54:33.049",
       "tier": 1,
-      "total_time_us": 2.1731656901041667
+      "total_time_us": 2.0095743408203126
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:34:35.000",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:54:37.037",
       "invocation_count": 24,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.177373250325521,
-      "start_timestamp": "2026-02-06 18:34:33.694",
+      "single_time_us": 1.9775467529296875,
+      "start_timestamp": "2026-02-10 18:54:35.059",
       "tier": 1,
-      "total_time_us": 52.2569580078125
+      "total_time_us": 47.4611220703125
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:34:36.302",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:54:39.048",
       "invocation_count": 24,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.1690030924479164,
-      "start_timestamp": "2026-02-06 18:34:35.000",
+      "single_time_us": 2.0110509033203123,
+      "start_timestamp": "2026-02-10 18:54:37.037",
       "tier": 1,
-      "total_time_us": 52.05607421875
+      "total_time_us": 48.2652216796875
     },
     {
-      "benchmark_runs": 50000,
-      "end_timestamp": "2026-02-06 18:34:36.502",
+      "benchmark_runs": 100000,
+      "end_timestamp": "2026-02-10 18:54:39.456",
       "invocation_count": 96,
       "name": "void gemv2N_kernel<int, int, __half, __half, __half, float, 128, 32, 4, 4, 1, false, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>)",
-      "single_time_us": 4.000993347167968,
-      "start_timestamp": "2026-02-06 18:34:36.302",
+      "single_time_us": 4.072550354003906,
+      "start_timestamp": "2026-02-10 18:54:39.048",
       "tier": 2,
-      "total_time_us": 384.09536132812497
+      "total_time_us": 390.964833984375
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:34:37.809",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:54:41.477",
       "invocation_count": 1,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.178527628580729,
-      "start_timestamp": "2026-02-06 18:34:36.502",
+      "single_time_us": 2.0208695068359375,
+      "start_timestamp": "2026-02-10 18:54:39.456",
       "tier": 1,
-      "total_time_us": 2.178527628580729
+      "total_time_us": 2.0208695068359375
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:34:39.110",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:54:43.469",
       "invocation_count": 24,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.168346150716146,
-      "start_timestamp": "2026-02-06 18:34:37.809",
+      "single_time_us": 1.9923275146484376,
+      "start_timestamp": "2026-02-10 18:54:41.477",
       "tier": 1,
-      "total_time_us": 52.0403076171875
+      "total_time_us": 47.815860351562506
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:34:40.413",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:54:45.470",
       "invocation_count": 1,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.171011962890625,
-      "start_timestamp": "2026-02-06 18:34:39.110",
+      "single_time_us": 2.0005731201171875,
+      "start_timestamp": "2026-02-10 18:54:43.469",
       "tier": 1,
-      "total_time_us": 2.171011962890625
+      "total_time_us": 2.0005731201171875
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:34:41.714",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:54:47.465",
       "invocation_count": 24,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.168206787109375,
-      "start_timestamp": "2026-02-06 18:34:40.413",
+      "single_time_us": 1.9948800048828126,
+      "start_timestamp": "2026-02-10 18:54:45.470",
       "tier": 1,
-      "total_time_us": 52.036962890625006
+      "total_time_us": 47.8771201171875
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:34:43.017",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:54:49.468",
       "invocation_count": 24,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.170834554036458,
-      "start_timestamp": "2026-02-06 18:34:41.714",
+      "single_time_us": 2.0024901123046877,
+      "start_timestamp": "2026-02-10 18:54:47.465",
       "tier": 1,
-      "total_time_us": 52.10002929687499
+      "total_time_us": 48.0597626953125
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:34:44.329",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:54:51.453",
       "invocation_count": 1,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.1864447021484374,
-      "start_timestamp": "2026-02-06 18:34:43.017",
+      "single_time_us": 1.9850322265625,
+      "start_timestamp": "2026-02-10 18:54:49.468",
       "tier": 1,
-      "total_time_us": 2.1864447021484374
+      "total_time_us": 1.9850322265625
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:34:45.633",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:54:53.443",
       "invocation_count": 24,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.172896525065104,
-      "start_timestamp": "2026-02-06 18:34:44.329",
+      "single_time_us": 1.9902279052734375,
+      "start_timestamp": "2026-02-10 18:54:51.453",
       "tier": 1,
-      "total_time_us": 52.149516601562496
+      "total_time_us": 47.7654697265625
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:34:46.936",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:54:55.440",
       "invocation_count": 1,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.1728717041015626,
-      "start_timestamp": "2026-02-06 18:34:45.633",
+      "single_time_us": 1.9968717041015625,
+      "start_timestamp": "2026-02-10 18:54:53.443",
       "tier": 1,
-      "total_time_us": 2.1728717041015626
+      "total_time_us": 1.9968717041015625
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:34:48.238",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:54:57.431",
       "invocation_count": 24,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.1688743082682294,
-      "start_timestamp": "2026-02-06 18:34:46.936",
+      "single_time_us": 1.9906016845703125,
+      "start_timestamp": "2026-02-10 18:54:55.440",
       "tier": 1,
-      "total_time_us": 52.052983398437505
+      "total_time_us": 47.7744404296875
     },
     {
-      "benchmark_runs": 50000,
-      "end_timestamp": "2026-02-06 18:34:48.438",
+      "benchmark_runs": 100000,
+      "end_timestamp": "2026-02-10 18:54:57.839",
       "invocation_count": 24,
       "name": "void gemv2N_kernel<int, int, __half, __half, __half, float, 128, 32, 4, 4, 1, false, cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float> >(cublasGemvParams<cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half const>, cublasGemvTensorStridedBatched<__half>, float>)",
-      "single_time_us": 4.0038604736328125,
-      "start_timestamp": "2026-02-06 18:34:48.238",
+      "single_time_us": 4.073482360839844,
+      "start_timestamp": "2026-02-10 18:54:57.431",
       "tier": 2,
-      "total_time_us": 96.0926513671875
+      "total_time_us": 97.76357666015625
     },
     {
-      "benchmark_runs": 600000,
-      "end_timestamp": "2026-02-06 18:34:49.739",
+      "benchmark_runs": 1000000,
+      "end_timestamp": "2026-02-10 18:54:59.846",
       "invocation_count": 24,
       "name": "Memcpy DtoD (Device -> Device)",
-      "single_time_us": 2.168504231770833,
-      "start_timestamp": "2026-02-06 18:34:48.438",
+      "single_time_us": 2.00701953125,
+      "start_timestamp": "2026-02-10 18:54:57.839",
       "tier": 1,
-      "total_time_us": 52.044101562499996
+      "total_time_us": 48.16846875
     }
   ],
-  "num_runs": 1000,
-  "predicted_total_ms": 81.11313954905188,
-  "predicted_total_us": 81113.13954905188,
-  "start_timestamp": "2026-02-06 18:32:35.270",
+  "num_runs": 10000,
+  "predicted_total_ms": 79.09311807060546,
+  "predicted_total_us": 79093.11807060546,
+  "start_timestamp": "2026-02-10 18:32:28.039",
   "tier1_count": 68,
-  "tier1_total_us": 2914.651868998211,
+  "tier1_total_us": 2694.3520229492187,
   "tier2_count": 23,
-  "tier2_total_us": 22705.544265136712,
+  "tier2_total_us": 23279.312202148434,
   "tier3_count": 53,
-  "tier3_total_us": 55492.94341491699
+  "tier3_total_us": 53119.453845507815
 }

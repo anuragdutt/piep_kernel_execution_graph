@@ -3,6 +3,7 @@
 #include <cuda_fp16.h>
 #include <iostream>
 #include <stdexcept>
+#include <algorithm>
 
 namespace tier2 {
 
@@ -41,6 +42,7 @@ double benchmark_gemm_fp16(int M, int N, int K, bool transpose_a, bool transpose
     cublasHandle_t handle = get_cublas_handle();
     
     // Allocate device memory
+    // A is M×K (or K×M if transposed), B is K×N (or N×K if transposed), C is M×N
     __half *A_d, *B_d, *C_d;
     size_t size_A = M * K * sizeof(__half);
     size_t size_B = K * N * sizeof(__half);
@@ -53,6 +55,15 @@ double benchmark_gemm_fp16(int M, int N, int K, bool transpose_a, bool transpose
     cublasOperation_t op_a = transpose_a ? CUBLAS_OP_T : CUBLAS_OP_N;
     cublasOperation_t op_b = transpose_b ? CUBLAS_OP_T : CUBLAS_OP_N;
     
+    // Leading dimensions:
+    // - For column-major (cuBLAS default): lda is the number of rows in the stored matrix
+    // - If op_a = N (not transposed): A is M×K, lda = M
+    // - If op_a = T (transposed): A is stored as K×M, lda = K
+    // Same logic for B
+    int lda = transpose_a ? K : M;
+    int ldb = transpose_b ? N : K;
+    int ldc = M;  // C is always M×N, ldc = M
+    
     auto bench_func = [&]() {
         // Use FP32 compute for Pascal GPUs (which have poor native FP16)
         float alpha_f = 1.0f;
@@ -63,10 +74,10 @@ double benchmark_gemm_fp16(int M, int N, int K, bool transpose_a, bool transpose
             op_a, op_b,
             M, N, K,
             &alpha_f,
-            A_d, CUDA_R_16F, M,
-            B_d, CUDA_R_16F, K,
+            A_d, CUDA_R_16F, lda,
+            B_d, CUDA_R_16F, ldb,
             &beta_f,
-            C_d, CUDA_R_16F, M,
+            C_d, CUDA_R_16F, ldc,
             CUBLAS_COMPUTE_32F,  // Use FP32 compute (faster on Pascal)
             CUBLAS_GEMM_DEFAULT
         );
@@ -114,11 +125,43 @@ double run_tier2_kernel(const kernel::KernelSignature& sig, int num_runs) {
         }
     }
     
+    // Parse transpose information from kernel name
+    // Common patterns:
+    //   _tn or _TN: first matrix Transposed, second Normal
+    //   _nt or _NT: first matrix Normal, second Transposed
+    //   _nn or _NN: both Normal (not transposed)
+    //   _tt or _TT: both Transposed
+    //   gemv2T: Transposed GEMV (matrix^T × vector)
+    //   gemv2N: Normal GEMV (matrix × vector)
+    bool transpose_a = false;
+    bool transpose_b = false;
+    
+    std::string name_lower = name;
+    std::transform(name_lower.begin(), name_lower.end(), name_lower.begin(), ::tolower);
+    
+    if (name_lower.find("gemv2t") != std::string::npos) {
+        // GEMV with transposed matrix
+        transpose_a = true;
+    } else if (name_lower.find("_tn") != std::string::npos) {
+        // GEMM with first matrix transposed, second normal
+        transpose_a = true;
+        transpose_b = false;
+    } else if (name_lower.find("_nt") != std::string::npos) {
+        // GEMM with first matrix normal, second transposed
+        transpose_a = false;
+        transpose_b = true;
+    } else if (name_lower.find("_tt") != std::string::npos) {
+        // GEMM with both matrices transposed
+        transpose_a = true;
+        transpose_b = true;
+    }
+    // _nn or gemv2n cases: default transpose_a=false, transpose_b=false (already set)
+    
     // Warmup once (10 iters), then time num_runs iterations
     if (name.find("gemv") != std::string::npos) {
-        return benchmark_gemv_fp16(M, K, false, 10, num_runs);
+        return benchmark_gemv_fp16(M, K, transpose_a, 10, num_runs);
     } else {
-        return benchmark_gemm_fp16(M, N, K, false, false, 10, num_runs);
+        return benchmark_gemm_fp16(M, N, K, transpose_a, transpose_b, 10, num_runs);
     }
 }
 

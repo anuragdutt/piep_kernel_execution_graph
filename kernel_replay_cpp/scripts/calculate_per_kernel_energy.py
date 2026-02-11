@@ -69,11 +69,15 @@ def main():
     parser.add_argument("--isolated-result", required=True, help="Isolated kernels JSON")
     parser.add_argument("--output", required=True, help="Output JSON file")
     parser.add_argument("--gpu", type=int, default=None, help="Use only this GPU index from log (default: use all / as logged)")
+    parser.add_argument("--idle-power", type=float, default=None, help="Idle/baseline power to subtract from system power measurements (W)")
     args = parser.parse_args()
     
     print("\n" + "="*70)
     print("PER-KERNEL ENERGY CALCULATION")
     print("="*70)
+    
+    if args.idle_power is not None:
+        print(f"Idle power baseline: {args.idle_power}W (will be subtracted)")
     
     # Load power log
     print(f"\n1. Loading power log: {args.power_log}")
@@ -106,6 +110,14 @@ def main():
         print("   Format: System power (WattsUp meter)")
     else:
         print("   Format: Dual power meter")
+    
+    # Subtract idle power if provided (for system power measurements)
+    if args.idle_power is not None:
+        print(f"   Subtracting idle power baseline: {args.idle_power}W")
+        power_df['sum'] = power_df['sum'] - args.idle_power
+        # Ensure we don't have negative power values
+        power_df.loc[power_df['sum'] < 0, 'sum'] = 0.0
+        print(f"   Adjusted power range: {power_df['sum'].min():.2f}W to {power_df['sum'].max():.2f}W")
     
     print(f"   Power samples: {len(power_df)}")
     print(f"   Time range: {power_df['time'].min()} to {power_df['time'].max()}")

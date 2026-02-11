@@ -1,10 +1,10 @@
 {
-  "end_timestamp": "2026-02-06 18:32:35.231",
-  "energy_joules": 2415.652014609575,
-  "full_model_inference_ms": 11.684551396369933,
-  "full_model_inference_us": 11684.551396369934,
-  "max_time_us": 12451.8404006958,
-  "min_time_us": 11600.671768188477,
-  "num_runs": 1000,
-  "start_timestamp": "2026-02-06 18:32:23.532"
+  "end_timestamp": "2026-02-10 18:32:28.003",
+  "energy_joules": 0.0,
+  "full_model_inference_ms": 11.684782305335998,
+  "full_model_inference_us": 11684.782305335999,
+  "max_time_us": 15077.44026184082,
+  "min_time_us": 11550.72021484375,
+  "num_runs": 10000,
+  "start_timestamp": "2026-02-10 18:30:31.030"
 }
