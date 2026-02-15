@@ -161,9 +161,9 @@ def main() -> int:
     shape_logging_enabled[0] = True
     with torch.profiler.profile(
         activities=[torch.profiler.ProfilerActivity.CPU, torch.profiler.ProfilerActivity.CUDA],
-        record_shapes=args.record_shapes,
+        record_shapes=True,  # Always record shapes for kernel analysis
         profile_memory=False,
-        with_stack=False,
+        with_stack=True,  # Enable stack traces to capture module hierarchy
     ) as prof:
         with torch.no_grad():
             _ = model.generate(**inputs, max_new_tokens=args.max_new_tokens)

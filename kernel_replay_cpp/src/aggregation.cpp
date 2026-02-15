@@ -10,6 +10,10 @@
 #include <iomanip>
 #include <sstream>
 #include <nlohmann/json.hpp>
+#include <cstdlib>
+#include <signal.h>
+#include <unistd.h>
+#include <sys/wait.h>
 
 using json = nlohmann::json;
 
@@ -28,6 +32,95 @@ std::string get_iso_timestamp() {
     return ss.str();
 }
 
+// Helper to start metrics collection subprocess
+// Returns PID of the metrics collector process, or -1 on failure
+pid_t start_metrics_collector(const std::string& output_file, double sample_interval = 0.1) {
+    pid_t pid = fork();
+    
+    if (pid < 0) {
+        std::cerr << "Failed to fork metrics collector process" << std::endl;
+        return -1;
+    }
+    
+    if (pid == 0) {
+        // Child process: exec the metrics collector
+        std::string interval_str = std::to_string(sample_interval);
+        
+        // Use absolute path to script
+        const char* python_path = "/home/pace/piep_kernel_execution_graph/kernel_replay_cpp/scripts/collect_system_metrics.py";
+        
+        // Keep stderr for debugging, only redirect stdout
+        freopen("/dev/null", "w", stdout);
+        // DO NOT redirect stderr - we want to see errors!
+        
+        execl("/usr/bin/python3", "python3", python_path, 
+              "--output", output_file.c_str(),
+              "--interval", interval_str.c_str(),
+              nullptr);
+        
+        // If execl returns, there was an error
+        std::cerr << "Failed to exec metrics collector: " << python_path << std::endl;
+        exit(1);
+    }
+    
+    // Parent process: return child PID
+    // Give the metrics collector a moment to start up
+    usleep(200000);  // 200ms
+    return pid;
+}
+
+// Helper to stop metrics collection subprocess
+bool stop_metrics_collector(pid_t pid, int timeout_ms = 5000) {
+    if (pid <= 0) {
+        return false;
+    }
+    
+    // Send SIGINT to trigger graceful shutdown
+    if (kill(pid, SIGINT) != 0) {
+        std::cerr << "Failed to send SIGINT to metrics collector (PID " << pid << ")" << std::endl;
+        return false;
+    }
+    
+    // Wait for process to exit
+    int status;
+    int wait_iterations = timeout_ms / 100;
+    for (int i = 0; i < wait_iterations; i++) {
+        pid_t result = waitpid(pid, &status, WNOHANG);
+        if (result == pid) {
+            // Process exited
+            return WIFEXITED(status) && WEXITSTATUS(status) == 0;
+        } else if (result < 0) {
+            std::cerr << "waitpid failed for metrics collector" << std::endl;
+            return false;
+        }
+        usleep(100000);  // 100ms
+    }
+    
+    // Timeout: forcefully kill
+    std::cerr << "Metrics collector didn't exit gracefully, sending SIGKILL" << std::endl;
+    kill(pid, SIGKILL);
+    waitpid(pid, &status, 0);
+    return false;
+}
+
+// Helper to load metrics from JSON file
+json load_metrics_file(const std::string& filepath) {
+    std::ifstream file(filepath);
+    if (!file.is_open()) {
+        std::cerr << "Warning: Could not open metrics file: " << filepath << std::endl;
+        return json::object();
+    }
+    
+    try {
+        json metrics;
+        file >> metrics;
+        return metrics;
+    } catch (const std::exception& e) {
+        std::cerr << "Warning: Failed to parse metrics file " << filepath << ": " << e.what() << std::endl;
+        return json::object();
+    }
+}
+
 struct KernelTiming {
     std::string name;
     kernel::Tier tier;
@@ -37,6 +130,11 @@ struct KernelTiming {
     std::string start_timestamp;  // For per-kernel energy calculation
     std::string end_timestamp;
     int benchmark_runs;  // Number of runs used for this kernel
+    
+    // System metrics collected during benchmarking
+    std::string metrics_file;  // Path to metrics JSON file
+    bool has_metrics;
+    json system_metrics;  // Loaded metrics data
 };
 
 struct AggregatedResults {
@@ -86,6 +184,8 @@ AggregatedResults run_isolated_kernels(const kernel::KernelRegistry& registry, i
     for (const auto& sig : kernels) {
         double avg_single_time_us = -1.0;
         std::string kernel_start_ts, kernel_end_ts;
+        std::string metrics_file;
+        pid_t metrics_pid = -1;
         int actual_runs = 0;
         
         try {
@@ -99,6 +199,17 @@ AggregatedResults run_isolated_kernels(const kernel::KernelRegistry& registry, i
                 adaptive_runs = 1000000; 
             } else {
                 adaptive_runs = 5000000; 
+            }
+            
+            // Create metrics file path for this kernel (absolute path)
+            std::stringstream metrics_path;
+            metrics_path << "/home/pace/piep_kernel_execution_graph/kernel_replay_cpp/results/metrics/kernel_" << completed << ".json";
+            metrics_file = metrics_path.str();
+            
+            // Start metrics collector subprocess
+            metrics_pid = start_metrics_collector(metrics_file, 0.1);
+            if (metrics_pid < 0) {
+                std::cerr << "Warning: Failed to start metrics collector for kernel " << sig.name << std::endl;
             }
             
             // Record start timestamp for THIS kernel
@@ -125,12 +236,26 @@ AggregatedResults run_isolated_kernels(const kernel::KernelRegistry& registry, i
             // Record end timestamp for THIS kernel
             kernel_end_ts = get_iso_timestamp();
             
+            // Stop metrics collector
+            if (metrics_pid > 0) {
+                bool stopped = stop_metrics_collector(metrics_pid, 5000);
+                if (!stopped) {
+                    std::cerr << "Warning: Metrics collector may not have exited cleanly" << std::endl;
+                }
+            }
+            
         } catch (const std::exception& e) {
             std::cerr << "Error benchmarking kernel '" << sig.name << "': " 
                       << e.what() << std::endl;
             avg_single_time_us = 0.0;  // Skip this kernel
             kernel_start_ts = "";
             kernel_end_ts = "";
+            
+            // Clean up metrics collector if it's still running
+            if (metrics_pid > 0) {
+                kill(metrics_pid, SIGKILL);
+                waitpid(metrics_pid, nullptr, 0);
+            }
         }
         
         if (avg_single_time_us >= 0) {
@@ -145,6 +270,19 @@ AggregatedResults run_isolated_kernels(const kernel::KernelRegistry& registry, i
             timing.start_timestamp = kernel_start_ts;
             timing.end_timestamp = kernel_end_ts;
             timing.benchmark_runs = actual_runs;  // Save actual adaptive run count
+            
+            // Load system metrics if available
+            timing.metrics_file = metrics_file;
+            timing.has_metrics = false;
+            if (!metrics_file.empty()) {
+                timing.system_metrics = load_metrics_file(metrics_file);
+                timing.has_metrics = !timing.system_metrics.empty();
+                
+                // Delete temporary metrics file after loading
+                if (timing.has_metrics) {
+                    std::remove(metrics_file.c_str());
+                }
+            }
             
             results.kernel_timings.push_back(timing);
             results.predicted_total_us += total_time_us;
@@ -212,6 +350,13 @@ bool save_isolated_results(const AggregatedResults& results, const std::string& 
         kernel_obj["start_timestamp"] = kt.start_timestamp;
         kernel_obj["end_timestamp"] = kt.end_timestamp;
         kernel_obj["benchmark_runs"] = kt.benchmark_runs;  // How many times we ran it for measurement
+        
+        // Add system metrics if available
+        kernel_obj["has_metrics"] = kt.has_metrics;
+        if (kt.has_metrics) {
+            kernel_obj["system_metrics"] = kt.system_metrics;
+        }
+        
         kernels_array.push_back(kernel_obj);
     }
     j["kernels"] = kernels_array;
