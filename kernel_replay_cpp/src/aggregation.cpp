@@ -2,6 +2,7 @@
 #include "cuda_kernels.hpp"
 #include "cublas_kernels.hpp"
 #include "libtorch_kernels.hpp"
+#include "nccl_allreduce.hpp"
 #include <iostream>
 #include <fstream>
 #include <map>
@@ -47,7 +48,7 @@ pid_t start_metrics_collector(const std::string& output_file, double sample_inte
         std::string interval_str = std::to_string(sample_interval);
         
         // Use absolute path to script
-        const char* python_path = "/home/pace/piep_kernel_execution_graph/kernel_replay_cpp/scripts/collect_system_metrics.py";
+        const char* python_path = "/home/adutt/wasiq/piep_kernel_execution_graph/kernel_replay_cpp/scripts/collect_system_metrics.py";
         
         // Keep stderr for debugging, only redirect stdout
         freopen("/dev/null", "w", stdout);
@@ -143,9 +144,11 @@ struct AggregatedResults {
     double tier1_total_us;
     double tier2_total_us;
     double tier3_total_us;
+    double tier4_total_us;
     int tier1_count;
     int tier2_count;
     int tier3_count;
+    int tier4_count;
     int num_runs;
     std::string start_timestamp;
     std::string end_timestamp;
@@ -167,43 +170,47 @@ AggregatedResults run_isolated_kernels(const kernel::KernelRegistry& registry, i
     results.tier1_total_us = 0.0;
     results.tier2_total_us = 0.0;
     results.tier3_total_us = 0.0;
+    results.tier4_total_us = 0.0;
     results.tier1_count = 0;
     results.tier2_count = 0;
     results.tier3_count = 0;
+    results.tier4_count = 0;
     results.num_runs = num_runs;  // Record user's requested runs (for reference only)
     
     const auto& kernels = registry.get_all_kernels();
     int total = kernels.size();
     int completed = 0;
+
+    // One run per unique signature; aggregate as (single_time × invocation_count) per kernel.
+    // No cache/reuse: each signature is run once; predicted total = sum over signatures.
+    // Tier 4 (AllReduce) is no different: each Tier 4 entry has its own nelems/group_size/count.
     
     // Record start timestamp for energy correlation
     results.start_timestamp = get_iso_timestamp();
     std::cout << "Start timestamp: " << results.start_timestamp << std::endl;
-    std::cout << "\nNote: Run counts chosen so each kernel runs 100ms+ for 2–3+ nvidia-smi samples (~25 Hz)." << std::endl;
-    
+    std::cout << "\nNote: Run counts chosen so each kernel runs 2–3+ s for system power meter (~1 Hz)." << std::endl;
+
     for (const auto& sig : kernels) {
         double avg_single_time_us = -1.0;
         std::string kernel_start_ts, kernel_end_ts;
         std::string metrics_file;
         pid_t metrics_pid = -1;
-        int actual_runs = 0;
-        
+        int benchmark_runs = 0;
+
         try {
-            // Target: each kernel runs long enough for system power meter (WattsUp at ~1 Hz => 1 sample/sec).
-            // Aim for 10+ seconds per kernel so we get 10+ power samples for accurate energy measurement.
-            // This is MUCH longer than GPU power (nvidia-smi ~25 Hz) because system power sampling is slower.
+            // Target: each kernel runs long enough for system power meter (WattsUp at ~1 Hz).
             int adaptive_runs;
             if (sig.tier == kernel::Tier::CUBLAS) {
-                adaptive_runs = 100000;   
+                adaptive_runs = 1000000;   // GEMM/GEMV: 100K was ~0.2–0.6 s; 500K → ~1–3 s
             } else if (sig.tier == kernel::Tier::CUDA_RUNTIME) {
-                adaptive_runs = 1000000; 
+                adaptive_runs = 2000000;  // Memcpy/memset: 1M was ~1.4 s for one; 2M → ~2–3 s 
             } else {
-                adaptive_runs = 5000000; 
+                adaptive_runs = 5000000;  // Tier 3 libtorch (all ops, including cuda_api)
             }
             
             // Create metrics file path for this kernel (absolute path)
             std::stringstream metrics_path;
-            metrics_path << "/home/pace/piep_kernel_execution_graph/kernel_replay_cpp/results/metrics/kernel_" << completed << ".json";
+            metrics_path << "/home/adutt/wasiq/piep_kernel_execution_graph/kernel_replay_cpp/results/metrics/kernel_" << completed << ".json";
             metrics_file = metrics_path.str();
             
             // Start metrics collector subprocess
@@ -215,7 +222,7 @@ AggregatedResults run_isolated_kernels(const kernel::KernelRegistry& registry, i
             // Record start timestamp for THIS kernel
             kernel_start_ts = get_iso_timestamp();
             
-            // Each tier benchmark function does warmup once, then times adaptive_runs iterations
+            benchmark_runs = adaptive_runs;
             switch (sig.tier) {
                 case kernel::Tier::CUDA_RUNTIME:
                     avg_single_time_us = tier1::run_tier1_kernel(sig, adaptive_runs);
@@ -229,13 +236,25 @@ AggregatedResults run_isolated_kernels(const kernel::KernelRegistry& registry, i
                     avg_single_time_us = tier3::run_tier3_kernel(sig, adaptive_runs);
                     results.tier3_count++;
                     break;
+                case kernel::Tier::COMMUNICATION:
+                    if (nccl_replay::has_nccl_support()) {
+                        size_t nelems = sig.get_allreduce_nelems();
+                        int group_size = sig.get_allreduce_group_size();
+                        auto ar_res = nccl_replay::run_allreduce_replay(adaptive_runs, nelems, group_size, 2);
+                        if (ar_res.success && ar_res.num_calls > 0)
+                            avg_single_time_us = ar_res.avg_time_us;
+                        else
+                            avg_single_time_us = -1.0;
+                    } else {
+                        avg_single_time_us = -1.0;  // Skip if no NCCL
+                    }
+                    results.tier4_count++;
+                    break;
             }
-            
-            actual_runs = adaptive_runs;
-            
+
             // Record end timestamp for THIS kernel
             kernel_end_ts = get_iso_timestamp();
-            
+
             // Stop metrics collector
             if (metrics_pid > 0) {
                 bool stopped = stop_metrics_collector(metrics_pid, 5000);
@@ -243,7 +262,7 @@ AggregatedResults run_isolated_kernels(const kernel::KernelRegistry& registry, i
                     std::cerr << "Warning: Metrics collector may not have exited cleanly" << std::endl;
                 }
             }
-            
+
         } catch (const std::exception& e) {
             std::cerr << "Error benchmarking kernel '" << sig.name << "': " 
                       << e.what() << std::endl;
@@ -257,7 +276,7 @@ AggregatedResults run_isolated_kernels(const kernel::KernelRegistry& registry, i
                 waitpid(metrics_pid, nullptr, 0);
             }
         }
-        
+
         if (avg_single_time_us >= 0) {
             double total_time_us = avg_single_time_us * sig.count;
             
@@ -269,7 +288,7 @@ AggregatedResults run_isolated_kernels(const kernel::KernelRegistry& registry, i
             timing.total_time_us = total_time_us;
             timing.start_timestamp = kernel_start_ts;
             timing.end_timestamp = kernel_end_ts;
-            timing.benchmark_runs = actual_runs;  // Save actual adaptive run count
+            timing.benchmark_runs = benchmark_runs;
             
             // Load system metrics if available
             timing.metrics_file = metrics_file;
@@ -297,6 +316,9 @@ AggregatedResults run_isolated_kernels(const kernel::KernelRegistry& registry, i
                 case kernel::Tier::LIBTORCH:
                     results.tier3_total_us += total_time_us;
                     break;
+                case kernel::Tier::COMMUNICATION:
+                    results.tier4_total_us += total_time_us;
+                    break;
             }
         }
         
@@ -318,6 +340,8 @@ AggregatedResults run_isolated_kernels(const kernel::KernelRegistry& registry, i
               << results.tier2_total_us << " us total" << std::endl;
     std::cout << "Tier 3 (libtorch):     " << results.tier3_count << " kernels, "
               << results.tier3_total_us << " us total" << std::endl;
+    std::cout << "Tier 4 (Communication): " << results.tier4_count << " kernels, "
+              << results.tier4_total_us << " us total" << std::endl;
     std::cout << "\nPredicted total:      " << results.predicted_total_us 
               << " us (" << (results.predicted_total_us / 1000.0) << " ms)" << std::endl;
     
@@ -334,9 +358,11 @@ bool save_isolated_results(const AggregatedResults& results, const std::string& 
     j["tier1_total_us"] = results.tier1_total_us;
     j["tier2_total_us"] = results.tier2_total_us;
     j["tier3_total_us"] = results.tier3_total_us;
+    j["tier4_total_us"] = results.tier4_total_us;
     j["tier1_count"] = results.tier1_count;
     j["tier2_count"] = results.tier2_count;
     j["tier3_count"] = results.tier3_count;
+    j["tier4_count"] = results.tier4_count;
     
     // Save per-kernel timing and timestamp data for per-kernel energy calculation
     json kernels_array = json::array();
@@ -406,7 +432,13 @@ void generate_comparison_report(const AggregatedResults& isolated_results,
         {"method", "torch::layer_norm/add/etc"},
         {"unique_kernels", isolated_results.tier3_count},
         {"total_us", isolated_results.tier3_total_us},
-        {"percentage_of_predicted", (isolated_results.tier3_total_us / isolated_results.predicted_total_us) * 100.0}
+        {"percentage_of_predicted", isolated_results.predicted_total_us > 0 ? (isolated_results.tier3_total_us / isolated_results.predicted_total_us) * 100.0 : 0.0}
+    };
+    report["tier_breakdown"]["tier4_communication"] = {
+        {"method", "NCCL AllReduce"},
+        {"unique_kernels", isolated_results.tier4_count},
+        {"total_us", isolated_results.tier4_total_us},
+        {"percentage_of_predicted", isolated_results.predicted_total_us > 0 ? (isolated_results.tier4_total_us / isolated_results.predicted_total_us) * 100.0 : 0.0}
     };
     
     // Individual kernel details (top 20 by total time)

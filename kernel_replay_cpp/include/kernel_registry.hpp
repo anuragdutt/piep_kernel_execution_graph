@@ -15,7 +15,8 @@ namespace kernel {
 enum class Tier {
     CUDA_RUNTIME = 1,  // cudaMemcpy, cudaMemset
     CUBLAS = 2,        // cublasGemmEx, cublasGemv
-    LIBTORCH = 3       // torch::layer_norm, torch::add, etc.
+    LIBTORCH = 3,      // torch::layer_norm, torch::add, etc.
+    COMMUNICATION = 4  // NCCL AllReduce, AllGather, etc.
 };
 
 /**
@@ -66,6 +67,17 @@ struct KernelSignature {
     std::string get_operation() const {
         return params.value("operation", "unknown");
     }
+
+    // Tier 4 (communication) - NCCL AllReduce
+    size_t get_allreduce_nelems() const {
+        return params.value("nelems", static_cast<size_t>(94208));
+    }
+    std::string get_allreduce_dtype() const {
+        return params.value("dtype", "Half");
+    }
+    int get_allreduce_group_size() const {
+        return params.value("group_size", 2);
+    }
 };
 
 /**
@@ -99,6 +111,8 @@ public:
         int tier2_invocations = 0;
         int tier3_unique = 0;
         int tier3_invocations = 0;
+        int tier4_unique = 0;
+        int tier4_invocations = 0;
     };
     
     Summary get_summary() const;

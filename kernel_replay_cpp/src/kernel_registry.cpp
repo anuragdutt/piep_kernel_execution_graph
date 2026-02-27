@@ -87,6 +87,10 @@ KernelRegistry::Summary KernelRegistry::get_summary() const {
                 summary.tier3_unique++;
                 summary.tier3_invocations += kernel.count;
                 break;
+            case Tier::COMMUNICATION:
+                summary.tier4_unique++;
+                summary.tier4_invocations += kernel.count;
+                break;
         }
     }
     
@@ -97,7 +101,8 @@ void KernelRegistry::print_summary() const {
     auto summary = get_summary();
     int total_invocations = summary.tier1_invocations + 
                            summary.tier2_invocations + 
-                           summary.tier3_invocations;
+                           summary.tier3_invocations + 
+                           summary.tier4_invocations;
     
     std::cout << "\nKernel Registry Summary:" << std::endl;
     std::cout << "========================" << std::endl;
@@ -108,22 +113,25 @@ void KernelRegistry::print_summary() const {
     std::cout << "Tier 1 (CUDA Runtime):" << std::endl;
     std::cout << "  Unique kernels: " << summary.tier1_unique << std::endl;
     std::cout << "  Invocations: " << summary.tier1_invocations 
-              << " (" << (100.0 * summary.tier1_invocations / total_invocations) 
-              << "%)" << std::endl;
+              << " (" << (total_invocations ? (100.0 * summary.tier1_invocations / total_invocations) : 0.0) << "%)" << std::endl;
     std::cout << std::endl;
     
     std::cout << "Tier 2 (cuBLAS):" << std::endl;
     std::cout << "  Unique kernels: " << summary.tier2_unique << std::endl;
     std::cout << "  Invocations: " << summary.tier2_invocations 
-              << " (" << (100.0 * summary.tier2_invocations / total_invocations) 
-              << "%)" << std::endl;
+              << " (" << (total_invocations ? (100.0 * summary.tier2_invocations / total_invocations) : 0.0) << "%)" << std::endl;
     std::cout << std::endl;
     
     std::cout << "Tier 3 (libtorch):" << std::endl;
     std::cout << "  Unique kernels: " << summary.tier3_unique << std::endl;
     std::cout << "  Invocations: " << summary.tier3_invocations 
-              << " (" << (100.0 * summary.tier3_invocations / total_invocations) 
-              << "%)" << std::endl;
+              << " (" << (total_invocations ? (100.0 * summary.tier3_invocations / total_invocations) : 0.0) << "%)" << std::endl;
+    std::cout << std::endl;
+    
+    std::cout << "Tier 4 (Communication/NCCL):" << std::endl;
+    std::cout << "  Unique kernels: " << summary.tier4_unique << std::endl;
+    std::cout << "  Invocations: " << summary.tier4_invocations 
+              << " (" << (total_invocations ? (100.0 * summary.tier4_invocations / total_invocations) : 0.0) << "%)" << std::endl;
 }
 
 } // namespace kernel

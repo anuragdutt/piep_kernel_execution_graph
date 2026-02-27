@@ -1,22 +1,19 @@
-# Pip-only setup. PyTorch (CUDA) must be installed first so pip doesn't pull CPU wheels from PyPI.
-# Match index to your driver: nvidia-smi shows max supported CUDA (use that or lower).
-#   CUDA 12.2 driver -> cu121:  pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
-#   CUDA 12.4+       -> cu124:  pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
+# Updated requirements for Vicuna on Ampere GPUs (A6000)
+# Install PyTorch with CUDA 12.4 support first:
+#   pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu124
 # Then: pip install -r requirements.txt
 
-# App / profiling (Vicuna tokenizer needs protobuf for SentencePiece)
-# For PyTorch 1.12 (Pascal GPUs): pip install 'transformers>=4.30,<4.36' first so transformers doesn't disable PyTorch.
-transformers>=4.31.0
-sentencepiece>=0.1.99
-accelerate>=0.20.0
-protobuf
-tiktoken
-# Plotting (plot_kernel_gantt.py)
-matplotlib>=3.5.0
+# Core dependencies for Vicuna-7B with tensor parallelism
+transformers>=4.36.0        # Updated for better TP support
+sentencepiece>=0.1.99       # Required for Vicuna tokenizer
+accelerate>=0.25.0          # Updated for better distributed support
+protobuf>=3.20.0            # SentencePiece dependency
+tiktoken                    # Tokenizer utilities
 
-# Version pin to avoid issues with PyTorch 2.x
-numpy<2
+# Analysis and visualization
+matplotlib>=3.5.0           # Gantt chart plotting
+pandas>=2.0.0               # Energy calculation scripts
+numpy>=1.24.0,<2.0.0        # Numeric operations
 
-# Optional: for single-GPU 8-bit loading (fits 11GB). ONLY on PyTorch 2.3+ (e.g. A6000).
-# On Pascal + PyTorch 1.12 do NOT install bitsandbytes - it will upgrade PyTorch and break 1080 Ti.
-# pip install bitsandbytes
+# Development utilities
+tqdm                        # Progress bars

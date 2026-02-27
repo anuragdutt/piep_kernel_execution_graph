@@ -29,26 +29,72 @@ if(NOT nlohmann_json_FOUND)
     # and place it in include/nlohmann/json.hpp
 endif()
 
+# Optional: NCCL (for AllReduce replay). Use -DNCCL_ROOT=... or set env NCCL_ROOT.
+# If you use Torch from anaconda, point NCCL_ROOT to anaconda's nvidia/nccl so the linker
+# gets ncclCommInitRankScalable (venv NCCL can be older and cause undefined reference).
+if(DEFINED ENV{NCCL_ROOT})
+    set(NCCL_ROOT $ENV{NCCL_ROOT})
+endif()
+if(NOT NCCL_ROOT)
+    execute_process(
+        COMMAND python3 -c "import nvidia.nccl, os; print(os.path.dirname(nvidia.nccl.__file__))"
+        OUTPUT_VARIABLE NCCL_ROOT
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+        RESULT_VARIABLE _nccl_py_ret
+    )
+    if(NOT _nccl_py_ret EQUAL 0)
+        set(NCCL_ROOT "")
+    endif()
+endif()
+set(NCCL_LIB_PATH "")
+if(NCCL_ROOT)
+    if(EXISTS "${NCCL_ROOT}/lib/libnccl.so")
+        set(NCCL_LIB_PATH "${NCCL_ROOT}/lib/libnccl.so")
+    elseif(EXISTS "${NCCL_ROOT}/lib/libnccl.so.2")
+        set(NCCL_LIB_PATH "${NCCL_ROOT}/lib/libnccl.so.2")
+    endif()
+endif()
+if(NCCL_ROOT AND EXISTS "${NCCL_ROOT}/include/nccl.h" AND NCCL_LIB_PATH)
+    set(HAVE_NCCL TRUE)
+    message(STATUS "NCCL found: ${NCCL_ROOT}")
+else()
+    set(HAVE_NCCL FALSE)
+    if(NOT NCCL_ROOT)
+        message(STATUS "NCCL not found (optional). Set NCCL_ROOT or install nvidia-nccl-cu12 for AllReduce mode.")
+    endif()
+endif()
+
 # Include directories
 include_directories(${CMAKE_SOURCE_DIR}/include)
 include_directories(${CMAKE_CUDA_TOOLKIT_INCLUDE_DIRECTORIES})
+if(HAVE_NCCL)
+    include_directories(${NCCL_ROOT}/include)
+endif()
 
-# Source files
+# Source files (nccl_allreduce.cpp always included; uses HAVE_NCCL for real vs stub)
+# cuda_api_replay.cpp uses real CUDA Runtime API + libtorch for minimal kernel launches
 set(SOURCES
     src/main.cpp
     src/kernel_registry.cpp
     src/cuda_kernels.cpp
     src/cublas_kernels.cpp
     src/libtorch_kernels.cpp
+    src/cuda_api_replay.cpp
     src/full_model_benchmark.cpp
     src/aggregation.cpp
+    src/nccl_allreduce.cpp
 )
 
 # Create executable
 add_executable(kernel_benchmark ${SOURCES})
 
-# Link libraries
-target_link_libraries(kernel_benchmark
+if(HAVE_NCCL)
+    target_compile_definitions(kernel_benchmark PRIVATE HAVE_NCCL)
+    target_link_libraries(kernel_benchmark PRIVATE ${NCCL_LIB_PATH})
+endif()
+
+# Link libraries (cuda_api_kernels already linked above)
+target_link_libraries(kernel_benchmark PRIVATE
     CUDA::cudart
     CUDA::cublas
     "${TORCH_LIBRARIES}"

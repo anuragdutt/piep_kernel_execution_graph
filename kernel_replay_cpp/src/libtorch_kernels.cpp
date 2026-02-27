@@ -1,5 +1,6 @@
 #include "libtorch_kernels.hpp"
 #include "benchmark_utils.hpp"
+#include "cuda_api_replay.hpp"
 #include <iostream>
 
 namespace tier3 {
@@ -141,6 +142,17 @@ double benchmark_gelu(const std::vector<int64_t>& shape, int num_iters) {
     return benchmark::benchmark_us(bench_func, 10, num_iters);
 }
 
+double benchmark_silu(const std::vector<int64_t>& shape, int num_iters) {
+    auto opts = torch::TensorOptions().dtype(torch::kFloat16).device(torch::kCUDA);
+    auto x = torch::randn(shape, opts);
+    
+    auto bench_func = [&]() {
+        torch::silu(x);
+    };
+    
+    return benchmark::benchmark_us(bench_func, 10, num_iters);
+}
+
 double benchmark_reduce(const std::vector<int64_t>& shape, int dim, int num_iters) {
     auto opts = torch::TensorOptions().dtype(torch::kFloat16).device(torch::kCUDA);
     auto x = torch::randn(shape, opts);
@@ -172,7 +184,6 @@ double run_tier3_kernel(const kernel::KernelSignature& sig, int num_runs) {
     std::string operation = sig.get_operation();
     
     // Use the num_runs passed from aggregation (calibrated for system power meter at ~1 Hz)
-    // No cap - we need long durations for accurate power measurement
     int iters = num_runs;
     
     // Infer shape from grid/block, considering operation type
@@ -199,6 +210,9 @@ double run_tier3_kernel(const kernel::KernelSignature& sig, int num_runs) {
     } 
     else if (operation == "gelu") {
         return benchmark_gelu(shape, iters);
+    }
+    else if (operation == "silu") {
+        return benchmark_silu(shape, iters);
     } 
     else if (operation == "reduce") {
         return benchmark_reduce(shape, -1, iters);
@@ -209,8 +223,28 @@ double run_tier3_kernel(const kernel::KernelSignature& sig, int num_runs) {
     else if (operation == "elementwise") {
         return benchmark_elementwise(shape, iters);
     }
+    else if (operation == "cuda_api") {
+        // Real CUDA Runtime API replay; use same iters as all other Tier 3 (no special cap).
+        if (is_known_cuda_api(name)) {
+            double us = run_cuda_api_benchmark(name, iters);
+            if (us >= 0.0) return us;
+        }
+        // Fallback: unknown cuda_api name → minimal fill proxy
+        return benchmark_fill({1, 1, 1}, 0.0f, iters);
+    }
+    else if (operation == "flash_attention") {
+        // Flash attention: no direct libtorch equivalent; approximate with elementwise workload.
+        return benchmark_elementwise(shape, iters);
+    }
+    else if (operation == "rms_norm") {
+        // RMS norm: similar to layer_norm, normalize over last dim
+        return benchmark_layer_norm(shape, shape.back(), iters);
+    }
+    else if (operation == "rotary_embedding") {
+        return benchmark_elementwise(shape, iters);
+    }
     else {
-        // Unknown operation - use generic elementwise as fallback
+        // Truly unknown operation - use generic elementwise as fallback
         static int warning_count = 0;
         if (warning_count < 3) {
             std::cerr << "Warning: Unknown operation '" << operation 

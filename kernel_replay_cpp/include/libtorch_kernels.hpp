@@ -94,11 +94,9 @@ double benchmark_elementwise(const std::vector<int64_t>& shape, int num_iters = 
 /**
  * Dispatch and benchmark a Tier 3 kernel based on its signature
  * 
- * Uses pattern matching on kernel name to determine operation type,
- * then calls appropriate libtorch function
- * 
  * @param sig Kernel signature from registry
- * @return Time in microseconds
+ * @param num_runs Requested iteration count (from aggregation)
+ * @return Average time per execution in microseconds
  */
 double run_tier3_kernel(const kernel::KernelSignature& sig, int num_runs = 1);
 

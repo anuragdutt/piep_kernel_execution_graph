@@ -14,6 +14,14 @@ bool init_cublas() {
         return true;  // Already initialized
     }
     
+    // Get GPU name for logging (always A6000)
+    int device;
+    cudaGetDevice(&device);
+    cudaDeviceProp prop;
+    cudaGetDeviceProperties(&prop, device);
+    
+    std::cout << "GPU: " << prop.name << " (sm_86)" << std::endl;
+    
     cublasStatus_t status = cublasCreate(&g_cublas_handle);
     if (status != CUBLAS_STATUS_SUCCESS) {
         std::cerr << "Failed to create cuBLAS handle" << std::endl;
@@ -65,9 +73,12 @@ double benchmark_gemm_fp16(int M, int N, int K, bool transpose_a, bool transpose
     int ldc = M;  // C is always M×N, ldc = M
     
     auto bench_func = [&]() {
-        // Use FP32 compute for Pascal GPUs (which have poor native FP16)
         float alpha_f = 1.0f;
         float beta_f = 0.0f;
+        
+        // A6000 (sm_86 Ampere): Always use FP16 Tensor Cores
+        cublasComputeType_t compute_type = CUBLAS_COMPUTE_16F;
+        cublasGemmAlgo_t algo = CUBLAS_GEMM_DEFAULT_TENSOR_OP;
         
         cublasStatus_t status = cublasGemmEx(
             handle,
@@ -78,8 +89,8 @@ double benchmark_gemm_fp16(int M, int N, int K, bool transpose_a, bool transpose
             B_d, CUDA_R_16F, ldb,
             &beta_f,
             C_d, CUDA_R_16F, ldc,
-            CUBLAS_COMPUTE_32F,  // Use FP32 compute (faster on Pascal)
-            CUBLAS_GEMM_DEFAULT
+            compute_type,
+            algo
         );
         
         if (status != CUBLAS_STATUS_SUCCESS) {
@@ -113,15 +124,16 @@ double run_tier2_kernel(const kernel::KernelSignature& sig, int num_runs) {
     
     // If not specified, try to infer from grid dimensions
     if (M == 0 || N == 0 || K == 0) {
-        // Default BLOOM-560M dimensions for common layer sizes
+        // Default Vicuna-7B dimensions for common layer sizes
         if (name.find("gemv") != std::string::npos) {
-            M = 1024;
-            K = 1024;
-            N = 1;
+            M = 1;
+            K = 4096;
+            N = 32000;  // LM head
         } else {
-            M = 1024;
-            N = 1024;
-            K = 1024;
+            // Most common GEMM shape
+            M = 57;
+            N = 4096;
+            K = 4096;
         }
     }
     

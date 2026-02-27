@@ -8,6 +8,7 @@
 #include "cublas_kernels.hpp"
 #include "libtorch_kernels.hpp"
 #include "benchmark_utils.hpp"
+#include "nccl_allreduce.hpp"
 
 // Forward declarations from other source files
 namespace full_model {
@@ -40,9 +41,11 @@ namespace aggregation {
         double tier1_total_us;
         double tier2_total_us;
         double tier3_total_us;
+        double tier4_total_us;
         int tier1_count;
         int tier2_count;
         int tier3_count;
+        int tier4_count;
         int num_runs;
         std::string start_timestamp;
         std::string end_timestamp;
@@ -61,6 +64,7 @@ void print_usage(const char* prog_name) {
     std::cout << "  full      - Run full model benchmark only" << std::endl;
     std::cout << "  isolated  - Run isolated kernel benchmarks only" << std::endl;
     std::cout << "  compare   - Run both and compare (default)" << std::endl;
+    std::cout << "  allreduce - Run NCCL AllReduce replay (2 GPUs, 94208 elem x 64; requires NCCL)" << std::endl;
     std::cout << "\nOptions:" << std::endl;
     std::cout << "  --model <path>        Path to TorchScript model (required for full/compare)" << std::endl;
     std::cout << "  --kernels <path>      Path to kernel_signatures.json (default: data/kernel_signatures.json)" << std::endl;
@@ -68,6 +72,7 @@ void print_usage(const char* prog_name) {
     std::cout << "  --warmup <n>          Number of warmup runs (default: 10)" << std::endl;
     std::cout << "  --runs <n>            Number of timed runs (default: 100)" << std::endl;
     std::cout << "  --output-dir <path>   Output directory for results (default: results/)" << std::endl;
+    std::cout << "  --allreduce-repeats <n>  AllReduce replay: number of AllReduce steps (default: 64)" << std::endl;
     std::cout << "\nExample:" << std::endl;
     std::cout << "  " << prog_name << " compare --model bloom_560m_traced.pt --kernels data/kernel_signatures.json" << std::endl;
     std::cout << "  " << prog_name << " compare --model bloom_560m_traced.pt --runs 1000" << std::endl;
@@ -82,6 +87,7 @@ int main(int argc, char** argv) {
     int seq_len = 5;
     int warmup_runs = 10;
     int timed_runs = 100;
+    int allreduce_repeats = 64;
     
     // Parse command line arguments
     for (int i = 1; i < argc; i++) {
@@ -109,7 +115,10 @@ int main(int argc, char** argv) {
         else if (arg == "--output-dir" && i + 1 < argc) {
             output_dir = argv[++i];
         }
-        else if (arg == "full" || arg == "isolated" || arg == "compare") {
+        else if (arg == "--allreduce-repeats" && i + 1 < argc) {
+            allreduce_repeats = std::atoi(argv[++i]);
+        }
+        else if (arg == "full" || arg == "isolated" || arg == "compare" || arg == "allreduce") {
             mode = arg;
         }
     }
@@ -129,6 +138,27 @@ int main(int argc, char** argv) {
     cudaGetDeviceProperties(&prop, 0);
     std::cout << "GPU: " << prop.name << std::endl;
     std::cout << "Compute capability: " << prop.major << "." << prop.minor << std::endl;
+
+    // AllReduce mode: run NCCL AllReduce replay and exit
+    if (mode == "allreduce") {
+        if (!nccl_replay::has_nccl_support()) {
+            std::cerr << "AllReduce mode requires NCCL. Set NCCL_ROOT (e.g. to python nvidia.nccl path) and rebuild." << std::endl;
+            return 1;
+        }
+        if (device_count < 2) {
+            std::cerr << "AllReduce replay requires at least 2 GPUs (found " << device_count << ")." << std::endl;
+            return 1;
+        }
+        std::cout << "Running NCCL AllReduce replay: " << allreduce_repeats << " steps, 94208 elem (fp16), GPUs 0,1" << std::endl;
+        auto res = nccl_replay::run_allreduce_replay(allreduce_repeats, 94208, 2, 2);
+        if (!res.success) {
+            std::cerr << "AllReduce replay failed: " << res.error_message << std::endl;
+            return 1;
+        }
+        std::cout << "AllReduce replay OK: total " << (res.total_time_us / 1000.0) << " ms, "
+                  << res.avg_time_us << " us/call, " << res.nelems << " elem, " << res.nbytes << " B" << std::endl;
+        _exit(0);
+    }
     
     // Initialize cuBLAS (needed for Tier 2)
     if (!tier2::init_cublas()) {
