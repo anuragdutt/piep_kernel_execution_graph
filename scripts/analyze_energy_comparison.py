@@ -2,8 +2,8 @@
 """
 Analyze energy consumption: Isolated kernels vs Full model inference
 
-Follows the same approach as kernel_replay_cpp/scripts/calculate_per_kernel_energy.py
-but adapted for the unified power logger format.
+Compares isolated kernel-level energy predictions against actual full-model
+inference energy measured with WattsUp + nvidia-smi.
 
 Energy calculation:
 1. For each kernel: Total energy during benchmark = avg_power × (end - start)
@@ -11,8 +11,7 @@ Energy calculation:
 3. Energy for full inference = energy_per_execution × invocation_count
 4. Predicted total = sum of all kernel energies
 
-Optional: subtract idle power for a fairer comparison (full-model runs longer wall-clock
-so more idle energy is included). Capture idle with:
+Optional: subtract idle power for a fairer comparison. Capture idle with:
   python scripts/capture_idle_power.py -d 60
 then run:
   python scripts/analyze_energy_comparison.py --idle-json results/idle_power_stats.json
@@ -25,38 +24,27 @@ import sys
 from pathlib import Path
 from datetime import datetime
 
-# File paths - UPDATE THESE TO LATEST RUN
-BASE_DIR = Path("/home/adutt/wasiq/piep_kernel_execution_graph")
-ISOLATED_TIMING = BASE_DIR / "kernel_replay_cpp/results/isolated_kernels_timing.json"
-ISOLATED_POWER = (
-    BASE_DIR / "kernel_replay_cpp/results/unified_power_20260223_085024.csv"
-)
-FULL_MODEL_ENERGY = BASE_DIR / "vicuna/results/full_model_energy_20260223_004904.json" 
-FULL_MODEL_BENCHMARK = (
-    BASE_DIR / "vicuna/results/full_model_benchmark_20260223_004904.json"
-)
-
 
 def parse_timestamp(ts_str):
     """Parse timestamp string to datetime"""
     return datetime.strptime(ts_str, "%Y-%m-%d %H:%M:%S.%f")
 
 
-def load_isolated_timing():
+def load_isolated_timing(path: Path):
     """Load isolated kernel timing data"""
-    with open(ISOLATED_TIMING) as f:
+    with open(path) as f:
         return json.load(f)
 
 
-def load_full_model_energy():
+def load_full_model_energy(path: Path):
     """Load full model energy measurements"""
-    with open(FULL_MODEL_ENERGY) as f:
+    with open(path) as f:
         return json.load(f)
 
 
-def load_full_model_benchmark():
+def load_full_model_benchmark(path: Path):
     """Load full model benchmark data"""
-    with open(FULL_MODEL_BENCHMARK) as f:
+    with open(path) as f:
         return json.load(f)
 
 
@@ -128,7 +116,9 @@ def calculate_energy_for_window(power_df, start_time, end_time):
         return system_energy_j, gpu_energy_j, 1
 
     # System: integrate using only valid samples and interpolate across gaps
-    system_energy_j = _integrate_system_energy_valid_aware(samples, start_time, end_time)
+    system_energy_j = _integrate_system_energy_valid_aware(
+        samples, start_time, end_time
+    )
 
     # GPU: trapezoidal (GPU power is sampled every poll, rarely N/A)
     samples["dt"] = samples["time"].diff().dt.total_seconds()
@@ -140,7 +130,39 @@ def calculate_energy_for_window(power_df, start_time, end_time):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Compare isolated kernel energy vs full model energy.")
+    parser = argparse.ArgumentParser(
+        description="Compare isolated kernel energy vs full model energy."
+    )
+    parser.add_argument(
+        "--isolated-timing",
+        type=Path,
+        default=None,
+        help="Path to isolated_kernels_timing.json from kernel_replay_benchmark.py",
+    )
+    parser.add_argument(
+        "--isolated-power",
+        type=Path,
+        default=None,
+        help="Path to replay_power.csv recorded during the isolated kernel benchmark",
+    )
+    parser.add_argument(
+        "--full-model-energy",
+        type=Path,
+        default=None,
+        help="Path to full_model_energy.json from run_experiment.sh",
+    )
+    parser.add_argument(
+        "--full-model-benchmark",
+        type=Path,
+        default=None,
+        help="Path to full_model_benchmark.json from vicuna_tp_profile.py",
+    )
+    parser.add_argument(
+        "--output-dir",
+        type=Path,
+        default=Path("."),
+        help="Directory to write energy_comparison_report.json (default: current dir)",
+    )
     parser.add_argument(
         "--idle-json",
         type=Path,
@@ -155,6 +177,34 @@ def main():
     )
     args = parser.parse_args()
 
+    # All four required paths must be provided explicitly — no more auto-discovery
+    # from hardcoded legacy locations.  run_experiment.sh always passes them.
+    missing = []
+    if args.isolated_timing is None:
+        missing.append("--isolated-timing")
+    if args.isolated_power is None:
+        missing.append("--isolated-power")
+    if args.full_model_energy is None:
+        missing.append("--full-model-energy")
+    if args.full_model_benchmark is None:
+        missing.append("--full-model-benchmark")
+    if missing:
+        print(
+            f"ERROR: required arguments not provided: {', '.join(missing)}",
+            file=sys.stderr,
+        )
+        print(
+            "  These are set automatically by run_experiment.sh; if running manually "
+            "pass each path explicitly.",
+            file=sys.stderr,
+        )
+        return 1
+
+    isolated_timing_path = args.isolated_timing
+    isolated_power_path = args.isolated_power
+    full_model_energy_path = args.full_model_energy
+    full_model_benchmark_path = args.full_model_benchmark
+
     # Load idle power if provided (for fair comparison: subtract baseline from both sides)
     idle_system_w = None
     idle_gpu_w = None
@@ -163,15 +213,21 @@ def main():
             idle_stats = json.load(f)
         idle_system_w = idle_stats.get("idle_system_watts")
         idle_gpu_w = idle_stats.get("idle_gpu_watts")
-        print(f"Idle power (from {args.idle_json}): system={idle_system_w} W, gpu={idle_gpu_w} W")
+        print(
+            f"Idle power (from {args.idle_json}): system={idle_system_w} W, gpu={idle_gpu_w} W"
+        )
     elif args.idle_csv and args.idle_csv.exists():
         idle_df = load_power_data(args.idle_csv)
         idle_system_w = float(idle_df["system_total_watts"].mean())
         idle_gpu_w = float(idle_df["gpu_total_watts"].mean())
-        print(f"Idle power (from {args.idle_csv}): system={idle_system_w:.2f} W, gpu={idle_gpu_w:.2f} W")
+        print(
+            f"Idle power (from {args.idle_csv}): system={idle_system_w:.2f} W, gpu={idle_gpu_w:.2f} W"
+        )
     use_idle = idle_system_w is not None and idle_gpu_w is not None
     if use_idle:
-        print("  → Will subtract idle power from both full-model and isolated for comparison.")
+        print(
+            "  → Will subtract idle power from both full-model and isolated for comparison."
+        )
     print()
 
     print("=" * 80)
@@ -181,9 +237,9 @@ def main():
 
     # Load data
     print("Loading data...")
-    timing_data = load_isolated_timing()
-    full_model_energy = load_full_model_energy()
-    full_model_benchmark = load_full_model_benchmark()
+    timing_data = load_isolated_timing(isolated_timing_path)
+    full_model_energy = load_full_model_energy(full_model_energy_path)
+    full_model_benchmark = load_full_model_benchmark(full_model_benchmark_path)
 
     print(f"  Isolated kernels: {len(timing_data['kernels'])} kernels")
     print(
@@ -197,7 +253,7 @@ def main():
 
     # Load power data
     print("Loading power measurements...")
-    power_df = load_power_data(ISOLATED_POWER)
+    power_df = load_power_data(isolated_power_path)
     print(f"  Isolated benchmark: {len(power_df)} power samples")
     print(
         f"    Duration: {(power_df['time'].max() - power_df['time'].min()).total_seconds():.1f}s"
@@ -247,10 +303,19 @@ def main():
                 total_predicted_system += energy_for_inference_system
                 total_predicted_gpu += energy_for_inference_gpu
                 if use_idle:
-                    system_active_j = max(0.0, system_energy_j - idle_system_w * benchmark_duration_s)
-                    gpu_active_j = max(0.0, gpu_energy_j - idle_gpu_w * benchmark_duration_s)
-                    total_predicted_system_active += (system_active_j / benchmark_runs) * invocation_count
-                    total_predicted_gpu_active += (gpu_active_j / benchmark_runs) * invocation_count
+                    assert idle_system_w is not None and idle_gpu_w is not None
+                    system_active_j = max(
+                        0.0, system_energy_j - idle_system_w * benchmark_duration_s
+                    )
+                    gpu_active_j = max(
+                        0.0, gpu_energy_j - idle_gpu_w * benchmark_duration_s
+                    )
+                    total_predicted_system_active += (
+                        system_active_j / benchmark_runs
+                    ) * invocation_count
+                    total_predicted_gpu_active += (
+                        gpu_active_j / benchmark_runs
+                    ) * invocation_count
                 estimated_count += 1
                 kernel_energies.append(
                     {
@@ -308,10 +373,16 @@ def main():
         total_predicted_system += energy_for_inference_system
         total_predicted_gpu += energy_for_inference_gpu
         if use_idle:
+            assert idle_system_w is not None and idle_gpu_w is not None
+            assert gpu_energy_j is not None  # reassigned above if it was None
             system_active_j = max(0.0, system_energy_j - idle_system_w * duration_s)
             gpu_active_j = max(0.0, gpu_energy_j - idle_gpu_w * duration_s)
-            total_predicted_system_active += (system_active_j / benchmark_runs) * invocation_count
-            total_predicted_gpu_active += (gpu_active_j / benchmark_runs) * invocation_count
+            total_predicted_system_active += (
+                system_active_j / benchmark_runs
+            ) * invocation_count
+            total_predicted_gpu_active += (
+                gpu_active_j / benchmark_runs
+            ) * invocation_count
 
         kernel_energies.append(
             {
@@ -334,24 +405,38 @@ def main():
             print(f"  Progress: {i + 1}/{len(timing_data['kernels'])} kernels...")
 
     print(f"  Measured: {measured_count} kernels (power samples in window)")
-    print(f"  Estimated: {estimated_count} kernels (included in total: no samples → avg×duration, or no timestamps → timing-based)")
+    print(
+        f"  Estimated: {estimated_count} kernels (included in total: no samples → avg×duration, or no timestamps → timing-based)"
+    )
     if skipped_count > 0:
-        estimated_from_timing = sum(1 for k in kernel_energies if k.get("method") == "estimated_no_timestamps")
-        print(f"  No timestamps: {skipped_count} kernels  ({estimated_from_timing} estimated from single_time_us, rest contribute 0)")
+        estimated_from_timing = sum(
+            1 for k in kernel_energies if k.get("method") == "estimated_no_timestamps"
+        )
+        print(
+            f"  No timestamps: {skipped_count} kernels  ({estimated_from_timing} estimated from single_time_us, rest contribute 0)"
+        )
     if kernels_no_power_samples:
-        print(f"  Kernels with no power samples in window: {len(kernels_no_power_samples)} (run longer or increase poll rate)")
+        print(
+            f"  Kernels with no power samples in window: {len(kernels_no_power_samples)} (run longer or increase poll rate)"
+        )
     print()
 
     # Print kernels that had no power samples (so user can run them longer)
     if kernels_no_power_samples:
         print("=" * 80)
-        print("KERNELS WITH NO POWER SAMPLES (energy = avg power × duration; run longer for measured)")
+        print(
+            "KERNELS WITH NO POWER SAMPLES (energy = avg power × duration; run longer for measured)"
+        )
         print("=" * 80)
         # Sort by duration ascending so shortest (most likely to need longer run) first
         for k in sorted(kernels_no_power_samples, key=lambda x: x["duration_s"])[:30]:
-            print(f"  Tier {k['tier']}  duration={k['duration_s']}s  inv={k['invocation_count']}  {k['name'][:60]}")
+            print(
+                f"  Tier {k['tier']}  duration={k['duration_s']}s  inv={k['invocation_count']}  {k['name'][:60]}"
+            )
         if len(kernels_no_power_samples) > 30:
-            print(f"  ... and {len(kernels_no_power_samples) - 30} more (see report JSON)")
+            print(
+                f"  ... and {len(kernels_no_power_samples) - 30} more (see report JSON)"
+            )
         print()
 
     # Aggregate by tier (include Tier 4 for AllReduce/communication)
@@ -389,9 +474,19 @@ def main():
         print(f"Tier {tier_num} ({tier_names[tier_num]}):")
         print(f"  Unique kernels:    {t['count']}")
         print(f"  Total invocations: {t['total_invocations']}")
-        pct_sys = (t["total_energy_system_j"] / total_predicted_system * 100) if total_predicted_system else 0
-        pct_gpu = (t["total_energy_gpu_j"] / total_predicted_gpu * 100) if total_predicted_gpu else 0
-        print(f"  System energy:     {t['total_energy_system_j']:.4f} J ({pct_sys:.2f}%)")
+        pct_sys = (
+            (t["total_energy_system_j"] / total_predicted_system * 100)
+            if total_predicted_system
+            else 0
+        )
+        pct_gpu = (
+            (t["total_energy_gpu_j"] / total_predicted_gpu * 100)
+            if total_predicted_gpu
+            else 0
+        )
+        print(
+            f"  System energy:     {t['total_energy_system_j']:.4f} J ({pct_sys:.2f}%)"
+        )
         print(f"  GPU energy:        {t['total_energy_gpu_j']:.4f} J ({pct_gpu:.2f}%)")
         print()
 
@@ -407,16 +502,25 @@ def main():
     # energy over benchmark / number of runs).
     actual_system_j = full_model_energy["energy_wh"]["system"] * 3600
     actual_gpu_j = full_model_energy["energy_wh"]["gpu_total"] * 3600
-    num_runs_in_window = full_model_benchmark["timed_runs"]  # power was logged only during timed runs
+    num_runs_in_window = full_model_benchmark[
+        "timed_runs"
+    ]  # power was logged only during timed runs
     actual_system_per_inference_j = actual_system_j / num_runs_in_window
     actual_gpu_per_inference_j = actual_gpu_j / num_runs_in_window
 
     full_model_duration_s = full_model_benchmark.get("total_duration_s")
     if use_idle and full_model_duration_s is not None:
+        assert (
+            idle_system_w is not None and idle_gpu_w is not None
+        )  # narrowing for type checker
         actual_system_active_j = actual_system_j - idle_system_w * full_model_duration_s
         actual_gpu_active_j = actual_gpu_j - idle_gpu_w * full_model_duration_s
-        actual_system_per_inference_active_j = max(0.0, actual_system_active_j) / num_runs_in_window
-        actual_gpu_per_inference_active_j = max(0.0, actual_gpu_active_j) / num_runs_in_window
+        actual_system_per_inference_active_j = (
+            max(0.0, actual_system_active_j) / num_runs_in_window
+        )
+        actual_gpu_per_inference_active_j = (
+            max(0.0, actual_gpu_active_j) / num_runs_in_window
+        )
     else:
         actual_system_per_inference_active_j = None
         actual_gpu_per_inference_active_j = None
@@ -425,10 +529,14 @@ def main():
     mean_ms = full_model_benchmark.get("stats", {}).get("mean_ms")
 
     print(f"Full Model (Actual - per inference):")
-    print(f"  Tensor parallelism: TP={tp_size}  (reported latency is parallel wall time)")
+    print(
+        f"  Tensor parallelism: TP={tp_size}  (reported latency is parallel wall time)"
+    )
     if mean_ms is not None:
         print(f"  Mean latency:       {mean_ms:.2f} ms")
-    print(f"  Total energy / {num_runs_in_window} runs  (power window = timed runs only)")
+    print(
+        f"  Total energy / {num_runs_in_window} runs  (power window = timed runs only)"
+    )
     print(f"  System energy:    {actual_system_per_inference_j:.4f} J")
     print(f"  GPU energy:       {actual_gpu_per_inference_j:.4f} J")
     print()
@@ -460,24 +568,60 @@ def main():
     # Comparison after subtracting idle power (fairer: same baseline removed from both sides)
     error_system_active_pct = None
     error_gpu_active_pct = None
-    if use_idle and actual_system_per_inference_active_j is not None and actual_gpu_per_inference_active_j is not None:
+    if (
+        use_idle
+        and actual_system_per_inference_active_j is not None
+        and actual_gpu_per_inference_active_j is not None
+    ):
         print("=" * 80)
         print("COMPARISON (after subtracting idle power)")
         print("=" * 80)
         print()
-        print(f"Full Model active (per inference):  System {actual_system_per_inference_active_j:.4f} J   GPU {actual_gpu_per_inference_active_j:.4f} J")
-        print(f"Isolated predicted active (per inf): System {total_predicted_system_active:.4f} J   GPU {total_predicted_gpu_active:.4f} J")
+        print(
+            f"Full Model active (per inference):  System {actual_system_per_inference_active_j:.4f} J   GPU {actual_gpu_per_inference_active_j:.4f} J"
+        )
+        print(
+            f"Isolated predicted active (per inf): System {total_predicted_system_active:.4f} J   GPU {total_predicted_gpu_active:.4f} J"
+        )
         print()
-        error_system_active_j = abs(total_predicted_system_active - actual_system_per_inference_active_j)
-        error_gpu_active_j = abs(total_predicted_gpu_active - actual_gpu_per_inference_active_j)
-        error_system_active_pct = (error_system_active_j / actual_system_per_inference_active_j) * 100 if actual_system_per_inference_active_j else 0
-        error_gpu_active_pct = (error_gpu_active_j / actual_gpu_per_inference_active_j) * 100 if actual_gpu_per_inference_active_j else None
-        ratio_system_active = total_predicted_system_active / actual_system_per_inference_active_j if actual_system_per_inference_active_j else None
-        ratio_gpu_active = total_predicted_gpu_active / actual_gpu_per_inference_active_j if actual_gpu_per_inference_active_j else None
-        gpu_pct_str = f"{error_gpu_active_pct:.2f}%" if error_gpu_active_pct is not None else "N/A (actual active=0)"
-        print(f"Prediction Error (active only):  System {error_system_active_j:.4f} J ({error_system_active_pct:.2f}%)   GPU {error_gpu_active_j:.4f} J ({gpu_pct_str})")
+        error_system_active_j = abs(
+            total_predicted_system_active - actual_system_per_inference_active_j
+        )
+        error_gpu_active_j = abs(
+            total_predicted_gpu_active - actual_gpu_per_inference_active_j
+        )
+        error_system_active_pct = (
+            (error_system_active_j / actual_system_per_inference_active_j) * 100
+            if actual_system_per_inference_active_j
+            else 0
+        )
+        error_gpu_active_pct = (
+            (error_gpu_active_j / actual_gpu_per_inference_active_j) * 100
+            if actual_gpu_per_inference_active_j
+            else None
+        )
+        ratio_system_active = (
+            total_predicted_system_active / actual_system_per_inference_active_j
+            if actual_system_per_inference_active_j
+            else None
+        )
+        ratio_gpu_active = (
+            total_predicted_gpu_active / actual_gpu_per_inference_active_j
+            if actual_gpu_per_inference_active_j
+            else None
+        )
+        gpu_pct_str = (
+            f"{error_gpu_active_pct:.2f}%"
+            if error_gpu_active_pct is not None
+            else "N/A (actual active=0)"
+        )
+        print(
+            f"Prediction Error (active only):  System {error_system_active_j:.4f} J ({error_system_active_pct:.2f}%)   GPU {error_gpu_active_j:.4f} J ({gpu_pct_str})"
+        )
         if ratio_system_active is not None and ratio_gpu_active is not None:
-            print(f"Prediction Ratio (active only):  System {ratio_system_active:.3f}x   GPU {ratio_gpu_active:.3f}x")
+            print(
+                f"Prediction Ratio (active only):  System {ratio_system_active:.3f}x   GPU {ratio_gpu_active:.3f}x"
+            )
         print()
 
     # Analysis
@@ -540,7 +684,7 @@ def main():
     print()
 
     # Save detailed report
-    output_file = BASE_DIR / "results" / "energy_comparison_report.json"
+    output_file = args.output_dir / "energy_comparison_report.json"
     output_file.parent.mkdir(exist_ok=True)
 
     report = {

@@ -15,5 +15,8 @@ matplotlib>=3.5.0           # Gantt chart plotting
 pandas>=2.0.0               # Energy calculation scripts
 numpy>=1.24.0,<2.0.0        # Numeric operations
 
+# GPU energy measurement
+nvidia-ml-py>=11.5.0        # NVML bindings for GPU energy counters
+
 # Development utilities
 tqdm                        # Progress bars

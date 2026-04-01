@@ -69,7 +69,7 @@ echo "  WattsUp monitors: /dev/ttyUSB0 (main), /dev/ttyUSB1 (auxiliary)"
 echo "  GPUs: nvidia-smi monitoring"
 echo "  CPU: Intel RAPL monitoring"
 
-python3 "$SCRIPT_DIR/../kernel_replay_cpp/scripts/unified_power_logger.py" \
+python3 "$SCRIPT_DIR/../scripts/unified_power_logger.py" \
     -o "$POWER_LOG" \
     -i "$POLL_INTERVAL" &
 

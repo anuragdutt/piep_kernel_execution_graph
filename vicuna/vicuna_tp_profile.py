@@ -95,6 +95,31 @@ def ranked_path(path: str, rank: int) -> str:
     return f"{root}_rank{rank}{ext}"
 
 
+def _get_local_tensor(tensor):
+    """Extract local shard from DTensor, or return tensor as-is."""
+    if tensor is None:
+        return None
+    if hasattr(tensor, "_local_tensor"):
+        return tensor._local_tensor
+    return tensor
+
+
+def _get_local_shape(tensor):
+    """Extract local shard shape from DTensor, or regular shape from Tensor."""
+    t = _get_local_tensor(tensor)
+    if t is not None and hasattr(t, "shape"):
+        return tuple(t.shape)
+    return None
+
+
+def _tensor_bytes(tensor) -> int:
+    """Compute byte count of a tensor (local shard for DTensor)."""
+    t = _get_local_tensor(tensor)
+    if t is None or not hasattr(t, "shape"):
+        return 0
+    return t.nelement() * t.element_size()
+
+
 def register_shape_hooks(
     model: torch.nn.Module, shape_log: List[Dict[str, object]], enabled: List[bool]
 ) -> None:
@@ -102,24 +127,7 @@ def register_shape_hooks(
 
     CRITICAL: For TP-sharded tensors (DTensor), we extract LOCAL shard shapes,
     not global shapes, because the actual CUDA kernels operate on local shards.
-
-    FIXED: Removed 'seen' set to log ALL invocations (prefill + decode steps),
-    not just first occurrence of each module.
     """
-
-    def get_local_shape(tensor):
-        """Extract local shard shape from DTensor, or regular shape from Tensor."""
-        if tensor is None:
-            return None
-        # Check if this is a DTensor (TP-sharded)
-        if hasattr(tensor, "_local_tensor"):
-            # DTensor: return the LOCAL shard shape (what kernels actually see)
-            return tuple(tensor._local_tensor.shape)
-        elif hasattr(tensor, "shape"):
-            # Regular tensor: return shape directly
-            return tuple(tensor.shape)
-        else:
-            return None
 
     def hook(
         mod: torch.nn.Module, inputs: Tuple[torch.Tensor, ...], output: torch.Tensor
@@ -127,8 +135,8 @@ def register_shape_hooks(
         if not enabled[0]:
             return
 
-        in_shape = get_local_shape(inputs[0]) if inputs else None
-        out_shape = get_local_shape(output)
+        in_shape = _get_local_shape(inputs[0]) if inputs else None
+        out_shape = _get_local_shape(output)
 
         shape_log.append(
             {
@@ -142,6 +150,73 @@ def register_shape_hooks(
     for _, module in model.named_modules():
         if isinstance(module, torch.nn.Linear):
             module.register_forward_hook(hook)
+
+
+def register_module_io_hooks(
+    model: torch.nn.Module,
+    module_io_log: List[Dict[str, object]],
+    enabled: List[bool],
+) -> None:
+    """Capture full qualified module path + input/output byte counts for ALL modules.
+
+    Used in --dataset-mode to build the module→kernel→I/O mapping.
+    Logs every invocation (not just first) so counts match the trace.
+    """
+    invocation_counter = [0]  # mutable counter shared across hooks
+
+    def make_hook(qualified_name: str):
+        def hook(mod, inputs, output):
+            if not enabled[0]:
+                return
+
+            # Input bytes: sum across all positional inputs
+            in_bytes = 0
+            if inputs:
+                for inp in inputs:
+                    if isinstance(inp, torch.Tensor):
+                        in_bytes += _tensor_bytes(inp)
+                    elif isinstance(inp, (tuple, list)):
+                        for t in inp:
+                            if isinstance(t, torch.Tensor):
+                                in_bytes += _tensor_bytes(t)
+
+            # Output bytes
+            out_bytes = 0
+            if isinstance(output, torch.Tensor):
+                out_bytes = _tensor_bytes(output)
+            elif isinstance(output, (tuple, list)):
+                for t in output:
+                    if isinstance(t, torch.Tensor):
+                        out_bytes += _tensor_bytes(t)
+
+            in_shape = _get_local_shape(inputs[0]) if inputs and isinstance(inputs[0], torch.Tensor) else None
+            out_shape = None
+            if isinstance(output, torch.Tensor):
+                out_shape = _get_local_shape(output)
+
+            dtype_str = None
+            if isinstance(output, torch.Tensor) and hasattr(output, "dtype"):
+                dtype_str = str(output.dtype)
+            elif inputs and isinstance(inputs[0], torch.Tensor):
+                dtype_str = str(inputs[0].dtype)
+
+            module_io_log.append({
+                "module_path": qualified_name,
+                "module_class": mod.__class__.__name__,
+                "invocation_idx": invocation_counter[0],
+                "input_bytes": in_bytes,
+                "output_bytes": out_bytes,
+                "in_shape": in_shape,
+                "out_shape": out_shape,
+                "dtype": dtype_str,
+            })
+            invocation_counter[0] += 1
+
+        return hook
+
+    for name, module in model.named_modules():
+        if name:  # skip root module (empty name)
+            module.register_forward_hook(make_hook(name))
 
 
 def run_generation(model, inputs, max_new_tokens: int):
@@ -180,8 +255,19 @@ def main() -> int:
     parser.add_argument(
         "--max-new-tokens",
         type=int,
-        default=64,
-        help="Number of tokens to generate (default: 64)",
+        default=None,
+        help="Number of new tokens to generate. Mutually exclusive with --decode-tokens.",
+    )
+    parser.add_argument(
+        "--decode-tokens",
+        type=int,
+        default=None,
+        help=(
+            "Number of decode steps (new tokens) to generate. "
+            "1 = prefill only (single decode step). "
+            "Mutually exclusive with --max-new-tokens. "
+            "Default: 64 when neither flag is given."
+        ),
     )
     parser.add_argument(
         "--warmup",
@@ -206,7 +292,40 @@ def main() -> int:
         default="benchmark_results.json",
         help="Output JSON file for benchmark results",
     )
+    parser.add_argument(
+        "--dataset-mode",
+        action="store_true",
+        help=(
+            "Dataset collection mode: disables tensor cores, forces decode-tokens=1, "
+            "enables with_modules=True in profiler, writes module_io_log.jsonl with "
+            "full qualified module path + I/O byte counts."
+        ),
+    )
+    parser.add_argument(
+        "--module-io-log",
+        default="module_io_log.jsonl",
+        help="Output JSONL for module I/O bytes (default: module_io_log.jsonl, dataset-mode only)",
+    )
     args = parser.parse_args()
+
+    # Dataset mode overrides
+    if args.dataset_mode:
+        # Force prefill-only (1 decode token)
+        if args.decode_tokens is None and args.max_new_tokens is None:
+            args.max_new_tokens = 1
+        # Disable tensor cores for cleaner kernel signatures
+        torch.backends.cuda.matmul.allow_tf32 = False
+        torch.backends.cudnn.allow_tf32 = False
+        torch.backends.cuda.matmul.allow_fp16_reduced_precision_reduction = False
+
+    # Resolve decode token count: --decode-tokens and --max-new-tokens are aliases.
+    # If neither is given, default to 64.
+    if args.decode_tokens is not None and args.max_new_tokens is not None:
+        parser.error("--decode-tokens and --max-new-tokens are mutually exclusive.")
+    if args.decode_tokens is not None:
+        args.max_new_tokens = args.decode_tokens
+    elif args.max_new_tokens is None:
+        args.max_new_tokens = 64  # default
 
     # CRITICAL: Load tokenizer BEFORE distributed init to avoid corruption
     # Known issue: HuggingFace tokenizers can get corrupted after torch.distributed.init_process_group()
@@ -226,17 +345,20 @@ def main() -> int:
 
     if rank == 0:
         print("=" * 70)
-        print("Vicuna-7B Tensor Parallel Inference")
+        print("Vicuna Tensor Parallel Inference")
         print("=" * 70)
         print(f"Model: {args.model}")
         print(f"Mode: {args.mode}")
+        print(f"Dataset mode: {args.dataset_mode}")
         print(f"TP size: {world_size}")
-        print(f"Prompt: '{args.prompt}'")  # DEBUG: Show actual prompt
+        print(f"Prompt: '{args.prompt}'")
         print(f"Max new tokens: {args.max_new_tokens}")
         print(f"Warmup runs: {args.warmup}")
         if args.mode in ["benchmark", "both"]:
             print(f"Timed runs: {args.runs}")
         print(f"Precision: FP16")
+        if args.dataset_mode:
+            print(f"Tensor cores: DISABLED (TF32={torch.backends.cuda.matmul.allow_tf32})")
         print("=" * 70)
 
     # Load model with tensor parallelism
@@ -244,10 +366,12 @@ def main() -> int:
         args.model, torch_dtype=torch.float16, low_cpu_mem_usage=True
     )
     model.eval()
-    model.to(device)
 
     mesh = DeviceMesh("cuda", list(range(world_size)))
     apply_tensor_parallel(model, mesh)
+    
+    # Move to device AFTER sharding to strictly avoid OOM for 33B model
+    model.to(device)
 
     if rank == 0:
         print("✓ Model loaded with TP sharding")
@@ -257,6 +381,12 @@ def main() -> int:
     shape_logging_enabled = [False]
     if args.mode in ["profile", "both"]:
         register_shape_hooks(model, shape_log, shape_logging_enabled)
+
+    # Setup module I/O hooks (dataset mode only)
+    module_io_log: List[Dict[str, object]] = []
+    module_io_enabled = [False]
+    if args.dataset_mode:
+        register_module_io_hooks(model, module_io_log, module_io_enabled)
 
     # Tokenize input (SAME for both modes)
     inputs = tokenizer(args.prompt, return_tensors="pt").to(device)
@@ -293,7 +423,8 @@ def main() -> int:
             print("\n[PROFILE MODE] Extracting kernel traces...")
 
         shape_logging_enabled[0] = True
-        with torch.profiler.profile(
+        module_io_enabled[0] = True
+        profiler_kwargs = dict(
             activities=[
                 torch.profiler.ProfilerActivity.CPU,
                 torch.profiler.ProfilerActivity.CUDA,
@@ -301,10 +432,15 @@ def main() -> int:
             record_shapes=True,
             profile_memory=False,
             with_stack=False,  # Avoid distributed profiler bug
-        ) as prof:
+        )
+        if args.dataset_mode:
+            profiler_kwargs["with_modules"] = True
+
+        with torch.profiler.profile(**profiler_kwargs) as prof:
             outputs = run_generation(model, inputs, args.max_new_tokens)
             torch.cuda.synchronize()
         shape_logging_enabled[0] = False
+        module_io_enabled[0] = False
 
         # Save trace
         trace_path = ranked_path(args.trace, rank)
@@ -319,6 +455,15 @@ def main() -> int:
                 f.write(json.dumps(item, ensure_ascii=True) + "\n")
         if rank == 0:
             print(f"✓ Shapes saved: {shape_path}")
+
+        # Save module I/O log (dataset mode)
+        if args.dataset_mode and module_io_log:
+            io_path = ranked_path(args.module_io_log, rank)
+            with open(io_path, "w", encoding="utf-8") as f:
+                for item in module_io_log:
+                    f.write(json.dumps(item, ensure_ascii=True) + "\n")
+            if rank == 0:
+                print(f"✓ Module I/O log saved: {io_path} ({len(module_io_log)} entries)")
 
         dist.barrier()
 

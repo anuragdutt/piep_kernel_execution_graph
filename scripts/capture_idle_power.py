@@ -55,7 +55,7 @@ def main():
     args = parser.parse_args()
 
     base_dir = Path(__file__).resolve().parent.parent
-    logger_script = base_dir / "kernel_replay_cpp/scripts/unified_power_logger.py"
+    logger_script = base_dir / "scripts/unified_power_logger.py"
     if not logger_script.exists():
         print(f"ERROR: {logger_script} not found", file=sys.stderr)
         return 1
@@ -67,8 +67,10 @@ def main():
     cmd = [
         sys.executable,
         str(logger_script),
-        "-o", str(csv_path),
-        "-i", str(args.interval),
+        "-o",
+        str(csv_path),
+        "-i",
+        str(args.interval),
     ]
     if args.gpu_only:
         cmd.append("--gpu-only")
@@ -127,7 +129,11 @@ def main():
 
     print()
     print("Idle power stats:")
-    print(f"  System: {idle_system_w:.2f} W" if idle_system_w is not None else "  System: N/A")
+    print(
+        f"  System: {idle_system_w:.2f} W"
+        if idle_system_w is not None
+        else "  System: N/A"
+    )
     print(f"  GPU:    {idle_gpu_w:.2f} W" if idle_gpu_w is not None else "  GPU: N/A")
     print(f"  Duration: {duration_s:.1f}s  Samples: {len(df)}")
     print(f"  Saved: {stats_path}")
